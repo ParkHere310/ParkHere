@@ -12,19 +12,21 @@ import com.google.firebase.database.FirebaseDatabase;
 public class SpotConnector {
     public static boolean postSpot(ParkingSpot spot, User user) {
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-        mDatabase.child("ParkingSpots").child(spot.getName()).setValue(spot);
+        String uid = mDatabase.child("ParkingSpots").push().getKey();
+        spot.setUID(uid);
+        mDatabase.child("ParkingSpots").child(uid).setValue(spot);
         return true;
     }
 
     public static boolean editSpot(ParkingSpot spot, User user) {
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-        mDatabase.child("ParkingSpots").child(spot.getName()).setValue(spot);
+        mDatabase.child("ParkingSpots").child(spot.getUID()).setValue(spot);
         return true;
     }
 
     public static boolean removeSpot(ParkingSpot spot, User user) {
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-        mDatabase.child("ParkingSpots").child(spot.getName()).setValue(null);
+        mDatabase.child("ParkingSpots").child(spot.getUID()).setValue(null);
         return true;
     }
 }
