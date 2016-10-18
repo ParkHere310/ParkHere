@@ -18,6 +18,7 @@ import java.util.Map;
  */
 
 public class UserConnector {
+    /* Commented out for testing purposes
     public static ArrayList<ParkingSpot> getListingsForUser(User user) {
         final ArrayList<ParkingSpot> list = new ArrayList<ParkingSpot>();
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
@@ -106,4 +107,5 @@ public class UserConnector {
     public static boolean checkIn(User user, Reservation res) {
         return true;
     }
+*/
 }
