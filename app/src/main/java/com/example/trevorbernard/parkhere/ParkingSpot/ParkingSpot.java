@@ -23,6 +23,7 @@ public class ParkingSpot {
     private boolean isSUV;
     private boolean isCovered;
     private Location location;
+    private TimeWindow timeWindow;
     private String UID;
 
     public ParkingSpot() {}
