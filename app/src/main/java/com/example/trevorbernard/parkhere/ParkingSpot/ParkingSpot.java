@@ -23,7 +23,95 @@ public class ParkingSpot {
     private boolean isSUV;
     private boolean isCovered;
     private Location location;
-    private 
+    private String UID;
 
+    public ParkingSpot() {}
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public User getOwner() {
+        return owner;
+    }
+
+    public void setOwner(User owner) {
+        this.owner = owner;
+    }
+
+    public Image getImage() {
+        return image;
+    }
+
+    public void setImage(Image image) {
+        this.image = image;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public ArrayList<String> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(ArrayList<String> reviews) {
+        this.reviews = reviews;
+    }
+
+    public User getOccupant() {
+        return occupant;
+    }
+
+    public void setOccupant(User occupant) {
+        this.occupant = occupant;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    public boolean isSUV() {
+        return isSUV;
+    }
+
+    public void setSUV(boolean SUV) {
+        isSUV = SUV;
+    }
+
+    public boolean isCovered() {
+        return isCovered;
+    }
+
+    public void setCovered(boolean covered) {
+        isCovered = covered;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
+    public String getUID() {
+        return this.UID;
+    }
+
+    public void setUID(String UID) {
+        this.UID = UID;
+    }
 }
