@@ -137,6 +137,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //TO BE FILLED
             }
+        });
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
