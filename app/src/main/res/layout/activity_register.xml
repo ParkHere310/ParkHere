@@ -9,7 +9,7 @@
         android:text="Register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/RegisterButton"
+        android:id="@+id/LoginButton"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="161dp" />
@@ -19,8 +19,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/LoginButton"
-        android:layout_alignTop="@+id/RegisterButton"
-        android:layout_alignStart="@+id/RegisterButton"
+        android:layout_alignTop="@+id/LoginButton"
+        android:layout_alignStart="@+id/LoginButton"
         android:layout_marginTop="71dp" />
 
     <EditText
