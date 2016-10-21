@@ -28,6 +28,10 @@ public class ParkingSpot {
 
     public ParkingSpot() {}
 
+    public void setTimeWindow(TimeWindow timeWindow) { this.timeWindow = timeWindow; }
+
+    public TimeWindow getTimeWindow() { return this.timeWindow; }
+
     public String getName() {
         return name;
     }
