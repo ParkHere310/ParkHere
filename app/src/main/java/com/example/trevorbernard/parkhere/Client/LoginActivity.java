@@ -1,7 +1,6 @@
 package com.example.trevorbernard.parkhere.Client;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -9,7 +8,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.example.trevorbernard.parkhere.MainActivity;
 import com.example.trevorbernard.parkhere.R;
 
 /**
@@ -34,7 +32,7 @@ public class LoginActivity extends Activity {
 
     private void initiateVariables() {
         loginButton = (Button) findViewById(R.id.LoginButton);
-        registerButton = (Button) findViewById(R.id.registerButton);
+        registerButton = (Button) findViewById(R.id.RegisterButton);
         editTextUsername = (EditText)findViewById(R.id.EditTextUsername);
         editTextPassword = (EditText)findViewById(R.id.EditTextPassword);
         username = editTextUsername.toString();
