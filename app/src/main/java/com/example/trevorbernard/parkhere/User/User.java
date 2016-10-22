@@ -4,13 +4,14 @@ package com.example.trevorbernard.parkhere.User;
  * Created by trevorbernard on 10/12/16.
  */
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.ArrayList;
 
 
 
-public class User {
-
-    //implements Parcelable
+public class User implements Parcelable{
 
     private String email;
     private String firstName;
@@ -36,7 +37,7 @@ public class User {
     private String UID;
 
 
-    /*
+
     public int describeContents(){
         return 0;
     }
@@ -67,7 +68,14 @@ public class User {
 
     }
 
-*/
+
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeStringArray(new String[] {this.email,
+                this.firstName,
+                this.lastName,
+                this.phoneNumber});
+    }
+
 
     public User() {
         // TODO Auto-generated constructor stub
