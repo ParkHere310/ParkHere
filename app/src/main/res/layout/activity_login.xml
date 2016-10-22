@@ -26,9 +26,9 @@
         android:ems="10"
         android:layout_marginTop="15dp"
         android:id="@+id/EditTextPassword"
-        android:text="password"
         android:layout_below="@+id/EditTextUsername"
-        android:layout_alignStart="@+id/EditTextUsername" />
+        android:layout_alignStart="@+id/EditTextUsername"
+        android:hint="password" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -37,9 +37,9 @@
         android:ems="10"
         android:layout_marginTop="101dp"
         android:id="@+id/EditTextUsername"
-        android:text="Username Email"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:hint="Username Email" />
 
     <Button
         android:text="Register"
