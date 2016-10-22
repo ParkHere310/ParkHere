@@ -14,15 +14,6 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="161dp" />
 
-    <Button
-        android:text="Login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/LoginButton"
-        android:layout_alignTop="@+id/LoginButton"
-        android:layout_alignStart="@+id/LoginButton"
-        android:layout_marginTop="71dp" />
-
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
