@@ -21,9 +21,19 @@ public class User {
     //private Image verificationPicture;
     //private Image profilePicture;
     private Rating rating;
+
+    public String getUID() {
+        return UID;
+    }
+
+    public void setUID(String UID) {
+        this.UID = UID;
+    }
+
     //private Search search; //this class needs to be made
     //private SpotManager spotManager;
    // private FireBaseUser fireBaseUser;
+    private String UID;
 
 
     /*
@@ -91,7 +101,7 @@ public class User {
         return phoneNumber;
     }
 
-    ArrayList<String> getReviews(){
+    public ArrayList<String> getReviews(){
         return reviews;
     }
 

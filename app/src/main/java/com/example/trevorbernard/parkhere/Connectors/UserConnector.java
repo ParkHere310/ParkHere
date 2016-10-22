@@ -127,15 +127,15 @@ public class UserConnector {
 
     public static boolean addReviewToUser(User submitter, User reviewed, String rev){
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-        String uid = mDatabase.child("Users").child(reviewed.getUID()).child(reviewed.getReviews()).push().getKey();
-        mDatabase.child("Users").child(reviewed.getUID()).child(reviewed.getReviews()).child(uid).setValue(rev);
+        String uid = mDatabase.child("Users").child(reviewed.getUID()).child("reviews").push().getKey();
+        mDatabase.child("Users").child(reviewed.getUID()).child("reviews").child(uid).setValue(rev);
         return true;
     }
 
     public static boolean addReviewToSpot(User submitter, ParkingSpot reviewed, String rev){
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
         String uid = mDatabase.child("ParkingSpots").child(reviewed.getUID()).child("reviews").push().getKey();
-        mDatabase.child("Users").child(reviewed.getUID()).child("reviews").child(uid).setValue(rev);
+        mDatabase.child("ParkingSpots").child(reviewed.getUID()).child("reviews").child(uid).setValue(rev);
         return true;
     }
 
