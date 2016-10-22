@@ -1,8 +1,11 @@
 package com.example.trevorbernard.parkhere.ParkingSpot;
 
-import android.location.Location;
+import android.content.Context;
+import android.location.Geocoder;
+import java.io.IOException;
+import java.util.List;
+import android.location.Address;
 import android.media.Image;
-
 import com.example.trevorbernard.parkhere.User.User;
 
 import java.util.ArrayList;
@@ -22,7 +25,7 @@ public class ParkingSpot {
     private int price;
     private boolean isSUV;
     private boolean isCovered;
-    private Location location;
+    private Address address;
     private TimeWindow timeWindow;
     private String UID;
 
@@ -104,12 +107,31 @@ public class ParkingSpot {
         isCovered = covered;
     }
 
-    public Location getLocation() {
-        return location;
+    public Address getAddress() {
+        return address;
     }
 
-    public void setLocation(Location location) {
-        this.location = location;
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    boolean setAdressFromString(String loc, Context con) {
+        try {
+            Geocoder geocoder = new Geocoder(con);
+            List<Address> addresses;
+
+            addresses = geocoder.getFromLocationName(loc, 5);
+            if(addresses == null) {
+               return false;
+            } else {
+                this.address = addresses.get(0);
+            }
+
+        } catch (IOException ioe){
+            ioe.printStackTrace();
+            System.out.println("ioe in setLocation from string in ParkingSpot");
+        }
+        return true;
     }
 
     public String getUID() {

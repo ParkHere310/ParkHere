@@ -12,7 +12,6 @@ public class TimeWindow {
 
     Date startDateTime;
     Date endDateTime;
-
     // if no start and end date are specified, default constructor
     // sets end date to now + 15 days (rounded to nearest hour)
     // and start date to 1 hour before
