@@ -1,6 +1,7 @@
 package com.example.trevorbernard.parkhere.Client;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.text.Editable;
@@ -106,13 +107,14 @@ public class LoginActivity extends Activity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TO BE FILLED
+                signIn(username, password);
             }
         });
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TO BE FILLED
+                Intent myIntent = new Intent(LoginActivity.this, RegisterActivity.class);
+                startActivity(myIntent);
             }
         });
 

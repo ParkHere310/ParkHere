@@ -17,6 +17,8 @@
         </activity>
         <activity android:name=".Client.SearchActivity"></activity>
         <activity android:name=".Client.LoginActivity"></activity>
+        <activity android:name=".Client.RegisterActivity"></activity>
+
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
