@@ -13,7 +13,7 @@ public class PastReservationActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_search);
+        setContentView(R.layout.activity_pastreservation);
         initiateVariables();
     }
 
