@@ -10,7 +10,6 @@ import android.os.Parcelable;
 import java.util.ArrayList;
 
 
-
 public class User implements Parcelable{
 
     private String email;
@@ -42,8 +41,16 @@ public class User implements Parcelable{
         return 0;
     }
 
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(email);
+        dest.writeString(firstName);
+        dest.writeString(lastName);
+        dest.writeString(phoneNumber);
+        dest.writeByte((byte) (isVerified ? 1 : 0));
+    }
 
-    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
+    public static final Parcelable.Creator CREATOR
+            = new Parcelable.Creator() {
         public User createFromParcel(Parcel in) {
             return new User(in);
         }
@@ -53,27 +60,12 @@ public class User implements Parcelable{
         }
     };
 
-
-    public User(Parcel in){
-        String[] data = new String[4];
-
-        this.email = data[0];
-        this.firstName = data[1];
-        this.lastName = data[2];
-        this.phoneNumber = data[3];
-
-      //  this.reviews = data[4];
-        //this.isVerified = data[5];
-        //this.rating = data[6];
-
-    }
-
-
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeStringArray(new String[] {this.email,
-                this.firstName,
-                this.lastName,
-                this.phoneNumber});
+    public User(Parcel in) {
+        email = in.readString();
+        firstName = in.readString();
+        lastName = in.readString();
+       phoneNumber = in.readString();
+        isVerified = in.readByte() != 0;
     }
 
 
