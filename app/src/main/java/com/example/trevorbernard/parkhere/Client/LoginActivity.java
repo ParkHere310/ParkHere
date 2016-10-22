@@ -64,7 +64,7 @@ public class LoginActivity extends Activity {
 
 
     private void initiateVariables() {
-        loginButton = (Button) findViewById(R.id.RegisterButton);
+        loginButton = (Button) findViewById(R.id.LoginButton);
         registerButton = (Button) findViewById(R.id.RegisterButton);
         editTextUsername = (EditText)findViewById(R.id.EditTextUsername);
         editTextPassword = (EditText)findViewById(R.id.EditTextPassword);
