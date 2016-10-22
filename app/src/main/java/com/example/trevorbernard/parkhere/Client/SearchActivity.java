@@ -1,5 +1,6 @@
 package com.example.trevorbernard.parkhere.Client;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -15,24 +16,26 @@ import com.example.trevorbernard.parkhere.R;
  * Created by Hexi on 2016/10/20.
  */
 
-public class SearchActivity extends FragmentActivity implements  OnMapReadyCallback{
+public class SearchActivity extends Activity { //extends FragmentActivity implements  OnMapReadyCallback{
 
-    private GoogleMap mMap;
+    //private GoogleMap mMap;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_map);
+        setContentView(R.layout.activity_search);
 
         initiateVariable();
 
         //Google Map Shit
+        /*
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-
+        */
     }
 
+    /*
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
@@ -42,6 +45,7 @@ public class SearchActivity extends FragmentActivity implements  OnMapReadyCallb
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
     }
+    */
 
     @Override
     protected void onStart() {
