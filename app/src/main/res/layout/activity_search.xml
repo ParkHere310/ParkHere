@@ -1,15 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent" android:layout_height="match_parent">
 
-    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/map"
-        tools:context=".MapsActivity"
-        android:name="com.google.android.gms.maps.SupportMapFragment" />
+    <TextView
+        android:text="Search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="45dp"
+        android:id="@+id/searchTitle" />
+
+    <TextView
+        android:text="Start Date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="19dp"
+        android:id="@+id/startDateLabel"
+        android:layout_below="@+id/addressField"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="date"
+        android:ems="10"
+        android:layout_below="@+id/endDateLabel"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="21dp"
+        android:id="@+id/endDateField"
+        android:text="End Date" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPostalAddress"
+        android:ems="10"
+        android:layout_marginTop="25dp"
+        android:id="@+id/addressField"
+        android:text="Address"
+        android:layout_below="@+id/searchTitle"
+        android:layout_alignStart="@+id/endDateField" />
+
+    <TextView
+        android:text="End Date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="11dp"
+        android:id="@+id/endDateLabel"
+        android:layout_below="@+id/startDateField"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:text="Start Time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/endDateField"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="26dp"
+        android:id="@+id/startTimeLabel" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="time"
+        android:ems="10"
+        android:layout_below="@+id/startTimeLabel"
+        android:layout_alignStart="@+id/endDateField"
+        android:layout_marginTop="10dp"
+        android:id="@+id/startTimeField"
+        android:text="Start Time" />
+
+    <TextView
+        android:text="End Time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/startTimeField"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="18dp"
+        android:id="@+id/endTimeLabel" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="time"
+        android:ems="10"
+        android:layout_below="@+id/endTimeLabel"
+        android:layout_alignStart="@+id/startTimeField"
+        android:id="@+id/endTimeField"
+        android:text="End Time" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="date"
+        android:ems="10"
+        android:layout_marginTop="18dp"
+        android:id="@+id/startDateField"
+        android:text="Start Date"
+        android:layout_below="@+id/startDateLabel"
+        android:layout_alignStart="@+id/endDateField" />
 
 </RelativeLayout>

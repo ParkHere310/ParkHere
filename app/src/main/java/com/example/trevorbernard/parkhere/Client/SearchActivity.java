@@ -10,7 +10,6 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import com.example.trevorbernard.parkhere.R;
-import com.google.android.gms.maps.MapFragment;
 
 /**
  * Created by Hexi on 2016/10/20.
@@ -23,7 +22,7 @@ public class SearchActivity extends FragmentActivity implements  OnMapReadyCallb
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search);
+        setContentView(R.layout.activity_map);
 
         initiateVariable();
 
