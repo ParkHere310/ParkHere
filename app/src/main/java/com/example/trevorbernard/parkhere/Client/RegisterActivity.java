@@ -28,7 +28,6 @@ import com.google.firebase.auth.FirebaseUser;
 public class RegisterActivity extends Activity{
 
     private Button registerButton;
-    private Button loginButton;
     private EditText editTextUsername;
     private EditText editTextPassword;
     private EditText editTextConfirmPassword;
@@ -79,8 +78,7 @@ public class RegisterActivity extends Activity{
     }
 
     private void initiateVariable() {
-        loginButton = (Button) findViewById(R.id.LoginButton);
-        registerButton = (Button) findViewById(R.id.registerButton);
+        registerButton = (Button) findViewById(R.id.RegisterButton);
         editTextUsername = (EditText)findViewById(R.id.EditTextUsername);
         editTextPassword = (EditText)findViewById(R.id.EditTextPassword);
         editTextConfirmPassword = (EditText)findViewById(R.id.EditTextConfirmPassword);
@@ -134,12 +132,6 @@ public class RegisterActivity extends Activity{
             @Override
             public void afterTextChanged(Editable s) {
 
-            }
-        });
-        loginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //TO BE FILLED
             }
         });
         registerButton.setOnClickListener(new View.OnClickListener() {
