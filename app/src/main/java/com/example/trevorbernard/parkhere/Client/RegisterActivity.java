@@ -79,12 +79,12 @@ public class RegisterActivity extends Activity{
 
     private void initiateVariable() {
         registerButton = (Button) findViewById(R.id.RegisterButton);
-        editTextUsername = (EditText)findViewById(R.id.EditTextUsername);
+        editTextUsername = (EditText)findViewById(R.id.EditTextEmail);
         editTextPassword = (EditText)findViewById(R.id.EditTextPassword);
         editTextConfirmPassword = (EditText)findViewById(R.id.EditTextConfirmPassword);
-        username = editTextUsername.toString();
-        password = editTextPassword.toString();
-        confirmPassword = editTextConfirmPassword.toString();
+        username = editTextUsername.getText().toString();
+        password = editTextPassword.getText().toString();
+        confirmPassword = editTextConfirmPassword.getText().toString();
 
         editTextUsername.addTextChangedListener(new TextWatcher() {
             @Override
@@ -94,7 +94,7 @@ public class RegisterActivity extends Activity{
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                username = editTextUsername.toString();
+                username = editTextUsername.getText().toString();
             }
 
             @Override
@@ -110,7 +110,7 @@ public class RegisterActivity extends Activity{
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                password = editTextPassword.toString();
+                password = editTextPassword.getText().toString();
             }
 
             @Override
@@ -126,7 +126,7 @@ public class RegisterActivity extends Activity{
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                confirmPassword = editTextConfirmPassword.toString();
+                confirmPassword = editTextConfirmPassword.getText().toString();
             }
 
             @Override
@@ -137,7 +137,7 @@ public class RegisterActivity extends Activity{
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TO BE FILLED
+                createAccount(username, password);
             }
         });
     }

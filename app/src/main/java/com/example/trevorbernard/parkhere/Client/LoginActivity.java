@@ -11,9 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.example.trevorbernard.parkhere.Connectors.AuthenticationConnector;
 import com.example.trevorbernard.parkhere.R;
-import com.example.trevorbernard.parkhere.User.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -51,12 +49,10 @@ public class LoginActivity extends Activity {
                 if (user != null) {
                     // User is signed in
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
-                    User newUser = AuthenticationConnector.authenticate(user);
                 } else {
                     // User is signed out
                     Log.d(TAG, "onAuthStateChanged:signed_out");
                 }
-                // ...
             }
         };
 
@@ -69,8 +65,8 @@ public class LoginActivity extends Activity {
         registerButton = (Button) findViewById(R.id.RegisterButton);
         editTextUsername = (EditText)findViewById(R.id.EditTextUsername);
         editTextPassword = (EditText)findViewById(R.id.EditTextPassword);
-        username = editTextUsername.toString();
-        password = editTextPassword.toString();
+        username = editTextUsername.getText().toString();
+        password = editTextPassword.getText().toString();
 
         editTextUsername.addTextChangedListener(new TextWatcher() {
             @Override
@@ -80,7 +76,7 @@ public class LoginActivity extends Activity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                username = editTextUsername.toString();
+                username = editTextUsername.getText().toString();
             }
 
             @Override
@@ -96,7 +92,7 @@ public class LoginActivity extends Activity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                password = editTextPassword.toString();
+                password = editTextPassword.getText().toString();
             }
 
             @Override
@@ -114,7 +110,7 @@ public class LoginActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Intent myIntent = new Intent(LoginActivity.this, RegisterActivity.class);
-                startActivity(myIntent);
+                LoginActivity.this.startActivity(myIntent);
             }
         });
 
@@ -137,6 +133,7 @@ public class LoginActivity extends Activity {
 
     private void signIn(String email, String password) {
         Log.d(TAG, "signIn:" + email);
+        System.out.println(email+ " : " + password); //debug
 
         // [START sign_in_with_email]
         mAuth.signInWithEmailAndPassword(email, password)
@@ -150,6 +147,7 @@ public class LoginActivity extends Activity {
                         // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
                             // Login failed
+                            System.out.println("failed login"); //debug
                         }
                     }
                 });

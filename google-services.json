@@ -15,14 +15,6 @@
       },
       "oauth_client": [
         {
-          "client_id": "281999882543-q270avkle7oe21v7teb22kfdsodm83k4.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.trevorbernard.parkhere",
-            "certificate_hash": "83C9C837F8FE4E6D9D7EAC43DFC93569DB2DD0FC"
-          }
-        },
-        {
           "client_id": "281999882543-n1i96ai7n4s8kc6e0g0ggqcs859vr51f.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -37,13 +29,8 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 2,
-          "other_platform_oauth_client": [
-            {
-              "client_id": "281999882543-n1i96ai7n4s8kc6e0g0ggqcs859vr51f.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "status": 1,
+          "other_platform_oauth_client": []
         },
         "ads_service": {
           "status": 2
