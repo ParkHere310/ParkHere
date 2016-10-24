@@ -3,12 +3,16 @@ package com.example.trevorbernard.parkhere.ParkingSpot;
 import android.content.Context;
 import android.location.Geocoder;
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 import android.location.Address;
 import android.media.Image;
 import com.example.trevorbernard.parkhere.User.User;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 /**
  * Created by trevorbernard on 10/12/16.
@@ -16,18 +20,87 @@ import java.util.ArrayList;
 
 public class ParkingSpot {
 
+    public static void test() {
+        System.out.println("running");
+        ParkingSpot ps = new ParkingSpot();
+        ps.setName("Spot 1");
+        Address address = new Address(Locale.US);
+        ps.setLatitude(34.052235);
+        ps.setLongitude(-118.243683);
+        ps.setAddress("123 Fake Street");
+        ps.setCovered(false);
+        ps.setPrice(200);
+        Date start = new Date();
+        Date end = new Date(start.getTime() + 100000L);
+        TimeWindow tw = new TimeWindow(start,end);
+        ps.setTimeWindow(tw);
+        List<String> reviews = new ArrayList<String>();
+        reviews.add("asdf");
+        reviews.add("fds");
+        ps.setReviews(reviews);
+
+
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+        String uid = mDatabase.child("ParkingSpots").push().getKey();
+        ps.setUID(uid);
+
+        mDatabase.child("ParkingSpots").child(uid).setValue(ps);
+
+
+
+
+    }
+
+
+
     private String name;
-    private User owner;
-    private Image image;
+    private String imageURL;
     private String description;
-    private ArrayList<String> reviews;
-    private User occupant;
+    private List<String> reviews;
     private int price;
     private boolean isSUV;
     private boolean isCovered;
-    private Address address;
+    //private Address address;
+    private double longitude;
+    private double latitude;
+    private String address;
     private TimeWindow timeWindow;
     private String UID;
+    private String occupantUID;
+    private String ownerUID;
+
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latidude) {
+        this.latitude = latidude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+
+    public String getOccupantUID() {
+        return occupantUID;
+    }
+
+    public void setOccupantUID(String occupantUID) {
+        this.occupantUID = occupantUID;
+    }
+
+    public String getOwnerUID() {
+        return ownerUID;
+    }
+
+    public void setOwnerUID(String ownerUID) {
+        this.ownerUID = ownerUID;
+    }
 
     public ParkingSpot() {}
 
@@ -43,20 +116,13 @@ public class ParkingSpot {
         this.name = name;
     }
 
-    public User getOwner() {
-        return owner;
+
+    public String getImageURL() {
+        return imageURL;
     }
 
-    public void setOwner(User owner) {
-        this.owner = owner;
-    }
-
-    public Image getImage() {
-        return image;
-    }
-
-    public void setImage(Image image) {
-        this.image = image;
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
     }
 
     public String getDescription() {
@@ -67,20 +133,12 @@ public class ParkingSpot {
         this.description = description;
     }
 
-    public ArrayList<String> getReviews() {
+    public List<String> getReviews() {
         return reviews;
     }
 
-    public void setReviews(ArrayList<String> reviews) {
+    public void setReviews(List<String> reviews) {
         this.reviews = reviews;
-    }
-
-    public User getOccupant() {
-        return occupant;
-    }
-
-    public void setOccupant(User occupant) {
-        this.occupant = occupant;
     }
 
     public int getPrice() {
@@ -107,31 +165,12 @@ public class ParkingSpot {
         isCovered = covered;
     }
 
-    public Address getAddress() {
+    public String getAddress() {
         return address;
     }
 
-    public void setAddress(Address address) {
+    public void setAddress(String address) {
         this.address = address;
-    }
-
-    boolean setAdressFromString(String loc, Context con) {
-        try {
-            Geocoder geocoder = new Geocoder(con);
-            List<Address> addresses;
-
-            addresses = geocoder.getFromLocationName(loc, 5);
-            if(addresses == null) {
-               return false;
-            } else {
-                this.address = addresses.get(0);
-            }
-
-        } catch (IOException ioe){
-            ioe.printStackTrace();
-            System.out.println("ioe in setLocation from string in ParkingSpot");
-        }
-        return true;
     }
 
     public String getUID() {
