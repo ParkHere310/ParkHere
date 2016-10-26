@@ -24,6 +24,7 @@ public class User implements Parcelable{
     //private Image profilePicture;
     private Rating rating;
     private transient FirebaseUser FbUsers;
+    private String UID;
 
     public String getUID() {
         return UID;
@@ -35,7 +36,6 @@ public class User implements Parcelable{
 
     //private Search search; //this class needs to be made
     //private SpotManager spotManager;
-    private String UID;
 
     public FirebaseUser getFbUsers() {
         return FbUsers;

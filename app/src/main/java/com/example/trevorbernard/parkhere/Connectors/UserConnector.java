@@ -99,5 +99,26 @@ public class UserConnector {
 
         return true;
     }
+
+    public static User getUserFromUID(String uID) {
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
+        final ArrayList<User> list = new ArrayList<User>();
+        Query queryRef = mDatabase.orderByChild("UID").equalTo(uID); //test email address
+        queryRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
+                    User user = postSnapshot.getValue(User.class);
+                    list.add(user);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+        return list.get(0);
+    }
 //
 }
