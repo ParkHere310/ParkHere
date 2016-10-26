@@ -38,4 +38,19 @@ public class TimeWindow {
         this.endDateTime = end.getTime();
     }
 
+    public long getStartDateTime() {
+        return startDateTime;
+    }
+
+    public void setStartDateTime(long startDateTime) {
+        this.startDateTime = startDateTime;
+    }
+
+    public long getEndDateTime() {
+        return endDateTime;
+    }
+
+    public void setEndDateTime(long endDateTime) {
+        this.endDateTime = endDateTime;
+    }
 }

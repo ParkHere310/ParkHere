@@ -29,7 +29,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="21dp"
         android:id="@+id/endDateField"
-        android:text="End Date" />
+        android:hint="End Date" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -38,9 +38,9 @@
         android:ems="10"
         android:layout_marginTop="25dp"
         android:id="@+id/addressField"
-        android:text="Address"
         android:layout_below="@+id/searchTitle"
-        android:layout_alignStart="@+id/endDateField" />
+        android:layout_alignStart="@+id/endDateField"
+        android:hint="Address" />
 
     <TextView
         android:text="End Date"
@@ -69,7 +69,7 @@
         android:layout_alignStart="@+id/endDateField"
         android:layout_marginTop="10dp"
         android:id="@+id/startTimeField"
-        android:text="Start Time" />
+        android:hint="Start Time" />
 
     <TextView
         android:text="End Time"
@@ -88,7 +88,7 @@
         android:layout_below="@+id/endTimeLabel"
         android:layout_alignStart="@+id/startTimeField"
         android:id="@+id/endTimeField"
-        android:text="End Time" />
+        android:hint="End Time" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -97,8 +97,17 @@
         android:ems="10"
         android:layout_marginTop="18dp"
         android:id="@+id/startDateField"
-        android:text="Start Date"
         android:layout_below="@+id/startDateLabel"
-        android:layout_alignStart="@+id/endDateField" />
+        android:layout_alignStart="@+id/endDateField"
+        android:hint="Start Date" />
+
+    <Button
+        android:text="Search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="17dp"
+        android:id="@+id/searchButton" />
 
 </RelativeLayout>

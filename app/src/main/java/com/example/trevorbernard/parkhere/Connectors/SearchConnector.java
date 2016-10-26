@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.SortedMap;
 import java.util.TreeMap;
+import java.util.Date;
 
 /**
  * Created by metzm on 10/16/2016.
@@ -21,16 +22,12 @@ import java.util.TreeMap;
 
 public class SearchConnector {
 
-    static SortedMap<Double,ParkingSpot> parkingSpots_distances = new TreeMap<Double,ParkingSpot>();
+    public static ArrayList<ParkingSpot> search(final double longitude, final double latitude, Date time) {
 
-
-    public static SortedMap<Double,ParkingSpot> search(final double longitude, final double latitude,
-                                                final long time) {
-        parkingSpots_distances.clear();
-
-
+        final ArrayList<ParkingSpot> parkingSpots = new ArrayList<ParkingSpot>();
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
         Query queryRef = mDatabase.child("ParkingSpot").orderByChild("longitude").startAt(longitude - 0.36).endAt(longitude + 0.36);
+        final Date time2 = new Date(time.getTime());
 
 
         queryRef.addValueEventListener(new ValueEventListener() {
@@ -41,15 +38,12 @@ public class SearchConnector {
                 source.setLatitude(latitude);
 
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    ParkingSpot ps = snapshot.getValue(ParkingSpot.class);
-                    if(ps.getTimeWindow().startDateTime < time && ps.getTimeWindow().endDateTime > time
-                            && ps.getLatitude() > latitude - 0.36 && ps.getLatitude() < latitude + 0.36) {
-                        Location tmp = new Location("");
-                        tmp.setLatitude(ps.getLatitude());
-                        tmp.setLongitude(ps.getLongitude());
-                        double distance = source.distanceTo(tmp);
-                        parkingSpots_distances.put(distance,snapshot.getValue(ParkingSpot.class));
-                        System.out.println(snapshot.getValue(ParkingSpot.class) + " " + distance);
+
+                    ParkingSpot spot = (snapshot.getValue(ParkingSpot.class));
+                    if(spot.getLatitude() >= latitude-0.36 && spot.getLatitude() <= latitude + 0.36
+                            && time2.compareTo(new Date(spot.getTimeWindow().getStartDateTime())) >= 0
+                            && time2.compareTo(new Date(spot.getTimeWindow().getEndDateTime()))<=0) {
+                        parkingSpots.add(spot);
                     }
                 }
             }
@@ -60,7 +54,7 @@ public class SearchConnector {
             }
         });
 
-        return parkingSpots_distances;
+        return parkingSpots;
     }
 
 
