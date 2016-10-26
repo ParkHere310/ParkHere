@@ -11,6 +11,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Map;
 import java.util.SortedMap;
 import java.util.TreeMap;
@@ -22,12 +23,15 @@ import java.util.Date;
 
 public class SearchConnector {
 
-    public static ArrayList<ParkingSpot> search(final double longitude, final double latitude, Date time) {
+    public static SortedMap<Double, ParkingSpot> search(final double longitude, final double latitude, Date time) {
 
-        final ArrayList<ParkingSpot> parkingSpots = new ArrayList<ParkingSpot>();
+        final SortedMap<Double,ParkingSpot> parkingSpotsByDistance = new TreeMap<Double,ParkingSpot>();
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
         Query queryRef = mDatabase.child("ParkingSpot").orderByChild("longitude").startAt(longitude - 0.36).endAt(longitude + 0.36);
         final Date time2 = new Date(time.getTime());
+        final Location source = new Location("");
+        source.setLatitude(latitude);
+        source.setLongitude(longitude);
 
 
         queryRef.addValueEventListener(new ValueEventListener() {
@@ -44,7 +48,13 @@ public class SearchConnector {
                             && time2.compareTo(new Date(spot.getTimeWindow().getStartDateTime())) >= 0
                             && time2.compareTo(new Date(spot.getTimeWindow().getEndDateTime()))<=0
                             && spot.getOccupantUID().equals("-1")) {
-                        parkingSpots.add(spot);
+
+                        Location spotloc = new Location("");
+                        spotloc.setLongitude(spot.getLongitude());
+                        spotloc.setLatitude(spot.getLatitude());
+                        double distance = spotloc.distanceTo(source);
+
+                        parkingSpotsByDistance.put(distance, spot);
                     }
                 }
             }
@@ -55,7 +65,7 @@ public class SearchConnector {
             }
         });
 
-        return parkingSpots;
+        return parkingSpotsByDistance;
     }
 
 
