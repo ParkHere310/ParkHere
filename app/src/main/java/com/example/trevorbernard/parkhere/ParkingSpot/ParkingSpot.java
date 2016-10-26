@@ -8,8 +8,12 @@ import java.util.List;
 import android.location.Address;
 import android.media.Image;
 import com.example.trevorbernard.parkhere.User.User;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -20,6 +24,26 @@ import java.util.Locale;
 
 public class ParkingSpot {
 
+    public static void test2() {
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+        Query queryRef = mDatabase.child("ParkingSpots").orderByChild("longitude").startAt(-120).endAt(110);
+
+        queryRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    //parkingSpots.add(snapshot.getValue(ParkingSpot.class));
+                    ParkingSpot ps = snapshot.getValue(ParkingSpot.class);
+                    System.out.println("ps: " + ps.getName() + " " + ps.getAddress());
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
     public static void test() {
         System.out.println("running");
         ParkingSpot ps = new ParkingSpot();
