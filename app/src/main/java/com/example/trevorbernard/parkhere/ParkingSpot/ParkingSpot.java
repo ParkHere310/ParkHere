@@ -1,13 +1,7 @@
 package com.example.trevorbernard.parkhere.ParkingSpot;
 
-import android.content.Context;
-import android.location.Geocoder;
-import java.io.IOException;
-import java.util.Date;
-import java.util.List;
 import android.location.Address;
-import android.media.Image;
-import com.example.trevorbernard.parkhere.User.User;
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -16,6 +10,8 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 /**
@@ -126,7 +122,9 @@ public class ParkingSpot {
         this.ownerUID = ownerUID;
     }
 
-    public ParkingSpot() {}
+    public ParkingSpot() {
+        occupantUID = "-1"; // No occupant
+    }
 
     public void setTimeWindow(TimeWindow timeWindow) { this.timeWindow = timeWindow; }
 
