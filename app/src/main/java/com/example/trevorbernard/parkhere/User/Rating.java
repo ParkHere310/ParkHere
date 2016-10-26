@@ -21,9 +21,24 @@ public class Rating {
         totalRating += rating;
     }
 
-    public double getRating(){
-        return (double) (totalRating/numRatings);
+    public double calculateRating(){
+        if(numRatings != 0) return(double) (totalRating/numRatings);
+        else return 1.0;
     }
 
+    public int getTotalRating() {
+        return totalRating;
+    }
 
+    public void setTotalRating(int totalRating) {
+        this.totalRating = totalRating;
+    }
+
+    public int getNumRatings() {
+        return numRatings;
+    }
+
+    public void setNumRatings(int numRatings) {
+        this.numRatings = numRatings;
+    }
 }

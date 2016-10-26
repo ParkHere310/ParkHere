@@ -9,25 +9,30 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Created by metzm on 10/16/2016.
  */
 
 public class SearchConnector {
-    public static ArrayList<ParkingSpot> search(double longitude, double latitude, String date,
-                                                int time) {
+    public static ArrayList<ParkingSpot> search(double longitude, final double latitude, Date time) {
 
-        ArrayList<ParkingSpot> parkingSpots;
+        final ArrayList<ParkingSpot> parkingSpots = new ArrayList<ParkingSpot>();
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-        Query queryRef = mDatabase.child("ParkingSpot").orderByChild("address/mLongitude").startAt(longitude - 0.36).endAt(longitude + 0.36);
-
+        Query queryRef = mDatabase.child("ParkingSpot").orderByChild("longitude").startAt(longitude - 0.36).endAt(longitude + 0.36);
+        final Date time2 = new Date(time.getTime());
 
         queryRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    //parkingSpots.add(snapshot.getValue(ParkingSpot.class));
+                    ParkingSpot spot = (snapshot.getValue(ParkingSpot.class));
+                    if(spot.getLatitude() >= latitude-0.36 && spot.getLatitude() <= latitude + 0.36
+                            && time2.compareTo(new Date(spot.getTimeWindow().getStartDateTime())) >= 0
+                            && time2.compareTo(new Date(spot.getTimeWindow().getEndDateTime()))<=0) {
+                        parkingSpots.add(spot);
+                    }
                 }
             }
 

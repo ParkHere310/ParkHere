@@ -11,7 +11,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.trevorbernard.parkhere.Connectors.AuthenticationConnector;
 import com.example.trevorbernard.parkhere.R;
+import com.example.trevorbernard.parkhere.User.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -49,6 +51,8 @@ public class LoginActivity extends Activity {
                 if (user != null) {
                     // User is signed in
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
+                    User newUser = AuthenticationConnector.authenticate(user);
+                    if(newUser != null) System.out.println(newUser.getFirstName()); //debug
                 } else {
                     // User is signed out
                     Log.d(TAG, "onAuthStateChanged:signed_out");

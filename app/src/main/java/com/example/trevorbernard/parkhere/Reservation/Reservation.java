@@ -1,31 +1,22 @@
 package com.example.trevorbernard.parkhere.Reservation;
 
-import com.example.trevorbernard.parkhere.ParkingSpot.ParkingSpot;
-import com.example.trevorbernard.parkhere.User.User;
-
 /**
  * Created by trevorbernard on 10/12/16.
  */
 
 public class Reservation {
 
-    User owner;
-    User seeker;
-    ParkingSpot parkingSpot;
+    String ownerUID;
+    String seekerUID;
+    String parkingSpotUID;
     boolean isCompleted;
     Transaction transaction;
     boolean isRatedAndReviewed;
+    String UID;
 
-    public void setOwner(User owner) {
-        this.owner = owner;
-    }
 
-    public void setSeeker(User seeker) {
-        this.seeker = seeker;
-    }
-
-    public void setParkingSpot(ParkingSpot parkingSpot) {
-        this.parkingSpot = parkingSpot;
+    public void setParkingSpotUID(String uID) {
+        this.parkingSpotUID = uID;
     }
 
     public void setCompleted(boolean completed) {
@@ -40,16 +31,16 @@ public class Reservation {
         isRatedAndReviewed = ratedAndReviewed;
     }
 
-    public User getOwner() {
-        return owner;
+    public String getOwnerUID() {
+        return ownerUID;
     }
 
-    public User getSeeker() {
-        return seeker;
+    public String getSeekerUID() {
+        return seekerUID;
     }
 
-    public ParkingSpot getParkingSpot() {
-        return parkingSpot;
+    public String getParkingSpotUID() {
+        return parkingSpotUID;
     }
 
     public boolean isCompleted() {
@@ -62,5 +53,21 @@ public class Reservation {
 
     public boolean isRatedAndReviewed() {
         return isRatedAndReviewed;
+    }
+
+    public String getUID() {
+        return UID;
+    }
+
+    public void setUID(String UID) {
+        this.UID = UID;
+    }
+
+    public void setOwnerUID(String ownerUID) {
+        this.ownerUID = ownerUID;
+    }
+
+    public void setSeekerUID(String seekerUID) {
+        this.seekerUID = seekerUID;
     }
 }

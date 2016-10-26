@@ -3,12 +3,12 @@ package com.example.trevorbernard.parkhere.Connectors;
 import com.example.trevorbernard.parkhere.ParkingSpot.ParkingSpot;
 import com.example.trevorbernard.parkhere.Reservation.Reservation;
 import com.example.trevorbernard.parkhere.User.User;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -20,30 +20,15 @@ public class UserConnector {
     // Commented out for testing purposes
     public static ArrayList<ParkingSpot> getListingsForUser(User user) {
         final ArrayList<ParkingSpot> list = new ArrayList<ParkingSpot>();
-        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-        Query queryRef = mDatabase.orderByChild("ParkingSpots/owner/email").equalTo("test@test.com"); // test email address
-        queryRef.addChildEventListener(new ChildEventListener() {
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("ParkingSpots");
+        Query queryRef = mDatabase.orderByChild("ownerUID").equalTo(user.getUID()); // limited to 10
+        queryRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+            public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
                     ParkingSpot spot = postSnapshot.getValue(ParkingSpot.class);
                     list.add(spot);
                 }
-            }
-
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
             }
 
             @Override
@@ -56,30 +41,15 @@ public class UserConnector {
 
     public static ArrayList<Reservation> getReservationsforUser(User user){
         final ArrayList<Reservation> list = new ArrayList<Reservation>();
-        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-        Query queryRef = mDatabase.orderByChild("Reservations/owner/email").equalTo("test@test.com"); //test email address
-        queryRef.addChildEventListener(new ChildEventListener() {
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("Reservations");
+        Query queryRef = mDatabase.orderByChild("ownerUID").equalTo(user.getUID()); //test email address
+        queryRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+            public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
                     Reservation spot = postSnapshot.getValue(Reservation.class);
                     list.add(spot);
                 }
-            }
-
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
             }
 
             @Override
@@ -91,30 +61,15 @@ public class UserConnector {
     }
     public static ArrayList<Reservation> getPastReservationsforUser(User user){
         final ArrayList<Reservation> list = new ArrayList<Reservation>();
-        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-        Query queryRef = mDatabase.orderByChild("PastReservations/owner/email").equalTo("test@test.com"); //test email address
-        queryRef.addChildEventListener(new ChildEventListener() {
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("PastReservations");
+        Query queryRef = mDatabase.orderByChild("ownerUID").equalTo(user.getUID()); //test email address
+        queryRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+            public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
                     Reservation spot = postSnapshot.getValue(Reservation.class);
                     list.add(spot);
                 }
-            }
-
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
             }
 
             @Override

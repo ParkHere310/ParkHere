@@ -7,7 +7,9 @@ package com.example.trevorbernard.parkhere.User;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.util.ArrayList;
+import com.google.firebase.auth.FirebaseUser;
+
+import java.util.List;
 
 
 public class User implements Parcelable{
@@ -16,11 +18,12 @@ public class User implements Parcelable{
     private String firstName;
     private String lastName;
     private String phoneNumber;
-    private ArrayList<String> reviews;
+    private List<String> reviews;
     private boolean isVerified;
     //private Image verificationPicture;
     //private Image profilePicture;
     private Rating rating;
+    private transient FirebaseUser FbUsers;
 
     public String getUID() {
         return UID;
@@ -32,10 +35,15 @@ public class User implements Parcelable{
 
     //private Search search; //this class needs to be made
     //private SpotManager spotManager;
-   // private FireBaseUser fireBaseUser;
     private String UID;
 
+    public FirebaseUser getFbUsers() {
+        return FbUsers;
+    }
 
+    public void setFbUsers(FirebaseUser fbUsers) {
+        FbUsers = fbUsers;
+    }
 
     public int describeContents(){
         return 0;
@@ -101,8 +109,12 @@ public class User implements Parcelable{
         return phoneNumber;
     }
 
-    public ArrayList<String> getReviews(){
+    public List<String> getReviews(){
         return reviews;
+    }
+
+    public void setReviews(List<String> list) {
+        this.reviews = list;
     }
 
     void addReview(String review){
@@ -123,6 +135,10 @@ public class User implements Parcelable{
 
     public Rating getRating(){
         return rating;
+    }
+
+    public void setRating(Rating rating) {
+        this.rating = rating;
     }
 
     /*
@@ -152,11 +168,11 @@ public class User implements Parcelable{
 
     */
 
-    public void Register(){
+    public static void Register(){
         //TODO
     }
 
-    public void Login(){
+    public static void Login(){
         //TODO
     }
 }
