@@ -42,7 +42,8 @@ public class SearchConnector {
                     ParkingSpot spot = (snapshot.getValue(ParkingSpot.class));
                     if(spot.getLatitude() >= latitude-0.36 && spot.getLatitude() <= latitude + 0.36
                             && time2.compareTo(new Date(spot.getTimeWindow().getStartDateTime())) >= 0
-                            && time2.compareTo(new Date(spot.getTimeWindow().getEndDateTime()))<=0) {
+                            && time2.compareTo(new Date(spot.getTimeWindow().getEndDateTime()))<=0
+                            && spot.getOccupantUID().equals("-1")) {
                         parkingSpots.add(spot);
                     }
                 }
