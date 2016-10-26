@@ -1,14 +1,15 @@
 package com.example.trevorbernard.parkhere.Client;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+
 
 import com.example.trevorbernard.parkhere.R;
 
@@ -19,6 +20,18 @@ import com.example.trevorbernard.parkhere.R;
 public class SearchActivity extends Activity { //extends FragmentActivity implements  OnMapReadyCallback{
 
     //private GoogleMap mMap;
+
+    EditText ETaddress;
+    EditText ETstartTime;
+    EditText ETendTime;
+    EditText ETstartDate;
+    EditText ETendDate;
+    String address;
+    String startTime;
+    String endTime;
+    String startDate;
+    String endDate;
+    Button searchButton;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -57,5 +70,103 @@ public class SearchActivity extends Activity { //extends FragmentActivity implem
     }
 
     private void initiateVariable() {
+        searchButton = (Button) findViewById(R.id.searchButton);
+        ETaddress = (EditText) findViewById(R.id.addressField);
+        ETstartDate = (EditText) findViewById(R.id.startDateField);
+        ETendDate = (EditText) findViewById(R.id.endDateField);
+        ETstartTime = (EditText) findViewById(R.id.startTimeField);
+        ETendTime = (EditText) findViewById(R.id.endTimeField);
+
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TO DO
+            }
+        });
+
+        ETaddress.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                address = ETaddress.getText().toString();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        ETstartDate.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                startDate = ETstartDate.getText().toString();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        ETendDate.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                endDate = ETendDate.getText().toString();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        ETstartTime.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                startTime = ETstartTime.getText().toString();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        ETendTime.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                endTime = ETendTime.getText().toString();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
     }
 }
