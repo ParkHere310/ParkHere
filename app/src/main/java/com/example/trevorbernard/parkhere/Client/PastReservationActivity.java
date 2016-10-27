@@ -15,6 +15,8 @@ public class PastReservationActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pastreservation);
         initiateVariables();
+
+        
     }
 
     private void initiateVariables() {
