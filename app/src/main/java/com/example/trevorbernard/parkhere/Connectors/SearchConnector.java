@@ -27,7 +27,7 @@ public class SearchConnector {
 
         final SortedMap<Double,ParkingSpot> parkingSpotsByDistance = new TreeMap<Double,ParkingSpot>();
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-        Query queryRef = mDatabase.child("ParkingSpot").orderByChild("longitude").startAt(longitude - 0.36).endAt(longitude + 0.36);
+        Query queryRef = mDatabase.child("ParkingSpots").orderByChild("longitude").startAt(longitude - 0.36).endAt(longitude + 0.36);
         final Date time2 = new Date(time.getTime());
         final Location source = new Location("");
         source.setLatitude(latitude);
