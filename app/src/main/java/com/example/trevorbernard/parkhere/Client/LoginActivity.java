@@ -113,7 +113,9 @@ public class LoginActivity extends Activity {
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent myIntent = new Intent(LoginActivity.this, RegisterActivity.class);
+                //Intent myIntent = new Intent(LoginActivity.this, RegisterActivity.class);
+                //Just for testing to see search results
+                Intent myIntent = new Intent(LoginActivity.this, SearchResultActivity.class);
                 LoginActivity.this.startActivity(myIntent);
             }
         });
