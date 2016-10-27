@@ -19,6 +19,7 @@
         <activity android:name=".Client.LoginActivity"></activity>
         <activity android:name=".Client.RegisterActivity"></activity>
         <activity android:name=".Client.SearchResultActivity"></activity>
+        <activity android:name=".Client.PastReservationActivity"></activity>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
