@@ -115,6 +115,10 @@ public class SubmitRatingAndReviewActivity extends Activity{
 
 
 
+
+
+
+    //this is for a merge conflict for me and jun
     /* post spot activity
     void postSpotFromGUI(
             String name,
