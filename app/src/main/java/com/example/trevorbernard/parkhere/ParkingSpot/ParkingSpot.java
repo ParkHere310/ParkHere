@@ -2,6 +2,7 @@ package com.example.trevorbernard.parkhere.ParkingSpot;
 
 import android.location.Address;
 
+import com.example.trevorbernard.parkhere.User.Rating;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -78,6 +79,7 @@ public class ParkingSpot {
     private boolean isSUV;
     private boolean isCovered;
     private boolean isHandicap;
+    private Rating rating;
 
 
     //private Address address;
@@ -272,5 +274,21 @@ public class ParkingSpot {
     public void setUID(String UID) {
 
         this.UID = UID;
+    }
+
+    public boolean isHandicap() {
+        return isHandicap;
+    }
+
+    public Rating getRating() {
+        return rating;
+    }
+
+    public void setHandicap(boolean handicap) {
+        isHandicap = handicap;
+    }
+
+    public void setRating(Rating rating) {
+        this.rating = rating;
     }
 }
