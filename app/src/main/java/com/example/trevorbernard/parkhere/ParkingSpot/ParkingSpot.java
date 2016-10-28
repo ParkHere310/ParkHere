@@ -81,6 +81,7 @@ public class ParkingSpot {
     private int price;
     private boolean isSUV;
     private boolean isCovered;
+    private boolean isHandicap;
     //private Address address;
     private double longitude;
     private double latitude;
@@ -92,40 +93,53 @@ public class ParkingSpot {
 
 
     public double getLatitude() {
+
         return latitude;
     }
 
     public void setLatitude(double latidude) {
+
         this.latitude = latidude;
     }
 
     public double getLongitude() {
+
         return longitude;
     }
 
     public void setLongitude(double longitude) {
+
         this.longitude = longitude;
     }
 
     public String getOccupantUID() {
+
         return occupantUID;
     }
 
     public void setOccupantUID(String occupantUID) {
+
         this.occupantUID = occupantUID;
     }
 
     public String getOwnerUID() {
+
         return ownerUID;
     }
 
     public void setOwnerUID(String ownerUID) {
+
         this.ownerUID = ownerUID;
     }
 
     public ParkingSpot() {
-        System.out.println("CALLED WRONG CONSTRUCTER, THIS IS DEFAULT, CALL WITH ARGUMENTS!")
+
+        System.out.println("CALLED WRONG CONSTRUCTER, THIS IS DEFAULT, CALL WITH ARGUMENTS!");
+
+        System.out.println("THIS DOES NOT MAKE A PARKING SPOT WITH EXPECTED INFORMATION!");
+
         occupantUID = "-1"; // No occupant
+        
     }
 
     public ParkingSpot(String name,
@@ -133,6 +147,7 @@ public class ParkingSpot {
                        int price,
                        boolean isSUV,
                        boolean isCovered,
+                       boolean isHandicap,
                        String address){
 
 
@@ -140,12 +155,17 @@ public class ParkingSpot {
 
         reviews = new ArrayList<String>();
 
+        this.price = price;
+        this.isSUV = isSUV;
+        this.isCovered = isCovered;
+        this.isHandicap = isHandicap;
+        this.address = address;
+
         //TODO:
         //set lat and long from the address that came in
         //private double longitude;
         //private double latitude;
 
-        this.address = address;
         //TODO: someone do the timewindow
        //private TimeWindow timeWindow;
 
