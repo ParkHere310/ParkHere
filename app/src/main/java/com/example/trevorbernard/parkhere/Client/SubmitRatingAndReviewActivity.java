@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.trevorbernard.parkhere.Connectors.UserConnector;
 import com.example.trevorbernard.parkhere.MainActivity;
 import com.example.trevorbernard.parkhere.ParkingSpot.ParkingSpot;
 import com.example.trevorbernard.parkhere.R;
@@ -87,29 +88,50 @@ public class SubmitRatingAndReviewActivity extends Activity{
 
 
 
-    public static boolean addReviewToSpot(ParkingSpot reviewed, String rev);
-
-    public static boolean addReviewToUser(User reviewed, String rev);
 
     //ask iman if need help
-
+    
     //for user
     //add ONLY review
-    public void addUserRatingFromGUI(int num){
+    public void addUserRatingFromGUI(User user, int num){
+
+        String userUID = user.getUID();
+
+        UserConnector.addRatingToUser(userUID, num);
 
     }
     //add rating with Review
-    public void addUserRatingReviewFromGUI() {
+    public void addUserRatingReviewFromGUI(User user, int num, String rev) {
+
+
+        String userUID = user.getUID();
+
+
+        //add rating
+        UserConnector.addRatingToUser(userUID, num);
+        //add review
+        UserConnector.addReviewToUser(userUID, rev);
 
     }
 
     //for spot
     //add ONLY review
-    public void addSpotRatingFromGUI(int num){
+    public void addSpotRatingFromGUI(ParkingSpot spot, int num){
+
+        String spotUID = spot.getUID();
+
+        UserConnector.addRatingToUser(spotUID, num);
 
     }
     //add rating with Review
-    public void addSpotRatingReviewFromGUI() {
+    public void addSpotRatingReviewFromGUI(ParkingSpot spot, int num, String rev) {
+
+        String spotUID = spot.getUID();
+
+        //add rating
+        UserConnector.addRatingToSpot(spotUID, num);
+        //add review
+        UserConnector.addReviewToSpot(spotUID, rev);
 
     }
 
