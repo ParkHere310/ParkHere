@@ -16,7 +16,9 @@ import java.util.ArrayList;
  */
 
 public class SpotConnector {
-    public static boolean postSpot(ParkingSpot spot, User user) {
+
+
+    public static boolean postSpot(ParkingSpot spot) {
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
         String uid = mDatabase.child("ParkingSpots").push().getKey(); //gets new unique id
         spot.setUID(uid);

@@ -139,7 +139,7 @@ public class ParkingSpot {
         System.out.println("THIS DOES NOT MAKE A PARKING SPOT WITH EXPECTED INFORMATION!");
 
         occupantUID = "-1"; // No occupant
-        
+
     }
 
     public ParkingSpot(String name,
@@ -174,11 +174,15 @@ public class ParkingSpot {
     }
 
     public void setTimeWindow(TimeWindow timeWindow) {
+
         this.timeWindow = timeWindow;
+
     }
 
     public TimeWindow getTimeWindow() {
+
         return this.timeWindow;
+
     }
 
     public String getName() {
