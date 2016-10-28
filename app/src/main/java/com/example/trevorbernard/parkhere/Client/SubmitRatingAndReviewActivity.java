@@ -10,7 +10,9 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.trevorbernard.parkhere.MainActivity;
+import com.example.trevorbernard.parkhere.ParkingSpot.ParkingSpot;
 import com.example.trevorbernard.parkhere.R;
+import com.example.trevorbernard.parkhere.User.User;
 
 /**
  * Created by Hexi on 2016/10/23.
@@ -82,4 +84,56 @@ public class SubmitRatingAndReviewActivity extends Activity{
         EditTextComment = (EditText) findViewById(R.id.CommentText);
         EditTextRating = (EditText) findViewById(R.id.RatingText);
     }
+
+
+
+    public static boolean addReviewToSpot(ParkingSpot reviewed, String rev);
+
+    public static boolean addReviewToUser(User reviewed, String rev);
+
+    //ask iman if need help
+
+    //for user
+    //add ONLY review
+    public void addUserRatingFromGUI(int num){
+
+    }
+    //add rating with Review
+    public void addUserRatingReviewFromGUI() {
+
+    }
+
+    //for spot
+    //add ONLY review
+    public void addSpotRatingFromGUI(int num){
+
+    }
+    //add rating with Review
+    public void addSpotRatingReviewFromGUI() {
+
+    }
+
+
+
+    /* post spot activity
+    void postSpotFromGUI(
+            String name,
+            String description,
+            int price,
+            boolean isSUV,
+            boolean isCovered,
+            boolean isHandicap,
+            String address
+            ) {
+
+        //make new spot
+        //the parking spot itself will add the seller user to the class
+        ParkingSpot spot = new ParkingSpot( name,
+                description, price, isSUV, isCovered, isHandicap, address);
+
+        SpotConnector.postSpot(spot);
+    }
+
+     */
+
 }
