@@ -5,7 +5,6 @@ import android.location.Location;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.example.trevorbernard.parkhere.ParkingSpot.ParkingSpot;
 import com.example.trevorbernard.parkhere.R;
@@ -18,11 +17,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.Date;
-import java.util.SortedMap;
-import java.util.TreeMap;
 
 /**
  * Created by Hexi on 2016/10/23.
@@ -65,19 +60,28 @@ public class SearchResultActivity extends Activity {
                 Location source = new Location("");
                 source.setLongitude(longitude);
                 source.setLatitude(latitude);
-
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     ParkingSpot spot = (snapshot.getValue(ParkingSpot.class));
+
+                    //if the spot is within this range
                     if(spot.getLatitude() >= latitude-0.36 && spot.getLatitude() <= latitude + 0.36) {
 
-                        Location spotloc = new Location("");
-                        spotloc.setLongitude(spot.getLongitude());
-                        spotloc.setLatitude(spot.getLatitude());
-                        Double distance = (double) spotloc.distanceTo(source); // in meters
-                        distance = toMiles(distance);
+                        //if the spot is within time, and unoccupied
+                        if(time2Start.compareTo(new Date(spot.getTimeWindow().getStartDateTime())) >= 0
+                                && time2Start.compareTo(new Date(spot.getTimeWindow().getEndDateTime())) < 0
+                                && time2End.compareTo(new Date(spot.getTimeWindow().getEndDateTime())) < 0
+                                && time2End.compareTo(new Date(spot.getTimeWindow().getStartTime())) > 0
+                                && spot.getOccupantUID().equals("-1")) {
 
-                        parkingSpots.add(spot);
-                        stringSpots.add(new DecimalFormat("#.##").format(distance) + " miles " + spot.getName() +  ": " + spot.getAddress());
+                            Location spotloc = new Location("");
+                            spotloc.setLongitude(spot.getLongitude());
+                            spotloc.setLatitude(spot.getLatitude());
+                            Double distance = (double) spotloc.distanceTo(source); // in meters
+                            distance = toMiles(distance);
+
+                            parkingSpots.add(spot);
+                            stringSpots.add(new DecimalFormat("#.##").format(distance) + " miles " + spot.getName() + ": " + spot.getAddress());
+                        }
                     }
                 }
        

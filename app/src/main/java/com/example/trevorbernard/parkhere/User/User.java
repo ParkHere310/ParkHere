@@ -54,6 +54,8 @@ public class User implements Parcelable{
         dest.writeString(firstName);
         dest.writeString(lastName);
         dest.writeString(phoneNumber);
+        //WHO WROTE THIS, DO WE NEED IT?
+        //dest.writeStrTrianium Universal [2-Pack] Dual Port Car Chargering(phoneNumber);
         dest.writeByte((byte) (isVerified ? 1 : 0));
     }
 
@@ -140,6 +142,7 @@ public class User implements Parcelable{
     public void setRating(Rating rating) {
         this.rating = rating;
     }
+
 
     /*
     public Image getProfilePicture(){

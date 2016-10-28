@@ -5,4 +5,8 @@ package com.example.trevorbernard.parkhere.Client;
  */
 
 public class PostSpotActivity {
+    void postSpotByNewUser(String title, ){
+
+    }
+
 }

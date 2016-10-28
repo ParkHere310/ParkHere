@@ -2,6 +2,7 @@ package com.example.trevorbernard.parkhere.ParkingSpot;
 
 import android.location.Address;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -123,83 +124,131 @@ public class ParkingSpot {
     }
 
     public ParkingSpot() {
+        System.out.println("CALLED WRONG CONSTRUCTER, THIS IS DEFAULT, CALL WITH ARGUMENTS!")
         occupantUID = "-1"; // No occupant
     }
 
-    public void setTimeWindow(TimeWindow timeWindow) { this.timeWindow = timeWindow; }
+    public ParkingSpot(String name,
+                       String description,
+                       int price,
+                       boolean isSUV,
+                       boolean isCovered,
+                       String address){
 
-    public TimeWindow getTimeWindow() { return this.timeWindow; }
+
+       // private String imageURL; need to add in later some how
+
+        reviews = new ArrayList<String>();
+
+        //TODO:
+        //set lat and long from the address that came in
+        //private double longitude;
+        //private double latitude;
+
+        this.address = address;
+        //TODO: someone do the timewindow
+       //private TimeWindow timeWindow;
+
+        ownerUID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        occupantUID = "-1"; // No occupant
+    }
+
+    public void setTimeWindow(TimeWindow timeWindow) {
+        this.timeWindow = timeWindow;
+    }
+
+    public TimeWindow getTimeWindow() {
+        return this.timeWindow;
+    }
 
     public String getName() {
+
         return name;
     }
 
     public void setName(String name) {
+
         this.name = name;
     }
 
 
     public String getImageURL() {
+
         return imageURL;
     }
 
     public void setImageURL(String imageURL) {
+
         this.imageURL = imageURL;
     }
 
     public String getDescription() {
+
         return description;
     }
 
     public void setDescription(String description) {
+
         this.description = description;
     }
 
     public List<String> getReviews() {
+
         return reviews;
     }
 
     public void setReviews(List<String> reviews) {
+
         this.reviews = reviews;
     }
 
     public int getPrice() {
+
         return price;
     }
 
     public void setPrice(int price) {
+
         this.price = price;
     }
 
     public boolean isSUV() {
+
         return isSUV;
     }
 
     public void setSUV(boolean SUV) {
+
         isSUV = SUV;
     }
 
     public boolean isCovered() {
+
         return isCovered;
     }
 
     public void setCovered(boolean covered) {
+
         isCovered = covered;
     }
 
     public String getAddress() {
+
         return address;
     }
 
     public void setAddress(String address) {
+
         this.address = address;
     }
 
     public String getUID() {
+
         return this.UID;
     }
 
     public void setUID(String UID) {
+
         this.UID = UID;
     }
 }
