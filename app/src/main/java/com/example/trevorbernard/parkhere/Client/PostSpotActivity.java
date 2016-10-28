@@ -1,5 +1,7 @@
 package com.example.trevorbernard.parkhere.Client;
 
+import android.app.Activity;
+
 import com.example.trevorbernard.parkhere.Connectors.SpotConnector;
 import com.example.trevorbernard.parkhere.ParkingSpot.ParkingSpot;
 
@@ -7,7 +9,7 @@ import com.example.trevorbernard.parkhere.ParkingSpot.ParkingSpot;
  * Created by Hexi on 2016/10/20.
  */
 
-public class PostSpotActivity {
+public class PostSpotActivity extends Activity {
 
 
     void postSpotFromGUI(

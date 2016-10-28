@@ -1,6 +1,7 @@
 package com.example.trevorbernard.parkhere.Client;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.text.Editable;
@@ -11,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.trevorbernard.parkhere.Connectors.AuthenticationConnector;
+import com.example.trevorbernard.parkhere.MainActivity;
 import com.example.trevorbernard.parkhere.R;
 import com.example.trevorbernard.parkhere.User.User;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -138,6 +140,8 @@ public class RegisterActivity extends Activity{
             @Override
             public void onClick(View v) {
                 createAccount(username, password);
+                Intent myIntent = new Intent(RegisterActivity.this, MainActivity.class);
+                RegisterActivity.this.startActivity(myIntent);
             }
         });
     }
