@@ -2,6 +2,7 @@ package com.example.trevorbernard.parkhere.Connectors;
 
 import com.example.trevorbernard.parkhere.ParkingSpot.ParkingSpot;
 import com.example.trevorbernard.parkhere.Reservation.Reservation;
+import com.example.trevorbernard.parkhere.User.Rating;
 import com.example.trevorbernard.parkhere.User.User;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -80,12 +81,24 @@ public class UserConnector {
         return list;
     }
 
-    public static boolean addRatingToUser(User reviewed, int num){
-
+    public static boolean addRatingToUser(String reviewedUID, int num){
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+        mDatabase.child("Users").child(reviewedUID).child("rating");
+        User user = getUserFromUID(reviewedUID);
+        Rating rating = user.getRating();
+        rating.addRating(num);
+        mDatabase.setValue(rating);
+        return true;
     }
 
-    public static boolean addRatingToSpot(ParkingSpot reviewed, int num){
-
+    public static boolean addRatingToSpot(String reviewedUID, int num){
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+        mDatabase.child("ParkingSpots").child(reviewedUID).child("rating");
+        ParkingSpot spot = SpotConnector.getParkingSpotFromUID(reviewedUID);
+        Rating rating = spot.getRating();
+        rating.addRating(num);
+        mDatabase.setValue(rating);
+        return true;
     }
 
     public static boolean addReviewToUser(User reviewed, String rev){
