@@ -66,10 +66,6 @@ public class ParkingSpot {
         ps.setUID(uid);
 
         mDatabase.child("ParkingSpots").child(uid).setValue(ps);
-
-
-
-
     }
 
 
@@ -82,6 +78,8 @@ public class ParkingSpot {
     private boolean isSUV;
     private boolean isCovered;
     private boolean isHandicap;
+
+
     //private Address address;
     private double longitude;
     private double latitude;

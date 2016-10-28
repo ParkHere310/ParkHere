@@ -6,8 +6,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.trevorbernard.parkhere.Connectors.SpotConnector;
+import com.example.trevorbernard.parkhere.Connectors.TransactionConnector;
 import com.example.trevorbernard.parkhere.MainActivity;
 import com.example.trevorbernard.parkhere.R;
+import com.example.trevorbernard.parkhere.Reservation.Reservation;
+import com.example.trevorbernard.parkhere.Reservation.Transaction;
+import com.google.firebase.auth.FirebaseAuth;
 
 /**
  * Created by Hexi on 2016/10/23.
@@ -33,6 +38,21 @@ public class RentSpotActivity extends Activity {
                 RentSpotActivity.this.startActivity(myIntent);
             }
         });
+    }
+
+    //iman,
+    private void rentSpotFromGUI( String parkingSpotUID) {
+
+        String seekerUID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        String ownerUID = SpotConnector.getParkingSpotFromUID(parkingSpotUID).getOwnerUID();
+
+                Transaction transaction = null;
+
+
+        Reservation res = new Reservation(ownerUID, seekerUID,
+                parkingSpotUID, transaction);
+
+        TransactionConnector.addReservation(res);
     }
 
     private void initiateVariables() {

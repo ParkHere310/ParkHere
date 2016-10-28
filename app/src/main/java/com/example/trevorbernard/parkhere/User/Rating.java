@@ -27,18 +27,22 @@ public class Rating {
     }
 
     public int getTotalRating() {
+
         return totalRating;
     }
 
     public void setTotalRating(int totalRating) {
+
         this.totalRating = totalRating;
     }
 
     public int getNumRatings() {
+
         return numRatings;
     }
 
     public void setNumRatings(int numRatings) {
+
         this.numRatings = numRatings;
     }
 }

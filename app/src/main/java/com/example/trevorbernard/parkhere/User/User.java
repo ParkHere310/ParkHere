@@ -7,6 +7,7 @@ package com.example.trevorbernard.parkhere.User;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.example.trevorbernard.parkhere.Connectors.UserConnector;
 import com.google.firebase.auth.FirebaseUser;
 
 import java.util.List;
@@ -27,25 +28,31 @@ public class User implements Parcelable{
     private String UID;
 
     public String getUID() {
+
         return UID;
     }
 
     public void setUID(String UID) {
+
         this.UID = UID;
     }
 
     //private Search search; //this class needs to be made
+
     //private SpotManager spotManager;
 
     public FirebaseUser getFbUsers() {
+
         return FbUsers;
     }
 
     public void setFbUsers(FirebaseUser fbUsers) {
+
         FbUsers = fbUsers;
     }
 
     public int describeContents(){
+
         return 0;
     }
 
@@ -54,6 +61,7 @@ public class User implements Parcelable{
         dest.writeString(firstName);
         dest.writeString(lastName);
         dest.writeString(phoneNumber);
+
         //WHO WROTE THIS, DO WE NEED IT?
         //dest.writeStrTrianium Universal [2-Pack] Dual Port Car Chargering(phoneNumber);
         dest.writeByte((byte) (isVerified ? 1 : 0));
@@ -84,62 +92,81 @@ public class User implements Parcelable{
     }
 
     public String getEmail(){
+
         return email;
     }
 
     public void setEmail(String email){
+
         this.email = email;
     }
 
     public String getFirstName(){
+
         return firstName;
     }
 
     public void setFirstName(String firstName){
+
         this.firstName = firstName;
     }
 
     public String getLastName(){
+
         return lastName;
     }
 
     public void setLastName(String lastName){
+
         this.lastName = lastName;
     }
 
     public String getPhoneNumber(){
+
         return phoneNumber;
     }
 
     public List<String> getReviews(){
+
         return reviews;
     }
 
     public void setReviews(List<String> list) {
+
         this.reviews = list;
     }
 
     void addReview(String review){
+
+        //add review
         reviews.add(review);
+
+        //add to database
+        UserConnector.addReviewToUser(this, review);
     }
 
     public void setPhoneNumber(String phoneNumber){
+
         this.phoneNumber = phoneNumber;
     }
 
     public boolean getIsVerified(){
+
         return isVerified;
     }
 
     public void setIsVerified(boolean verified){
+
         this.isVerified = verified;
     }
 
     public Rating getRating(){
+
         return rating;
     }
 
     public void setRating(Rating rating) {
+
         this.rating = rating;
     }
 
