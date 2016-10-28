@@ -96,6 +96,17 @@ public class UserConnector {
 
     public static boolean checkIn(User user, Reservation res) {
         // TODO: Update boolean, complete transaction to owner, move to PastReservations
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("Reservatons");
+        mDatabase.child(res.getUID()).removeValue();
+
+        res.setCompleted(true);
+
+        //TODO: PayPal complete Transaction
+
+        mDatabase = FirebaseDatabase.getInstance().getReference().getRoot().child("PastReservations")
+                .child(res.getUID());
+        mDatabase.setValue(res);
+
 
         return true;
     }
@@ -120,5 +131,7 @@ public class UserConnector {
         });
         return list.get(0);
     }
+
+
 //
 }
