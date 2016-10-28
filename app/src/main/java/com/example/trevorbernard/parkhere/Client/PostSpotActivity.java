@@ -8,8 +8,23 @@ import com.example.trevorbernard.parkhere.ParkingSpot.ParkingSpot;
  */
 
 public class PostSpotActivity {
-    void postSpotFromGUI(String title, ){
-        ParkingSpot spot = new ParkingSpot();
+
+
+    void postSpotFromGUI(
+            String name,
+            String description,
+            int price,
+            boolean isSUV,
+            boolean isCovered,
+            boolean isHandicap,
+            String address
+            ) {
+
+        //make new spot
+        //the parking spot itself will add the seller user to the class
+        ParkingSpot spot = new ParkingSpot( name,
+                description, price, isSUV, isCovered, isHandicap, address);
+
         SpotConnector.postSpot(spot);
     }
 
