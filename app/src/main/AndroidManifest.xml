@@ -16,6 +16,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".Client.SearchActivity"></activity>
+        <activity android:name=".Client.RentSpotActivity"></activity>
+        <activity android:name=".Client.FilterActivity"></activity>
         <activity android:name=".Client.LoginActivity"></activity>
         <activity android:name=".Client.RegisterActivity"></activity>
         <activity android:name=".Client.SearchResultActivity"></activity>

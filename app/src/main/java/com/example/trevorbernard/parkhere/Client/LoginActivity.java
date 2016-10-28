@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.trevorbernard.parkhere.Connectors.AuthenticationConnector;
+import com.example.trevorbernard.parkhere.MainActivity;
 import com.example.trevorbernard.parkhere.R;
 import com.example.trevorbernard.parkhere.User.User;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -115,7 +116,7 @@ public class LoginActivity extends Activity {
             public void onClick(View v) {
                 //Intent myIntent = new Intent(LoginActivity.this, RegisterActivity.class);
                 //Just for testing to see search results
-                Intent myIntent = new Intent(LoginActivity.this, SearchResultActivity.class);
+                Intent myIntent = new Intent(LoginActivity.this, MainActivity.class);
                 LoginActivity.this.startActivity(myIntent);
             }
         });
