@@ -90,7 +90,7 @@ public class SubmitRatingAndReviewActivity extends Activity{
 
 
     //ask iman if need help
-    
+
     //for user
     //add ONLY review
     public void addUserRatingFromGUI(User user, int num){
