@@ -11,6 +11,7 @@ import com.example.trevorbernard.parkhere.Client.PastReservationActivity;
 import com.example.trevorbernard.parkhere.Client.PostSpotActivity;
 import com.example.trevorbernard.parkhere.Client.SearchActivity;
 import com.example.trevorbernard.parkhere.Client.ViewListingsActivity;
+import com.google.firebase.auth.FirebaseAuth;
 
 //Last Edited by: Hexi
 //Last Edited about: Adding variables to the widgets
@@ -30,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if (true) {         //not logged in
+        if (FirebaseAuth.getInstance().getCurrentUser().getUid() == null) {         //not logged in
             Intent myIntent = new Intent(MainActivity.this, LoginActivity.class);
             startActivity(myIntent);
         }

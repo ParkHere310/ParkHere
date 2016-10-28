@@ -1,6 +1,5 @@
 package com.example.trevorbernard.parkhere.Connectors;
 
-import com.example.trevorbernard.parkhere.ParkingSpot.ParkingSpot;
 import com.example.trevorbernard.parkhere.Reservation.Reservation;
 import com.example.trevorbernard.parkhere.User.User;
 import com.google.firebase.database.DatabaseReference;
@@ -11,9 +10,7 @@ import com.google.firebase.database.FirebaseDatabase;
  */
 
 public class TransactionConnector {
-    public static Reservation rentSpot(ParkingSpot spot, User user) {
-        return new Reservation();
-    }
+
 
     public static boolean addReservation(Reservation res) {
         // Adds Reservation to Database, updates seekerUID of ParkingSpot

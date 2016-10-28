@@ -109,8 +109,6 @@ public class LoginActivity extends Activity {
             @Override
             public void onClick(View v) {
                 signIn(username, password);
-                Intent myIntent = new Intent(LoginActivity.this, MainActivity.class);
-                LoginActivity.this.startActivity(myIntent);
             }
         });
         registerButton.setOnClickListener(new View.OnClickListener() {
@@ -157,6 +155,9 @@ public class LoginActivity extends Activity {
                         if (!task.isSuccessful()) {
                             // Login failed
                             System.out.println("failed login"); //debug
+                        } else if(task.isSuccessful()) {
+                            Intent myIntent = new Intent(LoginActivity.this, MainActivity.class);
+                            LoginActivity.this.startActivity(myIntent);
                         }
                     }
                 });

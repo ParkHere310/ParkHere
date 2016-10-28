@@ -140,8 +140,6 @@ public class RegisterActivity extends Activity{
             @Override
             public void onClick(View v) {
                 createAccount(username, password);
-                Intent myIntent = new Intent(RegisterActivity.this, MainActivity.class);
-                RegisterActivity.this.startActivity(myIntent);
             }
         });
     }
@@ -161,6 +159,9 @@ public class RegisterActivity extends Activity{
                         // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
                             //TODO: Register failed
+                        } else if (task.isSuccessful()) {
+                            Intent myIntent = new Intent(RegisterActivity.this, MainActivity.class);
+                            RegisterActivity.this.startActivity(myIntent);
                         }
                     }
                 });
