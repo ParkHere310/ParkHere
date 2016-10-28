@@ -17,7 +17,6 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 /**
  * Created by Hexi on 2016/10/23.
@@ -67,11 +66,11 @@ public class SearchResultActivity extends Activity {
                     if(spot.getLatitude() >= latitude-0.36 && spot.getLatitude() <= latitude + 0.36) {
 
                         //if the spot is within time, and unoccupied
-                        if(time2Start.compareTo(new Date(spot.getTimeWindow().getStartDateTime())) >= 0
+                        /*if(time2Start.compareTo(new Date(spot.getTimeWindow().getStartDateTime())) >= 0
                                 && time2Start.compareTo(new Date(spot.getTimeWindow().getEndDateTime())) < 0
                                 && time2End.compareTo(new Date(spot.getTimeWindow().getEndDateTime())) < 0
                                 && time2End.compareTo(new Date(spot.getTimeWindow().getStartTime())) > 0
-                                && spot.getOccupantUID().equals("-1")) {
+                                && spot.getOccupantUID().equals("-1"))*/ {
 
                             Location spotloc = new Location("");
                             spotloc.setLongitude(spot.getLongitude());

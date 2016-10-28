@@ -12,7 +12,6 @@ import com.google.firebase.database.FirebaseDatabase;
 public class TransactionConnector {
 
 
-
     public static boolean addReservation(Reservation res) {
         // Adds Reservation to Database, updates seekerUID of ParkingSpot
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("Reservations");
