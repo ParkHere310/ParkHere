@@ -94,6 +94,20 @@ public class UserConnector {
         return true;
     }
 
+    public static boolean addReviewToUser(User reviewed, String rev){
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+        String uid = mDatabase.child("Users").child(reviewed.getUID()).child("reviews").push().getKey();
+        mDatabase.child("Users").child(reviewed.getUID()).child("reviews").child(uid).setValue(rev);
+        return true;
+    }
+
+    public static boolean addReviewToSpot(ParkingSpot reviewed, String rev){
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+        String uid = mDatabase.child("ParkingSpots").child(reviewed.getUID()).child("reviews").push().getKey();
+        mDatabase.child("ParkingSpots").child(reviewed.getUID()).child("reviews").child(uid).setValue(rev);
+        return true;
+    }
+
     public static boolean checkIn(User user, Reservation res) {
         // TODO: Update boolean, complete transaction to owner, move to PastReservations
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("Reservatons");
