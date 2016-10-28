@@ -16,10 +16,14 @@ public class TransactionConnector {
     }
 
     public static boolean addReservation(Reservation res) {
+        // Adds Reservation to Database, updates seekerUID of ParkingSpot
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("Reservations");
         String uid = mDatabase.push().getKey();
         res.setUID(uid);
         mDatabase.child(uid).setValue(res);
+
+        FirebaseDatabase.getInstance().getReference().getRoot().child("ParkingSpots")
+                .child(res.getParkingSpotUID()).child("occupantUID").setValue(res.getSeekerUID());
         return true;
     }
 

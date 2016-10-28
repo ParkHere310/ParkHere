@@ -80,14 +80,14 @@ public class UserConnector {
         return list;
     }
 
-    public static boolean addReviewToUser(User submitter, User reviewed, String rev){
+    public static boolean addReviewToUser(User reviewed, String rev){
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
         String uid = mDatabase.child("Users").child(reviewed.getUID()).child("reviews").push().getKey();
         mDatabase.child("Users").child(reviewed.getUID()).child("reviews").child(uid).setValue(rev);
         return true;
     }
 
-    public static boolean addReviewToSpot(User submitter, ParkingSpot reviewed, String rev){
+    public static boolean addReviewToSpot(ParkingSpot reviewed, String rev){
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
         String uid = mDatabase.child("ParkingSpots").child(reviewed.getUID()).child("reviews").push().getKey();
         mDatabase.child("ParkingSpots").child(reviewed.getUID()).child("reviews").child(uid).setValue(rev);
