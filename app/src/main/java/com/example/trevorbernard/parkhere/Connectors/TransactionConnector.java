@@ -21,6 +21,10 @@ public class TransactionConnector {
 
         FirebaseDatabase.getInstance().getReference().getRoot().child("ParkingSpots")
                 .child(res.getParkingSpotUID()).child("occupantUID").setValue(res.getSeekerUID());
+
+
+        //TODO: make seeker pay here
+
         return true;
     }
 
