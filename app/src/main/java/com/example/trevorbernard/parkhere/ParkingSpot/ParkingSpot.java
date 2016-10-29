@@ -152,6 +152,8 @@ public class ParkingSpot {
 
         reviews = new ArrayList<String>();
 
+        this.name = name;
+        this.description = description;
         this.price = price;
         this.isSUV = isSUV;
         this.isCovered = isCovered;

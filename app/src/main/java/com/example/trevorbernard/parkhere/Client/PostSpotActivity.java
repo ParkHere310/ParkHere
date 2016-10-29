@@ -10,33 +10,19 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 
+import com.example.trevorbernard.parkhere.Connectors.SpotConnector;
+import com.example.trevorbernard.parkhere.ParkingSpot.ParkingSpot;
 import com.example.trevorbernard.parkhere.R;
 import com.google.firebase.auth.FirebaseAuth;
+
+import java.util.Date;
 
 /**
  * Created by Hexi on 2016/10/20.
  */
 
 
-/*
-    void postSpotFromGUI(
-            String name,
-            String description,
-            int price,
-            boolean isSUV,
-            boolean isCovered,
-            boolean isHandicap,
-            String address
-            ) {
 
-        //make new spot
-        //the parking spot itself will add the seller user to the class
-        ParkingSpot spot = new ParkingSpot( name,
-                description, price, isSUV, isCovered, isHandicap, address);
-
-        SpotConnector.postSpot(spot);
-    }
-*/
 public class PostSpotActivity extends Activity {
         private Button postButton;
         private Button uploadButton;
@@ -45,6 +31,7 @@ public class PostSpotActivity extends Activity {
         private EditText startTime_field;
         private EditText endTime_field;
         private EditText price_field;
+        private EditText address_field;
         private EditText description_field;
         private CheckBox suvCheckBox;
         private CheckBox coveredCheckBox;
@@ -55,6 +42,7 @@ public class PostSpotActivity extends Activity {
         private String endTime;
         private String price;
         private String description;
+        private String address;
 
         private boolean isSUV;
         private boolean isCovered;
@@ -63,6 +51,28 @@ public class PostSpotActivity extends Activity {
         private FirebaseAuth.AuthStateListener mAuthListener;
         private FirebaseAuth mAuth;
         private static final String TAG = "PostSpotActivity";
+
+
+
+    void postSpotFromGUI(
+            String name,
+            String description,
+            int price,
+            boolean isSUV,
+            boolean isCovered,
+            boolean isHandicap,
+            String address,
+            Date startTime,
+            Date endTime
+    ) {
+
+        //make new spot
+        //the parking spot itself will add the seller user to the class
+        ParkingSpot spot = new ParkingSpot( name,
+                description, price, isSUV, isCovered, isHandicap, address, startTime, endTime);
+
+        SpotConnector.postSpot(spot);
+    }
 
         @Override
         public void onCreate(Bundle savedInstanceState) {
@@ -81,6 +91,7 @@ public class PostSpotActivity extends Activity {
                 startTime_field = (EditText)findViewById(R.id.startTime_field);
                 endTime_field = (EditText)findViewById(R.id.endTime_field);
                 price_field = (EditText)findViewById(R.id.price_field);
+                    address_field = (EditText)findViewById(R.id.address_field);
                 description_field = (EditText)findViewById(R.id.description_field);
                     coveredCheckBox = (CheckBox)findViewById(R.id.coveredCheckBox);
                 suvCheckBox = (CheckBox)findViewById(R.id.suvCheckBox);
@@ -116,6 +127,22 @@ public class PostSpotActivity extends Activity {
                         @Override
                         public void afterTextChanged(Editable s) {
                          }
+                    });
+                    address_field.addTextChangedListener(new TextWatcher() {
+                        @Override
+                        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                        }
+
+                        @Override
+                        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                            address = address_field.getText().toString();
+                        }
+
+                        @Override
+                        public void afterTextChanged(Editable editable) {
+
+                        }
                     });
                 startTime_field.addTextChangedListener(new TextWatcher() {
                     @Override
@@ -181,7 +208,33 @@ public class PostSpotActivity extends Activity {
                                 @Override
                                 public void onClick(View v) {
                                         //Post Here
-                                            }
+
+
+
+                                    
+                                    Date startTime = new Date(2016,10,29,8,30);
+                                    Date endTime = new Date(2016,10,29,15,30);
+
+                                    //Jun, print the title, description, price,
+                                    //all bools, address, and start/end time to log.
+                                    //There are 2 date variables above, make them using
+                                    // info from date and time picker
+
+
+                                    //this will post to database.
+                                    /*
+                                    postSpotFromGUI(
+                                            PostSpotActivity.this.title,
+                                            PostSpotActivity.this.description,
+                                    PostSpotActivity.this.price, PostSpotActivity.this.isSUV,
+                                    PostSpotActivity.this.isCovered,
+                                    PostSpotActivity.this.isHandicapped,
+                                    PostSpotActivity.this.address,startTime,endTime
+                                    );
+
+                                    */
+
+                                }
                             });
                 uploadButton.setOnClickListener(new View.OnClickListener() {
                        @Override
@@ -285,8 +338,8 @@ public class PostSpotActivity extends Activity {
 
                             SpotConnector.postSpot(spot);
                 }
-
 */
+
 
 
 }

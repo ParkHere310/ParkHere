@@ -187,4 +187,16 @@
         android:id="@+id/description_view"
         android:layout_below="@+id/coveredCheckBox"
         android:layout_toStartOf="@+id/endTime_field" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:layout_below="@+id/pic_textview"
+        android:layout_alignStart="@+id/date_view"
+        android:id="@+id/address_field"
+        android:layout_above="@+id/date_view"
+        android:layout_toStartOf="@+id/uploadButton"
+        android:hint="address" />
 </RelativeLayout>
