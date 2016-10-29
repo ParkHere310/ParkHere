@@ -134,11 +134,6 @@ public class ParkingSpot {
 
     public ParkingSpot() {
 
-        System.out.println("CALLED WRONG CONSTRUCTER, THIS IS DEFAULT, CALL WITH ARGUMENTS!");
-
-        System.out.println("THIS DOES NOT MAKE A PARKING SPOT WITH EXPECTED INFORMATION!");
-
-        occupantUID = "-1"; // No occupant
 
     }
 
