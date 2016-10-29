@@ -18,17 +18,15 @@ import java.util.List;
  */
 
 public class AuthenticationConnector {
-    public static User register(FirebaseUser user) {
+    public static User register(FirebaseUser user, String fName, String lName, String pn) {
         User newUser = new User();
-        newUser.setFirstName("Donald");
-        newUser.setLastName("Trump");
+        newUser.setFirstName(fName);
+        newUser.setLastName(lName);
         newUser.setEmail(user.getEmail());
         newUser.setIsVerified(true);
         newUser.setUID(user.getUid());
-        newUser.setPhoneNumber("5555555555");
+        newUser.setPhoneNumber(pn);
         List<String> reviews = new ArrayList<String>();
-        reviews.add("asdf");
-        reviews.add("fds");
         newUser.setReviews(reviews);
         newUser.setRating(new Rating());
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();

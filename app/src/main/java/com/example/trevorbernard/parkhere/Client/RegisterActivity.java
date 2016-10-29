@@ -62,7 +62,7 @@ public class RegisterActivity extends Activity{
                 if (user != null) {
                     // User is signed in
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
-                    User newUser = AuthenticationConnector.register(user);
+                    User newUser = AuthenticationConnector.register(user, firstName, lastName, phoneNumber);
                 } else {
                     // User is signed out
                     Log.d(TAG, "onAuthStateChanged:signed_out");
