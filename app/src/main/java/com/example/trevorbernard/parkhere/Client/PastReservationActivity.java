@@ -18,33 +18,34 @@ import java.util.List;
  */
 
 public class PastReservationActivity extends Activity {
+
+    ListView list;
+    String[] mReservations = {"Reservation Address 1","Reservation Address 2",
+            "Reservation Address3 "}; // FOR TESTING PURPOSE
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pastreservation);
         initiateVariables();
-
         populateListView();
-
-        createClickCallback();
+        CreateOnclickCallback();
     }
 
-    private void createClickCallback() {
+    private void initiateVariables() {
+        list = (ListView) findViewById(R.id.listView);
 
     }
 
     //ONLY FOR TESTING PURPOSES
     private void populateListView() {
-        String[] mReservations = {"Reservation Address 1","Reservation Address 2",
-                "Reservation Address3 "};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(
                 this, R.layout.layout_reservationitem, mReservations);
-        ListView list = (ListView) findViewById(R.id.listView);
         list.setAdapter(adapter);
+
      }
 
-    private void initiateVariables() {
-        ListView list = (ListView) findViewById(R.id.listView);
+    private void CreateOnclickCallback() {
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View viewClicked, int position, long id) {
@@ -53,5 +54,8 @@ public class PastReservationActivity extends Activity {
                         "I just clicked on: " + clickedTextView.toString(),Toast.LENGTH_LONG).show();
             }
         });
+
+
     }
+
 }

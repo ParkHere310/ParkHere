@@ -98,6 +98,8 @@ public class SubmitRatingAndReviewActivity extends Activity{
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Submit rating and review to our database
+                //TO BE UPDATED
                 Intent myIntent = new Intent(SubmitRatingAndReviewActivity.this, MainActivity.class);
                 SubmitRatingAndReviewActivity.this.startActivity(myIntent);
             }
