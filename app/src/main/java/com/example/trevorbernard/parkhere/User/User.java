@@ -106,6 +106,7 @@ public class User implements Parcelable{
         this.phoneNumber = phoneNumber;
         this.profilePic = profilePic;
         reviews = new ArrayList<String>();
+        rating = new Rating();
     }
 
     public String getEmail(){

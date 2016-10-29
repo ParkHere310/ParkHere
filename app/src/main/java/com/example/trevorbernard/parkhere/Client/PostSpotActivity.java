@@ -210,8 +210,6 @@ public class PostSpotActivity extends Activity {
                                         //Post Here
 
 
-
-                                    
                                     Date startTime = new Date(2016,10,29,8,30);
                                     Date endTime = new Date(2016,10,29,15,30);
 
