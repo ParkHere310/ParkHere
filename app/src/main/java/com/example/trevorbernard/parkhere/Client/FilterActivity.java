@@ -59,6 +59,7 @@ public class FilterActivity extends Activity {
 
     private ArrayList<ParkingSpot> sortByDistance(ArrayList<ParkingSpot> spotList) {
         // TODO: this
+        return spotList;
     }
 
     private ArrayList<ParkingSpot> sortBySpotRating(ArrayList<ParkingSpot> spotList) {
