@@ -29,6 +29,7 @@ public class SubmitRatingAndReviewActivity extends Activity{
     RatingBar spotRatingBar;
     String userComment;
     String spotComment;
+    String reservationID;
     int userRating;
     int spotRating;
 
@@ -124,6 +125,9 @@ public class SubmitRatingAndReviewActivity extends Activity{
     }
 
     private void initiateVariable() {
+        Intent myIntent = this.getIntent();
+        reservationID = myIntent.getStringExtra("reservationID");
+
         submitButton = (Button) findViewById(R.id.SubmitButton);
         EditTextUserComment = (EditText) findViewById(R.id.CommentUserText);
         EditTextSpotComment = (EditText) findViewById(R.id.CommentSpotText);

@@ -1,6 +1,7 @@
 package com.example.trevorbernard.parkhere.Client;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -20,8 +21,8 @@ import java.util.List;
 public class PastReservationActivity extends Activity {
 
     ListView list;
-    String[] mReservations = {"Reservation Address 1","Reservation Address 2",
-            "Reservation Address3 "}; // FOR TESTING PURPOSE
+    String[] mReservations = {"Reservation ID 1","Reservation ID 2",
+            "Reservation ID 3"}; // FOR TESTING PURPOSE
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,9 +41,8 @@ public class PastReservationActivity extends Activity {
     //ONLY FOR TESTING PURPOSES
     private void populateListView() {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-                this, R.layout.layout_reservationitem, mReservations);
+                this, android.R.layout.simple_list_item_1, mReservations);
         list.setAdapter(adapter);
-
      }
 
     private void CreateOnclickCallback() {
@@ -50,12 +50,12 @@ public class PastReservationActivity extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, View viewClicked, int position, long id) {
                 TextView clickedTextView = (TextView) viewClicked;
-                Toast.makeText(PastReservationActivity.this,
-                        "I just clicked on: " + clickedTextView.toString(),Toast.LENGTH_LONG).show();
+                String reservationID = clickedTextView.getText().toString();
+                Intent myIntent =  new Intent(PastReservationActivity.this, SubmitRatingAndReviewActivity.class);
+                myIntent.putExtra("reservationID",reservationID);
+                PastReservationActivity.this.startActivity(myIntent);
             }
         });
-
-
     }
 
 }

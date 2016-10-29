@@ -10,6 +10,7 @@ import android.os.Parcelable;
 import com.example.trevorbernard.parkhere.Connectors.UserConnector;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -26,6 +27,7 @@ public class User implements Parcelable{
     private Rating rating;
     private transient FirebaseUser FbUsers;
     private String UID;
+    private String profilePic;
 
     public String getUID() {
 
@@ -89,6 +91,14 @@ public class User implements Parcelable{
 
     public User() {
         // TODO Auto-generated constructor stub
+    }
+
+    public User(FirebaseUser fbuser, String firstName, String lastName, String phoneNumber, String profilePic) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phoneNumber = phoneNumber;
+        this.profilePic = profilePic;
+        reviews = new ArrayList<String>();
     }
 
     public String getEmail(){
