@@ -93,14 +93,14 @@
             android:layout_below="@+id/actual_price"
             android:layout_toStartOf="@+id/actual_date"
             android:layout_marginTop="11dp"
-            android:id="@+id/type_label" />
+            android:id="@+id/isHandicapped" />
 
         <TextView
             android:text="Type Here"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/type_label"
-            android:layout_toEndOf="@+id/type_label"
+            android:layout_alignTop="@+id/isHandicapped"
+            android:layout_toEndOf="@+id/isHandicapped"
             android:id="@+id/actual_type" />
 
         <TextView
@@ -108,7 +108,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/description_label"
-            android:layout_below="@+id/type_label"
+            android:layout_below="@+id/isHandicapped"
             android:layout_toStartOf="@+id/price_label"
             android:layout_marginTop="14dp" />
 
@@ -119,7 +119,7 @@
             android:layout_below="@+id/description_label"
             android:layout_alignStart="@+id/description_label"
             android:layout_marginTop="22dp"
-            android:id="@+id/textView13"
+            android:id="@+id/actual_description"
             android:layout_alignEnd="@+id/endTime"
             android:layout_above="@+id/reviewButton" />
 
@@ -130,7 +130,7 @@
             android:layout_marginBottom="16dp"
             android:id="@+id/reviewButton"
             android:layout_alignParentBottom="true"
-            android:layout_alignEnd="@+id/textView13" />
+            android:layout_alignEnd="@+id/actual_description" />
 
     </RelativeLayout>
 </RelativeLayout>
