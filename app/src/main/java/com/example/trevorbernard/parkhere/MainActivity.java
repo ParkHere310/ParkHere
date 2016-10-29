@@ -12,6 +12,7 @@ import com.example.trevorbernard.parkhere.Client.PostSpotActivity;
 import com.example.trevorbernard.parkhere.Client.SearchActivity;
 import com.example.trevorbernard.parkhere.Client.ViewListingsActivity;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 //Last Edited by: Hexi
 //Last Edited about: Adding variables to the widgets
@@ -29,10 +30,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Intent myIntent = new Intent(MainActivity.this, LoginActivity.class);
         setContentView(R.layout.activity_main);
-
-        if (FirebaseAuth.getInstance().getCurrentUser().getUid() == null) {         //not logged in
-            Intent myIntent = new Intent(MainActivity.this, LoginActivity.class);
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if ( user == null) { //not logged in
             startActivity(myIntent);
         }
 
