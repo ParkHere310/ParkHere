@@ -5,14 +5,17 @@
     android:layout_height="match_parent"
     android:baselineAligned="false">
 
-    <Button
-        android:text="Register"
+    <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/RegisterButton"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="161dp" />
+        android:inputType="textEmailAddress"
+        android:ems="10"
+        android:id="@+id/EditTextEmail"
+        android:layout_weight="0.11"
+        android:hint="Email Username"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/EditTextPassword"
+        android:layout_marginTop="31dp" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -22,20 +25,26 @@
         android:id="@+id/EditTextConfirmPassword"
         android:layout_weight="0.11"
         android:hint="Confirm Password"
-        android:layout_centerVertical="true"
+        android:layout_below="@+id/EditTextPassword"
         android:layout_centerHorizontal="true" />
 
-    <EditText
+    <Button
+        android:text="Register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textEmailAddress"
-        android:ems="10"
-        android:id="@+id/EditTextEmail"
-        android:layout_weight="0.11"
-        android:hint="Email Username"
-        android:layout_above="@+id/EditTextPassword"
-        android:layout_alignStart="@+id/EditTextPassword"
-        android:layout_marginBottom="21dp" />
+        android:id="@+id/RegisterButton"
+        android:layout_marginBottom="25dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:text="Upload Profile Picture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/verificationButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="11dp"
+        android:id="@+id/profileButton" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -45,7 +54,45 @@
         android:id="@+id/EditTextPassword"
         android:layout_weight="0.11"
         android:hint="Password"
-        android:layout_marginBottom="21dp"
-        android:layout_above="@+id/EditTextConfirmPassword"
+        android:layout_below="@+id/EditTextEmail"
         android:layout_alignStart="@+id/EditTextConfirmPassword" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:layout_below="@+id/EditTextConfirmPassword"
+        android:layout_alignStart="@+id/EditTextConfirmPassword"
+        android:id="@+id/firstNameEdit"
+        android:hint="First Name" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:layout_below="@+id/firstNameEdit"
+        android:layout_alignStart="@+id/firstNameEdit"
+        android:id="@+id/lastNameEdit"
+        android:hint="Last Name" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:layout_below="@+id/lastNameEdit"
+        android:layout_alignStart="@+id/lastNameEdit"
+        android:id="@+id/phoneNumberEdit"
+        android:hint="Phone Number" />
+
+    <Button
+        android:text="Upload Verfication Picture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="14dp"
+        android:id="@+id/verificationButton"
+        android:layout_above="@+id/RegisterButton"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>

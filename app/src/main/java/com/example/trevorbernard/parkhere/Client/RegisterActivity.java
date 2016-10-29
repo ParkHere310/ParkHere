@@ -33,6 +33,7 @@ public class RegisterActivity extends Activity{
     private EditText editTextUsername;
     private EditText editTextPassword;
     private EditText editTextConfirmPassword;
+
     private String username;
     private String password;
     private String confirmPassword;
