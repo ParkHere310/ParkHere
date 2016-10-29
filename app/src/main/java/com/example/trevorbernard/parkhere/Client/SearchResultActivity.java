@@ -10,6 +10,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.example.trevorbernard.parkhere.ParkingSpot.ParkingSpot;
+import com.example.trevorbernard.parkhere.ParkingSpot.ParkingSpotAdapter;
+import com.example.trevorbernard.parkhere.ParkingSpot.ParkingSpotDistance;
 import com.example.trevorbernard.parkhere.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -41,6 +43,7 @@ public class SearchResultActivity extends Activity {
     String startDate;
     String endDate;
 
+    ArrayList<ParkingSpotDistance> parkingSpotDistances;
     ArrayList<ParkingSpot> parkingSpots;
     ArrayList<String> stringSpots;
 
@@ -87,6 +90,7 @@ public class SearchResultActivity extends Activity {
         mDatabase = FirebaseDatabase.getInstance().getReference();
         parkingSpots = new ArrayList<ParkingSpot>();
         stringSpots = new ArrayList<String>();
+        parkingSpotDistances = new ArrayList<ParkingSpotDistance>();
     }
 
     private void populateParkingSpots() {
@@ -97,8 +101,8 @@ public class SearchResultActivity extends Activity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                stringSpots.clear();
-                parkingSpots.clear();
+
+                parkingSpotDistances.clear();
 
                 Location source = new Location("");
                 source.setLongitude(longitude);
@@ -122,13 +126,19 @@ public class SearchResultActivity extends Activity {
                             Double distance = (double) spotloc.distanceTo(source); // in meters
                             distance = toMiles(distance);
 
-                            parkingSpots.add(spot);
-                            stringSpots.add(new DecimalFormat("#.##").format(distance) + " miles " + spot.getName() + ": " + spot.getAddress());
+                            ParkingSpotDistance psd = new ParkingSpotDistance();
+                            psd.parkingSpot = spot;
+                            psd.distance = distance;
+                            parkingSpotDistances.add(psd);
+
+                            //parkingSpots.add(spot);
+                            //stringSpots.add(new DecimalFormat("#.##").format(distance) + " miles " + spot.getName() + ": " + spot.getAddress());
                         }
                     }
                 }
-       
-                ArrayAdapter arrayAdapter = new ArrayAdapter<String>(SearchResultActivity.this,android.R.layout.simple_list_item_1,stringSpots);
+
+                ArrayAdapter<ParkingSpotDistance> arrayAdapter = new ParkingSpotAdapter(SearchResultActivity.this, parkingSpotDistances);
+                //ArrayAdapter arrayAdapter = new ArrayAdapter<String>(SearchResultActivity.this,android.R.layout.simple_list_item_1,stringSpots);
                 listView.setAdapter(arrayAdapter);
                 arrayAdapter.notifyDataSetChanged();
             }

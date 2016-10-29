@@ -23,7 +23,7 @@ public class Rating {
 
     public double calculateRating(){
         if(numRatings != 0) return(double) (totalRating/numRatings);
-        else return 1.0;
+        else return 3.0;
     }
 
     public int getTotalRating() {
