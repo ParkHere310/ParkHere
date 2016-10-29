@@ -1,5 +1,6 @@
 package com.example.trevorbernard.parkhere.Connectors;
 
+import com.example.trevorbernard.parkhere.ParkingSpot.ParkingSpot;
 import com.example.trevorbernard.parkhere.Reservation.Reservation;
 import com.example.trevorbernard.parkhere.User.User;
 import com.google.firebase.database.DatabaseReference;
@@ -33,6 +34,12 @@ public class TransactionConnector {
         String uid = mDatabase.push().getKey();
         res.setUID(uid);
         mDatabase.child(uid).removeValue();
+
+        // Remove occupant
+        ParkingSpot spot = SpotConnector.getParkingSpotFromUID(res.getParkingSpotUID());
+        spot.setOccupantUID("-1");
+        mDatabase.getRoot().child("ParkingSpots").child(res.getParkingSpotUID()).setValue(spot);
+
         return true;
     }
 }
