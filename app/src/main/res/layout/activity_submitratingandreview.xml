@@ -17,20 +17,38 @@
         android:layout_height="wrap_content"
         android:inputType="textMultiLine"
         android:ems="10"
-        android:layout_marginTop="111dp"
-        android:id="@+id/CommentText"
-        android:hint="Comment"
+        android:layout_marginTop="42dp"
+        android:id="@+id/CommentUserText"
+        android:hint="Comment on User"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="numberSigned"
+        android:inputType="textMultiLine"
         android:ems="10"
-        android:layout_below="@+id/CommentText"
-        android:layout_alignStart="@+id/CommentText"
-        android:layout_marginTop="96dp"
-        android:id="@+id/RatingText"
-        android:hint="Score (1 to 5)" />
+        android:layout_centerVertical="true"
+        android:layout_alignEnd="@+id/CommentUserText"
+        android:id="@+id/CommentSpotText"
+        android:hint="Comment On Spot" />
+
+    <RatingBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="29dp"
+        android:id="@+id/SpotRatingBar"
+        android:layout_below="@+id/CommentSpotText"
+        android:layout_alignStart="@+id/UserRatingBar"
+        android:numStars="5" />
+
+    <RatingBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="29dp"
+        android:id="@+id/UserRatingBar"
+        android:numStars="5"
+        android:layout_below="@+id/CommentUserText"
+        android:layout_centerHorizontal="true" />
+
 </RelativeLayout>

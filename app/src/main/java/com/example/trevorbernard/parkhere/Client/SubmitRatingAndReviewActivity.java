@@ -8,6 +8,7 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RatingBar;
 
 import com.example.trevorbernard.parkhere.Connectors.UserConnector;
 import com.example.trevorbernard.parkhere.MainActivity;
@@ -22,10 +23,14 @@ import com.example.trevorbernard.parkhere.User.User;
 public class SubmitRatingAndReviewActivity extends Activity{
 
     Button submitButton;
-    EditText EditTextComment;
-    EditText EditTextRating;
-    String comment;
-    int rating;
+    EditText EditTextUserComment;
+    EditText EditTextSpotComment;
+    RatingBar userRatingBar;
+    RatingBar spotRatingBar;
+    String userComment;
+    String spotComment;
+    int userRating;
+    int spotRating;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,7 +41,8 @@ public class SubmitRatingAndReviewActivity extends Activity{
     }
 
     private void createClickCallback() {
-        EditTextComment.addTextChangedListener(new TextWatcher() {
+        //Update String that keeps track of EditTextSpotComment
+        EditTextSpotComment.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -44,7 +50,7 @@ public class SubmitRatingAndReviewActivity extends Activity{
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                comment = EditTextComment.toString();
+                spotComment = EditTextSpotComment.toString();
             }
 
             @Override
@@ -53,8 +59,8 @@ public class SubmitRatingAndReviewActivity extends Activity{
             }
         });
 
-
-        EditTextRating.addTextChangedListener(new TextWatcher() {
+        //Update String that keeps track of EditTextUserComment
+        EditTextUserComment.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -62,7 +68,7 @@ public class SubmitRatingAndReviewActivity extends Activity{
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                rating = Integer.parseInt(EditTextRating.toString());
+                userComment = EditTextUserComment.toString();
             }
 
             @Override
@@ -71,6 +77,24 @@ public class SubmitRatingAndReviewActivity extends Activity{
             }
         });
 
+        //Update variable that keeps user rating
+        userRatingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                userRating = (int) rating;
+            }
+        });
+
+        //Update variable taht keeps spot rating
+        spotRatingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                spotRating = (int) rating;
+            }
+        });
+
+        //TO BE UPDATED
+        //Direct the page back to the Main Activity
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -82,8 +106,12 @@ public class SubmitRatingAndReviewActivity extends Activity{
 
     private void initiateVariable() {
         submitButton = (Button) findViewById(R.id.SubmitButton);
-        EditTextComment = (EditText) findViewById(R.id.CommentText);
-        EditTextRating = (EditText) findViewById(R.id.RatingText);
+        EditTextUserComment = (EditText) findViewById(R.id.CommentUserText);
+        EditTextSpotComment = (EditText) findViewById(R.id.CommentSpotText);
+        userRatingBar = (RatingBar) findViewById(R.id.UserRatingBar);
+        spotRatingBar = (RatingBar) findViewById(R.id.SpotRatingBar);
+        userRating = 0;
+        spotRating = 0;
     }
 
 
