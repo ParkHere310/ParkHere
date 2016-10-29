@@ -143,9 +143,11 @@ public class ParkingSpot {
                        boolean isSUV,
                        boolean isCovered,
                        boolean isHandicap,
-                       String address){
+                       String address,
+                       Date start,
+                       Date end){
 
-
+        timeWindow = new TimeWindow(start,end);
        // private String imageURL; need to add in later some how
 
         reviews = new ArrayList<String>();
