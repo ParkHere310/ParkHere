@@ -20,12 +20,12 @@
         android:id="@+id/PostPageButton" />
 
     <Button
-        android:text="View Reservation"
+        android:text="View Past Reservation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="29dp"
-        android:id="@+id/ViewReservationButton"
-        android:layout_below="@+id/ReservationButton"
+        android:id="@+id/ViewPastReservationButton"
+        android:layout_below="@+id/CurrentReservationButton"
         android:layout_centerHorizontal="true" />
 
     <Button
@@ -33,15 +33,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/ListedSpotPage"
-        android:layout_below="@+id/ViewReservationButton"
+        android:layout_below="@+id/ViewPastReservationButton"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="17dp" />
 
     <Button
-        android:text="Reservation"
+        android:text="Current Reservation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/ReservationButton"
+        android:id="@+id/CurrentReservationButton"
         android:layout_below="@+id/PostPageButtonButton"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="164dp" />

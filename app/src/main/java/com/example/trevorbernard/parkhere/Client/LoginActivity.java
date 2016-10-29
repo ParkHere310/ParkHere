@@ -62,17 +62,13 @@ public class LoginActivity extends Activity {
         };
 
         initiateVariables();
+
+        createOnclickCallback();
     }
 
+    private void createOnclickCallback() {
 
-    private void initiateVariables() {
-        loginButton = (Button) findViewById(R.id.LoginButton);
-        registerButton = (Button) findViewById(R.id.RegisterButton);
-        editTextUsername = (EditText)findViewById(R.id.EditTextUsername);
-        editTextPassword = (EditText)findViewById(R.id.EditTextPassword);
-        username = editTextUsername.getText().toString();
-        password = editTextPassword.getText().toString();
-
+        //Username Field Edited
         editTextUsername.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -89,6 +85,8 @@ public class LoginActivity extends Activity {
 
             }
         });
+
+        //Password Field Edited
         editTextPassword.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -105,12 +103,16 @@ public class LoginActivity extends Activity {
 
             }
         });
+
+        //Login Button Clicked
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 signIn(username, password);
             }
         });
+
+        //Register Button Clicked
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -120,6 +122,18 @@ public class LoginActivity extends Activity {
                 LoginActivity.this.startActivity(myIntent);
             }
         });
+
+
+    }
+
+
+    private void initiateVariables() {
+        loginButton = (Button) findViewById(R.id.LoginButton);
+        registerButton = (Button) findViewById(R.id.RegisterButton);
+        editTextUsername = (EditText)findViewById(R.id.EditTextUsername);
+        editTextPassword = (EditText)findViewById(R.id.EditTextPassword);
+        username = editTextUsername.getText().toString();
+        password = editTextPassword.getText().toString();
 
 
     }

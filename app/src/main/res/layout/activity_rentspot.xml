@@ -19,14 +19,14 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="83dp"
-        android:id="@+id/AddressTextView" />
+        android:id="@+id/DescriptionTextView" />
 
     <TextView
         android:text="TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/AddressTextView"
-        android:layout_alignStart="@+id/AddressTextView"
+        android:layout_below="@+id/DescriptionTextView"
+        android:layout_alignStart="@+id/DescriptionTextView"
         android:layout_marginTop="36dp"
-        android:id="@+id/TimeTextView" />
+        android:id="@+id/PriceTextView" />
 </RelativeLayout>

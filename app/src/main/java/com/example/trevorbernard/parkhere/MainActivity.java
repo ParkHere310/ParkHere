@@ -21,9 +21,9 @@ public class MainActivity extends AppCompatActivity {
     //private FirebaseAuth.AuthStateListener mAuthListener;
     private static final String TAG = "MainActivity";
     private Button postPageButton;
-    private Button viewReservationButton;
+    private Button viewPastReservationButton;
     private Button listedSpotPage;
-    private Button reservationButton;
+    private Button currentReservationButton;
     private Button searchButton;
 
     @Override
@@ -35,7 +35,10 @@ public class MainActivity extends AppCompatActivity {
             Intent myIntent = new Intent(MainActivity.this, LoginActivity.class);
             startActivity(myIntent);
         }
+
         InitializeVariables();
+
+        CreateOnclickCallback();
 
         /*mAuth = FirebaseAuth.getInstance();
         mAuthListener = new FirebaseAuth.AuthStateListener() {
@@ -54,14 +57,10 @@ public class MainActivity extends AppCompatActivity {
         };*/
     }
 
-    private void InitializeVariables() {
-        postPageButton = (Button) findViewById(R.id.PostPageButton);
-        viewReservationButton = (Button) findViewById(R.id.ViewReservationButton);
-        listedSpotPage = (Button) findViewById(R.id.ListedSpotPage);
-        reservationButton = (Button) findViewById(R.id.ReservationButton);
-        searchButton = (Button) findViewById(R.id.SearchButton);
-
+    private void CreateOnclickCallback() {
         // Set listeners
+
+        //Post Page Button
         postPageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,13 +68,18 @@ public class MainActivity extends AppCompatActivity {
                 MainActivity.this.startActivity(myIntent);
             }
         });
-        viewReservationButton.setOnClickListener(new View.OnClickListener() {
+
+
+        //Past Reservation Button
+        viewPastReservationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Intent myIntent = new Intent(MainActivity.this, PostSpotActivity.class);
-                //MainActivity.this.startActivity(myIntent);
+                Intent myIntent = new Intent(MainActivity.this, PastReservationActivity.class);
+                MainActivity.this.startActivity(myIntent);
             }
         });
+
+        //Show my(owner's) Listed Spot Button
         listedSpotPage.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -84,14 +88,16 @@ public class MainActivity extends AppCompatActivity {
             }
         }));
 
-        reservationButton.setOnClickListener((new View.OnClickListener() {
+        //Current Reservation Button
+        currentReservationButton.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent myIntent = new Intent(MainActivity.this, PastReservationActivity.class);
-                MainActivity.this.startActivity(myIntent);
+                //Intent myIntent = new Intent(MainActivity.this, PastReservationActivity.class);
+                //MainActivity.this.startActivity(myIntent);
             }
         }));
 
+        //Search Button
         searchButton.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -100,6 +106,18 @@ public class MainActivity extends AppCompatActivity {
             }
         }));
     }
+
+    private void InitializeVariables() {
+        postPageButton = (Button) findViewById(R.id.PostPageButton);
+        viewPastReservationButton = (Button) findViewById(R.id.ViewPastReservationButton);
+        listedSpotPage = (Button) findViewById(R.id.ListedSpotPage);
+        currentReservationButton = (Button) findViewById(R.id.CurrentReservationButton);
+        searchButton = (Button) findViewById(R.id.SearchButton);
+
+
+    }
+
+
 
     @Override
     public void onStart() {

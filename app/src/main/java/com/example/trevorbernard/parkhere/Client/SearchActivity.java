@@ -40,7 +40,9 @@ public class SearchActivity extends Activity { //extends FragmentActivity implem
 
         initiateVariable();
 
-        //Google Map Shit
+        CreateOnclickCallback();
+
+        //Google Map API
         /*
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -48,6 +50,7 @@ public class SearchActivity extends Activity { //extends FragmentActivity implem
         */
     }
 
+    //Google Map API
     /*
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -76,14 +79,24 @@ public class SearchActivity extends Activity { //extends FragmentActivity implem
         ETendDate = (EditText) findViewById(R.id.endDateField);
         ETstartTime = (EditText) findViewById(R.id.startTimeField);
         ETendTime = (EditText) findViewById(R.id.endTimeField);
+    }
 
+    private void CreateOnclickCallback() {
+        //When search button is clicked
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TO DO
+                Intent myIntent = new Intent(SearchActivity.this, SearchResultActivity.class);
+                myIntent.putExtra("address",address);
+                myIntent.putExtra("startTime",startTime);
+                myIntent.putExtra("endTime",endTime);
+                myIntent.putExtra("startDate",startDate);
+                myIntent.putExtra("endDate",endDate);
+                SearchActivity.this.startActivity(myIntent);
             }
         });
 
+        //when etaddress is edited
         ETaddress.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -101,6 +114,7 @@ public class SearchActivity extends Activity { //extends FragmentActivity implem
             }
         });
 
+        //when start date is edited
         ETstartDate.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -118,6 +132,7 @@ public class SearchActivity extends Activity { //extends FragmentActivity implem
             }
         });
 
+        //when end date is edited
         ETendDate.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -135,6 +150,7 @@ public class SearchActivity extends Activity { //extends FragmentActivity implem
             }
         });
 
+        //when start time is edited
         ETstartTime.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -152,6 +168,7 @@ public class SearchActivity extends Activity { //extends FragmentActivity implem
             }
         });
 
+        //when end time is edited
         ETendTime.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -168,5 +185,6 @@ public class SearchActivity extends Activity { //extends FragmentActivity implem
 
             }
         });
+
     }
 }

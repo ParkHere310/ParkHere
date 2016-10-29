@@ -41,10 +41,10 @@
         android:text="Upload Profile Picture"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/verificationButton"
+        android:layout_above="@+id/UploadVerificationButton"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="11dp"
-        android:id="@+id/profileButton" />
+        android:id="@+id/UploadProfileButton" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -64,7 +64,7 @@
         android:ems="10"
         android:layout_below="@+id/EditTextConfirmPassword"
         android:layout_alignStart="@+id/EditTextConfirmPassword"
-        android:id="@+id/firstNameEdit"
+        android:id="@+id/EditTextFirstName"
         android:hint="First Name" />
 
     <EditText
@@ -72,9 +72,9 @@
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
         android:ems="10"
-        android:layout_below="@+id/firstNameEdit"
-        android:layout_alignStart="@+id/firstNameEdit"
-        android:id="@+id/lastNameEdit"
+        android:layout_below="@+id/EditTextFirstName"
+        android:layout_alignStart="@+id/EditTextFirstName"
+        android:id="@+id/EditTextLastName"
         android:hint="Last Name" />
 
     <EditText
@@ -82,9 +82,9 @@
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
         android:ems="10"
-        android:layout_below="@+id/lastNameEdit"
-        android:layout_alignStart="@+id/lastNameEdit"
-        android:id="@+id/phoneNumberEdit"
+        android:layout_below="@+id/EditTextLastName"
+        android:layout_alignStart="@+id/EditTextLastName"
+        android:id="@+id/EditTextPhoneNumber"
         android:hint="Phone Number" />
 
     <Button
@@ -92,7 +92,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="14dp"
-        android:id="@+id/verificationButton"
+        android:id="@+id/UploadVerificationButton"
         android:layout_above="@+id/RegisterButton"
         android:layout_centerHorizontal="true" />
 </RelativeLayout>

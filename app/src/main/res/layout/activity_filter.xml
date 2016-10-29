@@ -11,4 +11,98 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="39dp"
         android:id="@+id/FilterButton" />
+
+    <RadioButton
+        android:text="Regular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/TypeFilter1"
+        android:layout_below="@+id/TypeTextView"
+        android:layout_alignStart="@+id/TypeFilter2"
+        android:layout_marginTop="11dp" />
+
+    <RadioButton
+        android:text="Compact"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/TypeFilter2"
+        android:layout_below="@+id/TypeFilter1"
+        android:layout_centerHorizontal="true" />
+
+    <RadioButton
+        android:text="under $10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/PriceTextView"
+        android:layout_alignEnd="@+id/FilterButton"
+        android:layout_marginTop="13dp"
+        android:id="@+id/PriceFilter1" />
+
+    <RadioButton
+        android:text="$10 - $30"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/PriceFilter1"
+        android:layout_alignStart="@+id/PriceFilter1"
+        android:id="@+id/PriceFilter2" />
+
+    <RadioButton
+        android:text="  Within 1 mile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/DistanceTextView"
+        android:layout_alignStart="@+id/PriceFilter1"
+        android:layout_marginTop="11dp"
+        android:id="@+id/DistanceFilter1" />
+
+    <RadioButton
+        android:text="Within 3 miles"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/DistanceFilter1"
+        android:layout_alignEnd="@+id/DistanceFilter1"
+        android:id="@+id/DistanceFilter2" />
+
+    <TextView
+        android:text="Price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="53dp"
+        android:id="@+id/PriceTextView"
+        android:layout_below="@+id/DistanceFilter2"
+        android:layout_alignEnd="@+id/TypeTextView" />
+
+    <TextView
+        android:text="Distance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:id="@+id/DistanceTextView"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:text="Type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="49dp"
+        android:id="@+id/TypeTextView"
+        android:layout_below="@+id/PriceFilter2"
+        android:layout_centerHorizontal="true" />
+
+    <RadioButton
+        android:text="Within 5 miles"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/DistanceFilter2"
+        android:layout_alignStart="@+id/DistanceFilter2"
+        android:id="@+id/DistanceFilter3" />
+
+    <RadioButton
+        android:text="over $30"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/PriceFilter2"
+        android:layout_alignStart="@+id/PriceFilter2"
+        android:id="@+id/PriceFilter3" />
 </RelativeLayout>

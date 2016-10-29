@@ -1,6 +1,7 @@
 package com.example.trevorbernard.parkhere.Client;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
@@ -29,6 +30,12 @@ public class SearchResultActivity extends Activity {
     double longitude;
     double latitude;
 
+    String address;
+    String startTime;
+    String endTime;
+    String startDate;
+    String endDate;
+
     ArrayList<ParkingSpot> parkingSpots;
     ArrayList<String> stringSpots;
 
@@ -37,16 +44,27 @@ public class SearchResultActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_searchresult);
 
-        listView = (ListView) findViewById(R.id.list);
         initiateVariables();
+        populateParkingSpots();
     }
     private void initiateVariables() {
+        //Retrieve information passed from previous Intent
+        Intent previousIntent = this.getIntent();
+        address = previousIntent.getExtras().getString("address");
+        startTime = previousIntent.getExtras().getString("startTime");
+        endTime = previousIntent.getExtras().getString("endTime");
+        startDate = previousIntent.getExtras().getString("startDate");
+        endDate = previousIntent.getExtras().getString("endDate");
+
+        //Set up list view
+        listView = (ListView) findViewById(R.id.list);
+
+        //For Testing Purposes?
         longitude = -118.2;
         latitude = 34;
         mDatabase = FirebaseDatabase.getInstance().getReference();
         parkingSpots = new ArrayList<ParkingSpot>();
         stringSpots = new ArrayList<String>();
-        populateParkingSpots();
     }
 
     private void populateParkingSpots() {
@@ -106,6 +124,23 @@ public class SearchResultActivity extends Activity {
     public class ParkingSpotDistance {
         public ParkingSpot spot;
         public double distance;
+    }
+
+    //This is the void called on selection of a parking spot item
+    private void enterPostSpotActivity(ParkingSpot p) {
+        Intent myIntent = new Intent(SearchResultActivity.this, RentSpotActivity.class);
+        /*
+        DECIDE WHAT TO PASS TO THE RENT SPOT ACTIVITY
+
+        myIntent.putExtra("address",p.getAddress());
+        myIntent.putExtra("price",p.getPrice());
+        myIntent.putExtra("description",p.getDescription());
+        myIntent.putExtra("name",p.getName());
+        myIntent.putExtra("uid",p.getUID());
+        myIntent.putExtra("owneruid",p.getOwnerUID())
+        */
+
+        SearchResultActivity.this.startActivity(myIntent);
     }
 
 }

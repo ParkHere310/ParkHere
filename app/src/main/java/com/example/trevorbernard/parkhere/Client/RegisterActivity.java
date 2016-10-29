@@ -30,14 +30,14 @@ import com.google.firebase.auth.FirebaseUser;
 public class RegisterActivity extends Activity{
 
     private Button registerButton;
-    private Button profileButton;
-    private Button verificationButton;
+    private Button uploadProfileButton;
+    private Button uploadVerificationButton;
     private EditText editTextUsername;
     private EditText editTextPassword;
     private EditText editTextConfirmPassword;
-    private EditText firstNameEdit;
-    private EditText lastNameEdit;
-    private EditText phoneNumberEdit;
+    private EditText editTextFirstName;
+    private EditText editTextLastName;
+    private EditText editTextPhoneNumber;
     private String username;
     private String password;
     private String confirmPassword;
@@ -72,7 +72,10 @@ public class RegisterActivity extends Activity{
         };
 
         initiateVariable();
+
+        CreateOnclickCallback();
     }
+
 
     @Override
     protected void onStart() {
@@ -89,13 +92,23 @@ public class RegisterActivity extends Activity{
 
     private void initiateVariable() {
         registerButton = (Button) findViewById(R.id.RegisterButton);
+        uploadProfileButton = (Button) findViewById(R.id.UploadProfileButton);
+        uploadVerificationButton = (Button) findViewById(R.id.UploadVerificationButton);
+
         editTextUsername = (EditText)findViewById(R.id.EditTextEmail);
         editTextPassword = (EditText)findViewById(R.id.EditTextPassword);
         editTextConfirmPassword = (EditText)findViewById(R.id.EditTextConfirmPassword);
+        editTextFirstName = (EditText) findViewById(R.id.EditTextFirstName);
+        editTextLastName = (EditText) findViewById(R.id.EditTextLastName);
+        editTextPhoneNumber = (EditText) findViewById(R.id.EditTextPhoneNumber);
+
         username = editTextUsername.getText().toString();
         password = editTextPassword.getText().toString();
         confirmPassword = editTextConfirmPassword.getText().toString();
+    }
 
+    private void CreateOnclickCallback() {
+        //When username is edited
         editTextUsername.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -112,6 +125,8 @@ public class RegisterActivity extends Activity{
 
             }
         });
+
+        //When password is edited
         editTextPassword.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -128,6 +143,8 @@ public class RegisterActivity extends Activity{
 
             }
         });
+
+        //When confirm password is edited
         editTextConfirmPassword.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -144,7 +161,9 @@ public class RegisterActivity extends Activity{
 
             }
         });
-        firstNameEdit.addTextChangedListener(new TextWatcher() {
+
+        //When first name is edited
+        editTextFirstName.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -152,7 +171,7 @@ public class RegisterActivity extends Activity{
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                firstName = firstNameEdit.getText().toString();
+                firstName = editTextFirstName.getText().toString();
             }
 
             @Override
@@ -160,7 +179,9 @@ public class RegisterActivity extends Activity{
 
             }
         });
-        lastNameEdit.addTextChangedListener(new TextWatcher() {
+
+        //When last name is edited
+        editTextLastName.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -168,7 +189,7 @@ public class RegisterActivity extends Activity{
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                lastName = lastNameEdit.getText().toString();
+                lastName = editTextLastName.getText().toString();
             }
 
             @Override
@@ -176,7 +197,9 @@ public class RegisterActivity extends Activity{
 
             }
         });
-        phoneNumberEdit.addTextChangedListener(new TextWatcher() {
+
+        //When phone number is edited
+        editTextPhoneNumber.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -184,7 +207,7 @@ public class RegisterActivity extends Activity{
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                phoneNumber = phoneNumberEdit.getText().toString();
+                phoneNumber = editTextPhoneNumber.getText().toString();
             }
 
             @Override
@@ -192,25 +215,30 @@ public class RegisterActivity extends Activity{
 
             }
         });
+
+        //When register button is clicked
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 createAccount(username, password);
             }
         });
-        profileButton.setOnClickListener(new View.OnClickListener() {
+
+        //When uploadProfileButton is clicked
+        uploadProfileButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // profile stuff here
-            }
-        });
-        verificationButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // verification stuff here
+                // TO BE FILLED
             }
         });
 
+        //When uploadVerificationButton is clicked
+        uploadVerificationButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TO BE FILLED
+            }
+        });
     }
 
     private void createAccount(String email, String password) {

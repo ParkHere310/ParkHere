@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RadioButton;
 
 import com.example.trevorbernard.parkhere.Connectors.UserConnector;
 import com.example.trevorbernard.parkhere.ParkingSpot.ParkingSpot;
@@ -22,6 +23,14 @@ import java.util.Comparator;
 public class FilterActivity extends Activity {
 
     Button FilterButton;
+    RadioButton distanceFilterButton1;
+    RadioButton distanceFilterButton2;
+    RadioButton distanceFilterButton3;
+    RadioButton priceFilterButton1;
+    RadioButton priceFilterButton2;
+    RadioButton priceFilterButton3;
+    RadioButton typeFilterButton1;
+    RadioButton typeFilterButton2;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -32,7 +41,21 @@ public class FilterActivity extends Activity {
         createOnclickCallback();
     }
 
+    private void initiateVariables() {
+        FilterButton = (Button) findViewById(R.id.FilterButton);
+        RadioButton distanceFilterButton1 = (RadioButton) findViewById(R.id.DistanceFilter1);
+        RadioButton distanceFilterButton2 = (RadioButton) findViewById(R.id.DistanceFilter2);
+        RadioButton distanceFilterButton3 = (RadioButton) findViewById(R.id.DistanceFilter3);
+        RadioButton priceFilterButton1 = (RadioButton) findViewById(R.id.PriceFilter1);
+        RadioButton priceFilterButton2 = (RadioButton) findViewById(R.id.PriceFilter2);
+        RadioButton priceFilterButton3 = (RadioButton) findViewById(R.id.PriceFilter3);
+        RadioButton typeFilterButton1 = (RadioButton) findViewById(R.id.TypeFilter1);
+        RadioButton typeFilterButton2 = (RadioButton) findViewById(R.id.TypeFilter2);
+    }
+
     private void createOnclickCallback() {
+
+        //When filter button is clicked
         FilterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -41,10 +64,13 @@ public class FilterActivity extends Activity {
 
             }
         });
-    }
 
-    private void initiateVariables() {
-        FilterButton = (Button) findViewById(R.id.FilterButton);
+        //When radio button is checked
+        /*
+
+            TO BE FILLED
+
+        */
     }
 
     private ArrayList<ParkingSpot> sortByPrice(ArrayList<ParkingSpot> spotList) {

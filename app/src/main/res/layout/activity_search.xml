@@ -12,7 +12,7 @@
         android:id="@+id/searchTitle" />
 
     <TextView
-        android:text="Start Date"
+        android:text="Start Date "
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="19dp"
@@ -29,7 +29,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="21dp"
         android:id="@+id/endDateField"
-        android:hint="End Date" />
+        android:hint="(MM/DD/YY)" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -40,7 +40,7 @@
         android:id="@+id/addressField"
         android:layout_below="@+id/searchTitle"
         android:layout_alignStart="@+id/endDateField"
-        android:hint="Address" />
+        android:hint="(Full Address)" />
 
     <TextView
         android:text="End Date"
@@ -69,7 +69,7 @@
         android:layout_alignStart="@+id/endDateField"
         android:layout_marginTop="10dp"
         android:id="@+id/startTimeField"
-        android:hint="Start Time" />
+        android:hint="(HH : MM)" />
 
     <TextView
         android:text="End Time"
@@ -88,7 +88,7 @@
         android:layout_below="@+id/endTimeLabel"
         android:layout_alignStart="@+id/startTimeField"
         android:id="@+id/endTimeField"
-        android:hint="End Time" />
+        android:hint="(HH : MM)" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -99,7 +99,7 @@
         android:id="@+id/startDateField"
         android:layout_below="@+id/startDateLabel"
         android:layout_alignStart="@+id/endDateField"
-        android:hint="Start Date" />
+        android:hint="(MM/DD/YY)" />
 
     <Button
         android:text="Search"

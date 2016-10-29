@@ -3,8 +3,10 @@ package com.example.trevorbernard.parkhere.Client;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.TextureView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.trevorbernard.parkhere.Connectors.SpotConnector;
 import com.example.trevorbernard.parkhere.Connectors.TransactionConnector;
@@ -21,13 +23,27 @@ import com.google.firebase.auth.FirebaseAuth;
 public class RentSpotActivity extends Activity {
 
     Button rentButton;
+    TextView descriptionTextview;
+    TextView priceTextview;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rentspot);
+
+        //FOR TESTING PURPOSES
+        descriptionTextview.setText("Address, Time, Price, Type");
+        priceTextview.setText("$20");
+
         initiateVariables();
         createOnclickCallback();
+    }
+
+    private void initiateVariables() {
+        rentButton = (Button) findViewById(R.id.RentButton);
+        descriptionTextview = (TextView) findViewById(R.id.DescriptionTextView);
+        priceTextview = (TextView) findViewById(R.id.PriceTextView);
+
     }
 
     private void createOnclickCallback() {
@@ -55,7 +71,4 @@ public class RentSpotActivity extends Activity {
         TransactionConnector.addReservation(res);
     }
 
-    private void initiateVariables() {
-        rentButton = (Button) findViewById(R.id.RentButton);
-    }
 }
