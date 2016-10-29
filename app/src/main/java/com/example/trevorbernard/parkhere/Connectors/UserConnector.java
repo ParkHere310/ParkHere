@@ -104,14 +104,28 @@ public class UserConnector {
     public static boolean addReviewToUser(User reviewed, String rev){
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
         String uid = mDatabase.child("Users").child(reviewed.getUID()).child("reviews").push().getKey();
-        mDatabase.child("Users").child(reviewed.getUID()).child("reviews").child(uid).setValue(rev);
+        mDatabase.getRoot().child("Users").child(reviewed.getUID()).child("reviews").child(uid).setValue(rev);
         return true;
     }
 
     public static boolean addReviewToSpot(ParkingSpot reviewed, String rev){
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
         String uid = mDatabase.child("ParkingSpots").child(reviewed.getUID()).child("reviews").push().getKey();
-        mDatabase.child("ParkingSpots").child(reviewed.getUID()).child("reviews").child(uid).setValue(rev);
+        mDatabase.getRoot().child("ParkingSpots").child(reviewed.getUID()).child("reviews").child(uid).setValue(rev);
+        return true;
+    }
+
+    public static boolean addReviewToUser(String reviewedUID, String rev){
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+        String uid = mDatabase.child("Users").child(reviewedUID).child("reviews").push().getKey();
+        mDatabase.getRoot().child("Users").child(reviewedUID).child("reviews").child(uid).setValue(rev);
+        return true;
+    }
+
+    public static boolean addReviewToSpot(String reviewedUID, String rev){
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+        String uid = mDatabase.child("ParkingSpots").child(reviewedUID).child("reviews").push().getKey();
+        mDatabase.getRoot().child("ParkingSpots").child(reviewedUID).child("reviews").child(uid).setValue(rev);
         return true;
     }
 
