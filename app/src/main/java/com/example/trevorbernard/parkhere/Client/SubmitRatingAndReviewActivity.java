@@ -99,7 +99,24 @@ public class SubmitRatingAndReviewActivity extends Activity{
             @Override
             public void onClick(View v) {
                 //Submit rating and review to our database
-                //TO BE UPDATED
+
+                if (userRating == 0 || spotRating == 0) {
+                    //NOT SUBMIT, RETURN WARNING
+
+                } else {
+                    //User Rating & Review
+                    if (userComment.equals("")) {
+                        //addUserRatingFromGUI(,userRating);
+                    } else {
+                        //addUserRatingReviewFromGUI(,userRating,userComment);
+                    }
+                    //Spot Rating & Review
+                    if (spotComment.equals("")) {
+                        //addSpotRatingFromGUI(,spotRating);
+                    } else {
+                        //addSpotRatingReviewFromGUI(,spotRating,spotComment);
+                    }
+                }
                 Intent myIntent = new Intent(SubmitRatingAndReviewActivity.this, MainActivity.class);
                 SubmitRatingAndReviewActivity.this.startActivity(myIntent);
             }
