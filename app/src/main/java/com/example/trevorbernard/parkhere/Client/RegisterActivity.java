@@ -2,7 +2,9 @@ package com.example.trevorbernard.parkhere.Client;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -45,6 +47,11 @@ public class RegisterActivity extends Activity{
     private String lastName;
     private String phoneNumber;
 
+    static final int REQUEST_IMAGE_PROFILE = 1;
+    static final int REQUEST_IMAGE_VERIFY = 2;
+    private Bitmap profilePic = null;
+    private Bitmap verifyPic = null;
+
     private FirebaseAuth.AuthStateListener mAuthListener;
     private FirebaseAuth mAuth;
     private static final String TAG = "RegisterActivity";
@@ -62,7 +69,7 @@ public class RegisterActivity extends Activity{
                 if (user != null) {
                     // User is signed in
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
-                    User newUser = AuthenticationConnector.register(user, firstName, lastName, phoneNumber);
+                    User newUser = AuthenticationConnector.register(user, firstName, lastName, phoneNumber, profilePic);
                 } else {
                     // User is signed out
                     Log.d(TAG, "onAuthStateChanged:signed_out");
@@ -228,7 +235,7 @@ public class RegisterActivity extends Activity{
         uploadProfileButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TO BE FILLED
+                dispatchTakePictureIntent(REQUEST_IMAGE_PROFILE);
             }
         });
 
@@ -236,7 +243,7 @@ public class RegisterActivity extends Activity{
         uploadVerificationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TO BE FILLED
+                dispatchTakePictureIntent(REQUEST_IMAGE_VERIFY);
             }
         });
     }
@@ -263,6 +270,24 @@ public class RegisterActivity extends Activity{
                     }
                 });
         // [END create_user_with_email]
+    }
+    private void dispatchTakePictureIntent(int code) {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+            startActivityForResult(takePictureIntent, code);
+        }
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_IMAGE_PROFILE && resultCode == RESULT_OK) {
+            Bundle extras = data.getExtras();
+            profilePic = (Bitmap) extras.get("data");
+
+        } else if (requestCode == REQUEST_IMAGE_VERIFY && resultCode == RESULT_OK) {
+            Bundle extras = data.getExtras();
+            verifyPic = (Bitmap) extras.get("data");
+
+        }
     }
 
 }

@@ -4,11 +4,18 @@ package com.example.trevorbernard.parkhere.User;
  * Created by trevorbernard on 10/12/16.
  */
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
 
 import com.example.trevorbernard.parkhere.Connectors.UserConnector;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -84,7 +91,7 @@ public class User implements Parcelable{
         email = in.readString();
         firstName = in.readString();
         lastName = in.readString();
-       phoneNumber = in.readString();
+        phoneNumber = in.readString();
         isVerified = in.readByte() != 0;
     }
 
@@ -180,6 +187,36 @@ public class User implements Parcelable{
         this.rating = rating;
     }
 
+    public Bitmap downloadProfilePic() {
+        final ArrayList<Bitmap> bmps = new ArrayList<Bitmap>();
+
+        StorageReference storageRef = FirebaseStorage.getInstance().getReferenceFromUrl(this.profilePic);
+        final long ONE_MEGABYTE = 1024 * 1024;
+        storageRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+            @Override
+            public void onSuccess(byte[] bytes) {
+                // Data for "images/island.jpg" is returns, use this as needed
+                BitmapFactory.Options options = new BitmapFactory.Options();
+                options.inMutable = true;
+                Bitmap bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.length, options);
+                bmps.add(bmp);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                // Handle any errors
+            }
+        });
+        while(bmps.isEmpty()) {
+            try{
+                Thread.sleep(10);
+            } catch (Exception e) {
+
+            }
+        }
+        return bmps.get(0);
+    }
+
 
     /*
     public Image getProfilePicture(){
@@ -214,5 +251,25 @@ public class User implements Parcelable{
 
     public static void Login(){
         //TODO
+    }
+
+    public boolean isVerified() {
+        return isVerified;
+    }
+
+    public void setVerified(boolean verified) {
+        isVerified = verified;
+    }
+
+    public String getProfilePic() {
+        return profilePic;
+    }
+
+    public void setProfilePic(String profilePic) {
+        this.profilePic = profilePic;
+    }
+
+    public static Creator getCREATOR() {
+        return CREATOR;
     }
 }
