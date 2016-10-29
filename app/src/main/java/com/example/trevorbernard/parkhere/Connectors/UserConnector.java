@@ -167,6 +167,48 @@ public class UserConnector {
         return list.get(0);
     }
 
+    public static Reservation getReservationFromUID(String uID) {
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("Reservations");
+        final ArrayList<Reservation> list = new ArrayList<Reservation>();
+        Query queryRef = mDatabase.orderByChild("UID").equalTo(uID); //test email address
+        queryRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
+                    Reservation res = postSnapshot.getValue(Reservation.class);
+                    list.add(res);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+        return list.get(0);
+    }
+
+    public static Reservation getPastReservationFromUID(String uID) {
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("PastReservations");
+        final ArrayList<Reservation> list = new ArrayList<Reservation>();
+        Query queryRef = mDatabase.orderByChild("UID").equalTo(uID); //test email address
+        queryRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
+                    Reservation res = postSnapshot.getValue(Reservation.class);
+                    list.add(res);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+        return list.get(0);
+    }
+
 
 //
 }
