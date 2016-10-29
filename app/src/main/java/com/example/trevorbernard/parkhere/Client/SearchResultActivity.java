@@ -2,6 +2,8 @@ package com.example.trevorbernard.parkhere.Client;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
@@ -16,8 +18,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by Hexi on 2016/10/23.
@@ -58,10 +63,27 @@ public class SearchResultActivity extends Activity {
 
         //Set up list view
         listView = (ListView) findViewById(R.id.list);
+        Location source = new Location("");
+        Locale current = getResources().getConfiguration().locale;
+        Geocoder geocoder = new Geocoder(this,current);
+        List<Address> codedAddress;
+        try {
+            System.out.println(address);
+            codedAddress = geocoder.getFromLocationName(address,5);
+            if(codedAddress == null) {
+                System.out.println("didnt code address");
+                latitude = 34;
+                longitude = -118;
+            } else {
+                latitude = codedAddress.get(0).getLatitude();
+                longitude = codedAddress.get(0).getLongitude();
+            }
 
-        //For Testing Purposes?
-        longitude = -118.2;
-        latitude = 34;
+        } catch (IOException ioe) {
+            System.out.println("IOE Exception in geocoding address");
+            ioe.printStackTrace();
+        }
+
         mDatabase = FirebaseDatabase.getInstance().getReference();
         parkingSpots = new ArrayList<ParkingSpot>();
         stringSpots = new ArrayList<String>();
@@ -74,6 +96,10 @@ public class SearchResultActivity extends Activity {
         queryRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+
+                stringSpots.clear();
+                parkingSpots.clear();
+
                 Location source = new Location("");
                 source.setLongitude(longitude);
                 source.setLatitude(latitude);
@@ -121,10 +147,6 @@ public class SearchResultActivity extends Activity {
         return (meters / 1609.344);
     }
 
-    public class ParkingSpotDistance {
-        public ParkingSpot spot;
-        public double distance;
-    }
 
     //This is the void called on selection of a parking spot item
     private void enterPostSpotActivity(ParkingSpot p) {
