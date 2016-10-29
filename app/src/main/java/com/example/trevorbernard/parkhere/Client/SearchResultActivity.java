@@ -130,7 +130,6 @@ public class SearchResultActivity extends Activity {
        
                 ArrayAdapter arrayAdapter = new ArrayAdapter<String>(SearchResultActivity.this,android.R.layout.simple_list_item_1,stringSpots);
                 listView.setAdapter(arrayAdapter);
-                System.out.println("size: " + stringSpots.size());
                 arrayAdapter.notifyDataSetChanged();
             }
 
