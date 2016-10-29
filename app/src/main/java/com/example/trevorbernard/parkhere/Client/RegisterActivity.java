@@ -30,13 +30,20 @@ import com.google.firebase.auth.FirebaseUser;
 public class RegisterActivity extends Activity{
 
     private Button registerButton;
+    private Button profileButton;
+    private Button verificationButton;
     private EditText editTextUsername;
     private EditText editTextPassword;
     private EditText editTextConfirmPassword;
-
+    private EditText firstNameEdit;
+    private EditText lastNameEdit;
+    private EditText phoneNumberEdit;
     private String username;
     private String password;
     private String confirmPassword;
+    private String firstName;
+    private String lastName;
+    private String phoneNumber;
 
     private FirebaseAuth.AuthStateListener mAuthListener;
     private FirebaseAuth mAuth;
@@ -137,12 +144,73 @@ public class RegisterActivity extends Activity{
 
             }
         });
+        firstNameEdit.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                firstName = firstNameEdit.getText().toString();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        lastNameEdit.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                lastName = lastNameEdit.getText().toString();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        phoneNumberEdit.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                phoneNumber = phoneNumberEdit.getText().toString();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 createAccount(username, password);
             }
         });
+        profileButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // profile stuff here
+            }
+        });
+        verificationButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // verification stuff here
+            }
+        });
+
     }
 
     private void createAccount(String email, String password) {
