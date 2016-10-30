@@ -60,10 +60,53 @@ public class UserConnector {
         });
         return list;
     }
+
+    public static ArrayList<Reservation> getReservationsforUserUID(String Uid){
+        final ArrayList<Reservation> list = new ArrayList<Reservation>();
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("Reservations");
+        Query queryRef = mDatabase.orderByChild("ownerUID").equalTo(Uid); //test email address
+        queryRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
+                    Reservation spot = postSnapshot.getValue(Reservation.class);
+                    list.add(spot);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+        return list;
+    }
+
     public static ArrayList<Reservation> getPastReservationsforUser(User user){
         final ArrayList<Reservation> list = new ArrayList<Reservation>();
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("PastReservations");
         Query queryRef = mDatabase.orderByChild("ownerUID").equalTo(user.getUID()); //test email address
+        queryRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
+                    Reservation spot = postSnapshot.getValue(Reservation.class);
+                    list.add(spot);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+        return list;
+    }
+
+    public static ArrayList<Reservation> getPastReservationsforUserUID(String Uid){
+        final ArrayList<Reservation> list = new ArrayList<Reservation>();
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("PastReservations");
+        Query queryRef = mDatabase.orderByChild("ownerUID").equalTo(Uid); //test email address
         queryRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -100,6 +143,8 @@ public class UserConnector {
         mDatabase.setValue(rating);
         return true;
     }
+
+
 
     public static boolean addReviewToUser(User reviewed, String rev){
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();

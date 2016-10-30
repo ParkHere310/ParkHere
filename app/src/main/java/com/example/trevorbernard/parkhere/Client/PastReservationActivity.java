@@ -8,9 +8,11 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.example.trevorbernard.parkhere.Connectors.UserConnector;
 import com.example.trevorbernard.parkhere.R;
+import com.example.trevorbernard.parkhere.Reservation.Reservation;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.List;
 
@@ -56,6 +58,17 @@ public class PastReservationActivity extends Activity {
                 PastReservationActivity.this.startActivity(myIntent);
             }
         });
+    }
+
+    private List<Reservation> getPastResercationList() {
+        return UserConnector.getPastReservationsforUserUID(FirebaseAuth.getInstance()
+                .getCurrentUser().getUid());
+    }
+
+    // This function return the current reservation list. Use it in the current reservation list activity
+    private List<Reservation> getResercationList() {
+        return UserConnector.getReservationsforUserUID(FirebaseAuth.getInstance()
+                .getCurrentUser().getUid());
     }
 
 }
