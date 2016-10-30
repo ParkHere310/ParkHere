@@ -170,23 +170,11 @@ public class SearchResultActivity extends Activity {
                 Intent myIntent = new Intent(SearchResultActivity.this, RentSpotActivity.class);
                 String spotUID = parkingSpotDistances.get(position).parkingSpot.getUID();
                 String distance = new DecimalFormat("#.#").format(parkingSpotDistances.get(position).distance);
-                SearchResultActivity.this.startActivity(myIntent);
                 myIntent.putExtra("spotUID", spotUID);
                 myIntent.putExtra("distance", distance);
+                SearchResultActivity.this.startActivity(myIntent);
             }
         });
-
-
-        /*
-        DECIDE WHAT TO PASS TO THE RENT SPOT ACTIVITY
-
-        myIntent.putExtra("address",p.getAddress());
-        myIntent.putExtra("price",p.getPrice());
-        myIntent.putExtra("description",p.getDescription());
-        myIntent.putExtra("name",p.getName());
-        myIntent.putExtra("uid",p.getUID());
-        myIntent.putExtra("owneruid",p.getOwnerUID())
-        */
 
 
 
