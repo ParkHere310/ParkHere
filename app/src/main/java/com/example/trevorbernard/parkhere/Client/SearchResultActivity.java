@@ -6,8 +6,11 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.trevorbernard.parkhere.ParkingSpot.ParkingSpot;
 import com.example.trevorbernard.parkhere.ParkingSpot.ParkingSpotAdapter;
@@ -54,6 +57,7 @@ public class SearchResultActivity extends Activity {
 
         initiateVariables();
         populateParkingSpots();
+        CreateOnlickCallback();
     }
     private void initiateVariables() {
         //Retrieve information passed from previous Intent
@@ -159,8 +163,20 @@ public class SearchResultActivity extends Activity {
 
 
     //This is the void called on selection of a parking spot item
-    private void enterPostSpotActivity(ParkingSpot p) {
-        Intent myIntent = new Intent(SearchResultActivity.this, RentSpotActivity.class);
+    private void CreateOnlickCallback() {
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View viewClicked, int position, long id) {
+                Intent myIntent = new Intent(SearchResultActivity.this, RentSpotActivity.class);
+                String spotUID = parkingSpotDistances.get(position).parkingSpot.getUID();
+                String distance = new DecimalFormat("#.#").format(parkingSpotDistances.get(position).distance);
+                SearchResultActivity.this.startActivity(myIntent);
+                myIntent.putExtra("spotUID", spotUID);
+                myIntent.putExtra("distance", distance);
+            }
+        });
+
+
         /*
         DECIDE WHAT TO PASS TO THE RENT SPOT ACTIVITY
 
@@ -172,7 +188,7 @@ public class SearchResultActivity extends Activity {
         myIntent.putExtra("owneruid",p.getOwnerUID())
         */
 
-        SearchResultActivity.this.startActivity(myIntent);
-    }
 
+
+    }
 }
