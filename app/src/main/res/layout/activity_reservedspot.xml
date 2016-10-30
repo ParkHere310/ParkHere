@@ -117,15 +117,24 @@
         android:layout_marginTop="22dp"
         android:id="@+id/actual_description"
         android:layout_alignEnd="@+id/endTime"
-        android:layout_above="@+id/cancelButton" />
+        android:layout_above="@+id/reviewButton" />
 
     <Button
         android:text="Cancel Reservation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:id="@+id/cancelButton"
+        android:id="@+id/reviewButton"
         android:layout_alignParentBottom="true"
-        android:layout_alignEnd="@+id/actual_description" />
+        android:layout_toEndOf="@+id/to_view" />
+
+    <Button
+        android:text="Check In"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/checkinButton"
+        android:layout_below="@+id/actual_description"
+        android:layout_alignStart="@+id/actual_description"
+        android:layout_toStartOf="@+id/to_view" />
 
 </RelativeLayout>

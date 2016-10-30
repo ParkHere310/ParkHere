@@ -33,7 +33,7 @@ public class ParkingSpotAdapter extends ArrayAdapter<ParkingSpotDistance> {
 
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.search_result_row, parent, false);
-        }
+    }
         if(parkingSpotDistance != null) {
             ParkingSpot parkingSpot = parkingSpotDistance.parkingSpot;
             TextView name = (TextView) convertView.findViewById(R.id.name);

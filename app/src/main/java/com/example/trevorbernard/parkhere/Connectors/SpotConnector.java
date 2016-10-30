@@ -39,9 +39,10 @@ public class SpotConnector {
     }
 
     public static ParkingSpot getParkingSpotFromUID(String uID) {
+        System.out.println(uID);
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("ParkingSpots");
         final ArrayList<ParkingSpot> list = new ArrayList<ParkingSpot>();
-        Query queryRef = mDatabase.orderByChild("ownerUID").equalTo(uID); //test email address
+        Query queryRef = mDatabase.orderByChild("uid").equalTo(uID);
         queryRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -56,6 +57,7 @@ public class SpotConnector {
 
             }
         });
-        return list.get(0);
+       return new ParkingSpot();
+
     }
 }

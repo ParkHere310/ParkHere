@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.trevorbernard.parkhere.Client.LoginActivity;
-import com.example.trevorbernard.parkhere.Client.PastReservationActivity;
+import com.example.trevorbernard.parkhere.Client.ViewPastReservationActivity;
 import com.example.trevorbernard.parkhere.Client.PostSpotActivity;
 import com.example.trevorbernard.parkhere.Client.SearchActivity;
 import com.example.trevorbernard.parkhere.Client.ViewListingsActivity;
@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
         viewPastReservationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent myIntent = new Intent(MainActivity.this, PastReservationActivity.class);
+                Intent myIntent = new Intent(MainActivity.this, ViewPastReservationActivity.class);
                 MainActivity.this.startActivity(myIntent);
             }
         });
@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
         currentReservationButton.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Intent myIntent = new Intent(MainActivity.this, PastReservationActivity.class);
+                //Intent myIntent = new Intent(MainActivity.this, ViewPastReservationActivity.class);
                 //MainActivity.this.startActivity(myIntent);
             }
         }));

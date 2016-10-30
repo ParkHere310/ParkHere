@@ -9,8 +9,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.example.trevorbernard.parkhere.ParkingSpot.ParkingSpot;
 import com.example.trevorbernard.parkhere.ParkingSpot.ParkingSpotAdapter;
@@ -45,6 +45,9 @@ public class SearchResultActivity extends Activity {
     String endTime;
     String startDate;
     String endDate;
+    String filterType = "-1";
+
+    Button filterButton;
 
     ArrayList<ParkingSpotDistance> parkingSpotDistances;
     ArrayList<ParkingSpot> parkingSpots;
@@ -67,6 +70,24 @@ public class SearchResultActivity extends Activity {
         endTime = previousIntent.getExtras().getString("endTime");
         startDate = previousIntent.getExtras().getString("startDate");
         endDate = previousIntent.getExtras().getString("endDate");
+        if(previousIntent.getExtras().containsKey("filter")) {
+            filterType = previousIntent.getExtras().getString("filter");
+        }
+
+        filterButton = (Button) findViewById(R.id.filter_button);
+        filterButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(SearchResultActivity.this, FilterActivity.class);
+                myIntent.putExtra("address", address);
+                myIntent.putExtra("startTime", startTime);
+                myIntent.putExtra("endTime", endTime);
+                myIntent.putExtra("startDate", startDate);
+                myIntent.putExtra("endDate", endDate);
+                SearchResultActivity.this.startActivity(myIntent);
+            }
+        });
+
 
         //Set up list view
         listView = (ListView) findViewById(R.id.list);
@@ -141,6 +162,15 @@ public class SearchResultActivity extends Activity {
                     }
                 }
 
+                // Sort here
+                if(filterType.equals("sortByPrice")) {
+
+                } else if(filterType.equals("sortBySpotRating")) {
+
+                } else if(filterType.equals("sortByOwnerRating")) {
+                    
+                }
+
                 ArrayAdapter<ParkingSpotDistance> arrayAdapter = new ParkingSpotAdapter(SearchResultActivity.this, parkingSpotDistances);
                 //ArrayAdapter arrayAdapter = new ArrayAdapter<String>(SearchResultActivity.this,android.R.layout.simple_list_item_1,stringSpots);
                 listView.setAdapter(arrayAdapter);
@@ -170,23 +200,11 @@ public class SearchResultActivity extends Activity {
                 Intent myIntent = new Intent(SearchResultActivity.this, RentSpotActivity.class);
                 String spotUID = parkingSpotDistances.get(position).parkingSpot.getUID();
                 String distance = new DecimalFormat("#.#").format(parkingSpotDistances.get(position).distance);
-                SearchResultActivity.this.startActivity(myIntent);
                 myIntent.putExtra("spotUID", spotUID);
                 myIntent.putExtra("distance", distance);
+                SearchResultActivity.this.startActivity(myIntent);
             }
         });
-
-
-        /*
-        DECIDE WHAT TO PASS TO THE RENT SPOT ACTIVITY
-
-        myIntent.putExtra("address",p.getAddress());
-        myIntent.putExtra("price",p.getPrice());
-        myIntent.putExtra("description",p.getDescription());
-        myIntent.putExtra("name",p.getName());
-        myIntent.putExtra("uid",p.getUID());
-        myIntent.putExtra("owneruid",p.getOwnerUID())
-        */
 
 
 
