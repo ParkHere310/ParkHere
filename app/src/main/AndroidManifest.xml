@@ -27,6 +27,7 @@
         <activity android:name=".Client.PostSpotActivity"></activity>
         <activity android:name=".Client.ListedSpotActivity"></activity>
         <activity android:name=".Client.ViewListingsActivity"></activity>
+        <activity android:name=".Client.PastReservedSpotActivity"></activity>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

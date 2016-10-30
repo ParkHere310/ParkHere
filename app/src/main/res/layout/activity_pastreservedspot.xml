@@ -78,14 +78,14 @@
             android:layout_marginTop="22dp"
             android:id="@+id/actual_description"
             android:layout_alignEnd="@+id/endTime"
-            android:layout_above="@+id/reviewButton" />
+            android:layout_above="@+id/UploadReviewButton" />
 
         <Button
             android:text="Upload Review"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            android:id="@+id/reviewButton"
+            android:id="@+id/UploadReviewButton"
             android:layout_alignParentBottom="true"
             android:layout_alignEnd="@+id/actual_description" />
 

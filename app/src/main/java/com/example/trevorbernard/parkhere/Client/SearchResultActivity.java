@@ -12,10 +12,12 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
+import com.example.trevorbernard.parkhere.Connectors.UserConnector;
 import com.example.trevorbernard.parkhere.ParkingSpot.ParkingSpot;
 import com.example.trevorbernard.parkhere.ParkingSpot.ParkingSpotAdapter;
 import com.example.trevorbernard.parkhere.ParkingSpot.ParkingSpotDistance;
 import com.example.trevorbernard.parkhere.R;
+import com.example.trevorbernard.parkhere.User.User;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -26,6 +28,8 @@ import com.google.firebase.database.ValueEventListener;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 
@@ -209,4 +213,66 @@ public class SearchResultActivity extends Activity {
 
 
     }
+
+    private ArrayList<ParkingSpot> sortByPrice(ArrayList<ParkingSpot> spotList) {
+        Collections.sort(spotList, new Comparator<ParkingSpot>() {
+            @Override
+            public int compare(ParkingSpot o1, ParkingSpot o2) {
+                return new Integer(o1.getPrice()).compareTo(o2.getPrice());
+            }
+        });
+        return spotList;
+    }
+
+    private ArrayList<ParkingSpot> sortBySpotRating(ArrayList<ParkingSpot> spotList) {
+        Collections.sort(spotList, new Comparator<ParkingSpot>() {
+            @Override
+            public int compare(ParkingSpot o1, ParkingSpot o2) {
+                return new Double(o1.getRating().calculateRating()).compareTo(o2.getRating().calculateRating());
+            }
+        });
+        return spotList;
+    }
+
+    private ArrayList<ParkingSpot> sortByOwnerRating(ArrayList<ParkingSpot> spotList) {
+
+        Collections.sort(spotList, new Comparator<ParkingSpot>() {
+            @Override
+            public int compare(ParkingSpot o1, ParkingSpot o2) {
+                User u1 = UserConnector.getUserFromUID(o1.getOwnerUID());
+                User u2 = UserConnector.getUserFromUID(o2.getOwnerUID());
+                return new Double(u1.getRating().calculateRating()).compareTo(u2.getRating().calculateRating());
+            }
+        });
+        return spotList;
+    }
+
+    public User getUserFromUID(String uID) {
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
+        final ArrayList<User> list = new ArrayList<User>();
+        Query queryRef = mDatabase.orderByChild("UID").equalTo(uID); //test email address
+        queryRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
+                    User user = postSnapshot.getValue(User.class);
+                    list.add(user);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+        while(list.isEmpty()) {
+            try {
+                Thread.sleep(10);
+            } catch(Exception e) {
+
+            }
+        }
+        return list.get(0);
+    }
+
 }

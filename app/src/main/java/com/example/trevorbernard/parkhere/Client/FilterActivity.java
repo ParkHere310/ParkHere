@@ -23,14 +23,16 @@ import java.util.Comparator;
 public class FilterActivity extends Activity {
 
     Button FilterButton;
-    RadioButton distanceFilterButton1;
-    RadioButton distanceFilterButton2;
-    RadioButton distanceFilterButton3;
-    RadioButton priceFilterButton1;
-    RadioButton priceFilterButton2;
-    RadioButton priceFilterButton3;
-    RadioButton typeFilterButton1;
-    RadioButton typeFilterButton2;
+    RadioButton priceButton;
+    RadioButton ownerRatingButton;
+    RadioButton spotRatingButton;
+
+    String address;
+    String startTime;
+    String endTime;
+    String startDate;
+    String endDate;
+    String filterType = "-1";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -43,14 +45,21 @@ public class FilterActivity extends Activity {
 
     private void initiateVariables() {
         FilterButton = (Button) findViewById(R.id.FilterButton);
-        RadioButton distanceFilterButton1 = (RadioButton) findViewById(R.id.DistanceFilter1);
-        RadioButton distanceFilterButton2 = (RadioButton) findViewById(R.id.DistanceFilter2);
-        RadioButton distanceFilterButton3 = (RadioButton) findViewById(R.id.DistanceFilter3);
-        RadioButton priceFilterButton1 = (RadioButton) findViewById(R.id.PriceFilter1);
-        RadioButton priceFilterButton2 = (RadioButton) findViewById(R.id.PriceFilter2);
-        RadioButton priceFilterButton3 = (RadioButton) findViewById(R.id.PriceFilter3);
-        RadioButton typeFilterButton1 = (RadioButton) findViewById(R.id.TypeFilter1);
-        RadioButton typeFilterButton2 = (RadioButton) findViewById(R.id.TypeFilter2);
+        spotRatingButton = (RadioButton) findViewById(R.id.sortBySpotRating);
+        ownerRatingButton = (RadioButton) findViewById(R.id.sortByOwnerRating);
+        priceButton = (RadioButton) findViewById(R.id.sortByPrice);
+
+        /*myIntent.putExtra("address", address);
+        myIntent.putExtra("startTime", startTime);
+        myIntent.putExtra("endTime", endTime);
+        myIntent.putExtra("startDate", startDate);
+        myIntent.putExtra("endDate", endDate);*/
+        Intent previousIntent = this.getIntent();
+        address = previousIntent.getExtras().getString("address");
+        startTime = previousIntent.getExtras().getString("startTime");
+        endTime = previousIntent.getExtras().getString("endTime");
+        startDate = previousIntent.getExtras().getString("startDate");
+        endDate = previousIntent.getExtras().getString("endDate");
     }
 
     private void createOnclickCallback() {
@@ -60,6 +69,17 @@ public class FilterActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Intent myIntent = new Intent(FilterActivity.this, SearchResultActivity.class);
+
+                myIntent.putExtra("address", address);
+                myIntent.putExtra("startTime", startTime);
+                myIntent.putExtra("endTime", endTime);
+                myIntent.putExtra("startDate", startDate);
+                myIntent.putExtra("endDate", endDate);
+
+                if(priceButton.isChecked()) myIntent.putExtra("filter", "sortByPrice");
+                else if(ownerRatingButton.isChecked()) myIntent.putExtra("filter", "sortByOwnerRating");
+                else if(spotRatingButton.isChecked()) myIntent.putExtra("filter", "sortBySpotRating");
+
                 FilterActivity.this.startActivity(myIntent);
 
             }
