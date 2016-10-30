@@ -10,7 +10,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.trevorbernard.parkhere.Connectors.UserConnector;
 import com.example.trevorbernard.parkhere.R;
+import com.example.trevorbernard.parkhere.User.User;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.List;
 
@@ -21,6 +24,8 @@ import java.util.List;
 public class PastReservationActivity extends Activity {
 
     ListView list;
+    //User mUser = UserConnector.getUserFromUID(FirebaseAuth.getInstance().getCurrentUser().getUid());
+
     String[] mReservations = {"Reservation ID 1","Reservation ID 2",
             "Reservation ID 3"}; // FOR TESTING PURPOSE
 

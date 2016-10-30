@@ -105,6 +105,7 @@ public class SearchActivity extends Activity { //extends FragmentActivity implem
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+
                 address = ETaddress.getText().toString();
             }
 
