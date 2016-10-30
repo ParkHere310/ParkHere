@@ -22,7 +22,6 @@ public class Reservation {
         this.ownerUID = ownerUID;
         this.seekerUID = seekerUID;
         this.parkingSpotUID = parkingSpotUID;
-        this.parkingSpotUID = parkingSpotUID;
         isCompleted = false;
         isRatedAndReviewed = false;
 
