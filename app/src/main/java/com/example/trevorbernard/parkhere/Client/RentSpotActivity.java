@@ -61,6 +61,7 @@ public class RentSpotActivity extends Activity {
         descriptionTextview = (TextView) findViewById(R.id.DescriptionTextView);
         priceTextview = (TextView) findViewById(R.id.PriceTextView);
 
+
         /*
         TO BE UPDATED
         */
@@ -72,6 +73,7 @@ public class RentSpotActivity extends Activity {
         rentButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                rentSpotFromGUI(spotUID);
                 Intent myIntent = new Intent (RentSpotActivity.this, MainActivity.class);
                 RentSpotActivity.this.startActivity(myIntent);
             }
@@ -88,7 +90,8 @@ public class RentSpotActivity extends Activity {
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
                     parkingSpot = postSnapshot.getValue(ParkingSpot.class);
                     priceTextview.setText("$ " + parkingSpot.getPrice());
-                    descriptionTextview.setText(parkingSpot.getAddress()+ " " + parkingSpot.getDescription());
+                    descriptionTextview.setText(parkingSpot.getName()+ "\n" + parkingSpot.getAddress()
+                            + "\n" + parkingSpot.getDescription());
                 }
             }
 
@@ -98,13 +101,14 @@ public class RentSpotActivity extends Activity {
             }
         });
     }
+
     //iman,
     private void rentSpotFromGUI( String parkingSpotUID) {
 
         String seekerUID = FirebaseAuth.getInstance().getCurrentUser().getUid();
         String ownerUID = SpotConnector.getParkingSpotFromUID(parkingSpotUID).getOwnerUID();
 
-                Transaction transaction = null;
+        Transaction transaction = null;
 
 
         Reservation res = new Reservation(ownerUID, seekerUID,
