@@ -53,7 +53,7 @@ public class ViewPastReservationActivity extends Activity {
             public void onItemClick(AdapterView<?> parent, View viewClicked, int position, long id) {
                 TextView clickedTextView = (TextView) viewClicked;
                 String reservationID = clickedTextView.getText().toString();
-                Intent myIntent =  new Intent(ViewPastReservationActivity.this, SubmitRatingAndReviewActivity.class);
+                Intent myIntent =  new Intent(ViewPastReservationActivity.this, PastReservedSpotActivity.class);
                 myIntent.putExtra("reservationID",reservationID);
                 ViewPastReservationActivity.this.startActivity(myIntent);
             }

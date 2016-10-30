@@ -42,7 +42,7 @@ public class ReservedSpotActivity extends Activity {
 
 
     private void initiateVariable() {
-        cancelButton = (Button)findViewById(R.id.reviewButton);
+        cancelButton = (Button)findViewById(R.id.UploadReviewButton);
         checkinButton = (Button) findViewById(R.id.checkinButton);
 
         /*
