@@ -26,7 +26,7 @@ import java.util.Date;
 public class PostSpotActivity extends Activity {
         private Button postButton;
         private Button uploadButton;
-        private EditText date_field;
+
         private EditText title_field;
         //private EditText startTime_field;
         //private EditText endTime_field;
@@ -103,7 +103,7 @@ public class PostSpotActivity extends Activity {
                 private void initiateVariable() {
                 postButton = (Button) findViewById(R.id.postButton);
                 uploadButton = (Button) findViewById(R.id.uploadButton);
-                date_field = (EditText)findViewById(R.id.date_field);
+
                 title_field = (EditText)findViewById(R.id.title_field);
                 startHour_field = (EditText)findViewById(R.id.startHour_field);
                 endHour_field = (EditText)findViewById(R.id.endHour_field);
@@ -120,19 +120,7 @@ public class PostSpotActivity extends Activity {
                 handicappedCheckBox = (CheckBox)findViewById(R.id.handicapCheckBox);
 
 
-                    date_field.addTextChangedListener(new TextWatcher() {
-                        @Override
-                        public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-                        @Override
-                        public void onTextChanged(CharSequence s, int start, int before, int count) {
-                            date = date_field.getText().toString();
-                        }
-
-                        @Override
-                        public void afterTextChanged(Editable s) {
-
-                        }
-                    });
+                    
 
 
                     title_field.addTextChangedListener(new TextWatcher() {
