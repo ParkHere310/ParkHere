@@ -3,6 +3,8 @@ package com.example.trevorbernard.parkhere.Client;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.Editable;
@@ -18,9 +20,9 @@ import com.example.trevorbernard.parkhere.ParkingSpot.ParkingSpot;
 import com.example.trevorbernard.parkhere.R;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.io.IOException;
 import java.util.Date;
-
-import static com.example.trevorbernard.parkhere.Client.RegisterActivity.REQUEST_IMAGE_PROFILE;
+import java.util.List;
 
 /**
  * Created by Hexi on 2016/10/20.
@@ -79,6 +81,7 @@ public class PostSpotActivity extends Activity {
     }
 
 
+
     void postSpotFromGUI(
             String name,
             String description,
@@ -90,11 +93,20 @@ public class PostSpotActivity extends Activity {
             Date startTime,
             Date endTime
     ) {
-
+        double latitude = -1;
+        double longitude = -1;
+        try {
+            Geocoder geocoder = new Geocoder(this);
+            List<Address> codedAddress = geocoder.getFromLocationName(address,5);
+            latitude = codedAddress.get(0).getLatitude();
+            longitude = codedAddress.get(0).getLongitude();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         //make new spot
         //the parking spot itself will add the seller user to the class
         ParkingSpot spot = new ParkingSpot( name,
-                description, price, isSUV, isCovered, isHandicap, address, startTime, endTime);
+                description, price, isSUV, isCovered, isHandicap, address, startTime, endTime,latitude,longitude);
 
         SpotConnector.postSpot(spot);
     }
