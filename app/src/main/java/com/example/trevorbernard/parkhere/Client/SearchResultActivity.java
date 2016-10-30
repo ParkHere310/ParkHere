@@ -9,8 +9,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.example.trevorbernard.parkhere.ParkingSpot.ParkingSpot;
 import com.example.trevorbernard.parkhere.ParkingSpot.ParkingSpotAdapter;
@@ -45,6 +45,9 @@ public class SearchResultActivity extends Activity {
     String endTime;
     String startDate;
     String endDate;
+    String filterType = "-1";
+
+    Button filterButton;
 
     ArrayList<ParkingSpotDistance> parkingSpotDistances;
     ArrayList<ParkingSpot> parkingSpots;
@@ -67,6 +70,24 @@ public class SearchResultActivity extends Activity {
         endTime = previousIntent.getExtras().getString("endTime");
         startDate = previousIntent.getExtras().getString("startDate");
         endDate = previousIntent.getExtras().getString("endDate");
+        if(previousIntent.getExtras().containsKey("filter")) {
+            filterType = previousIntent.getExtras().getString("filter");
+        }
+
+        filterButton = (Button) findViewById(R.id.filter_button);
+        filterButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(SearchResultActivity.this, FilterActivity.class);
+                myIntent.putExtra("address", address);
+                myIntent.putExtra("startTime", startTime);
+                myIntent.putExtra("endTime", endTime);
+                myIntent.putExtra("startDate", startDate);
+                myIntent.putExtra("endDate", endDate);
+                SearchResultActivity.this.startActivity(myIntent);
+            }
+        });
+
 
         //Set up list view
         listView = (ListView) findViewById(R.id.list);
@@ -139,6 +160,15 @@ public class SearchResultActivity extends Activity {
                             //stringSpots.add(new DecimalFormat("#.##").format(distance) + " miles " + spot.getName() + ": " + spot.getAddress());
                         }
                     }
+                }
+
+                // Sort here
+                if(filterType.equals("sortByPrice")) {
+
+                } else if(filterType.equals("sortBySpotRating")) {
+
+                } else if(filterType.equals("sortByOwnerRating")) {
+                    
                 }
 
                 ArrayAdapter<ParkingSpotDistance> arrayAdapter = new ParkingSpotAdapter(SearchResultActivity.this, parkingSpotDistances);
