@@ -22,7 +22,7 @@
         <activity android:name=".Client.LoginActivity"></activity>
         <activity android:name=".Client.RegisterActivity"></activity>
         <activity android:name=".Client.SearchResultActivity"></activity>
-        <activity android:name=".Client.PastReservationActivity"></activity>
+        <activity android:name=".Client.ViewPastReservationActivity"></activity>
         <activity android:name=".Client.SubmitRatingAndReviewActivity"></activity>
         <activity android:name=".Client.PostSpotActivity"></activity>
         <activity android:name=".Client.ListedSpotActivity"></activity>

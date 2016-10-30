@@ -9,10 +9,10 @@ import android.widget.TextView;
 import com.example.trevorbernard.parkhere.R;
 
 /**
- * Created by junseob on 10/29/16.
+ * Created by zilongxiao on 10/30/16.
  */
 
-public class ViewReservationActivity extends Activity {
+public class PastReservedSpotActivity extends Activity {
     private Button ReviewButton;
     private TextView title;
     private TextView date;
@@ -23,31 +23,18 @@ public class ViewReservationActivity extends Activity {
     private TextView handicapped;
 
 
-
-    private static final String TAG = "ViewReservationActivity";
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_viewreservation);
-
-
-
+        setContentView(R.layout.activity_pastreservedspot);
 
         initiateVariable();
 
         CreateOnclickCallback();
     }
 
-
     private void initiateVariable() {
-        ReviewButton = (Button)findViewById(R.id.cancelButton);
-
-        /*
-        do a bunch of setTexts with the textviews below using the info in the pertinent
-        object
-         */
-
+        ReviewButton = (Button)findViewById(R.id.reviewButton);
         title = (TextView)findViewById(R.id.title);
         date = (TextView)findViewById(R.id.actual_date);
         startTime = (TextView) findViewById(R.id.startTime);
@@ -56,6 +43,10 @@ public class ViewReservationActivity extends Activity {
         handicapped = (TextView) findViewById(R.id.isHandicapped);
         covered = (TextView) findViewById(R.id.isCovered);
 
+        /*
+        do a bunch of setTexts with the textviews below using the info in the pertinent
+        object
+         */
     }
 
     private void CreateOnclickCallback() {

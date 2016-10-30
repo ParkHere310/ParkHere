@@ -89,15 +89,6 @@
             android:layout_alignEnd="@+id/endTime"
             android:layout_above="@+id/BuyButton" />
 
-        <Button
-            android:text="Rent This Spot"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:id="@+id/BuyButton"
-            android:layout_alignParentBottom="true"
-            android:layout_alignEnd="@+id/actual_description" />
-
         <TextView
             android:text="Price here"
             android:layout_width="wrap_content"

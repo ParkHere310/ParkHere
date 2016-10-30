@@ -20,7 +20,7 @@ import java.util.List;
  * Created by Hexi on 2016/10/22.
  */
 
-public class PastReservationActivity extends Activity {
+public class ViewPastReservationActivity extends Activity {
 
     ListView list;
     String[] mReservations = {"Reservation ID 1","Reservation ID 2",
@@ -29,7 +29,7 @@ public class PastReservationActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pastreservation);
+        setContentView(R.layout.activity_viewpastreservation);
         initiateVariables();
         populateListView();
         CreateOnclickCallback();
@@ -53,9 +53,9 @@ public class PastReservationActivity extends Activity {
             public void onItemClick(AdapterView<?> parent, View viewClicked, int position, long id) {
                 TextView clickedTextView = (TextView) viewClicked;
                 String reservationID = clickedTextView.getText().toString();
-                Intent myIntent =  new Intent(PastReservationActivity.this, SubmitRatingAndReviewActivity.class);
+                Intent myIntent =  new Intent(ViewPastReservationActivity.this, SubmitRatingAndReviewActivity.class);
                 myIntent.putExtra("reservationID",reservationID);
-                PastReservationActivity.this.startActivity(myIntent);
+                ViewPastReservationActivity.this.startActivity(myIntent);
             }
         });
     }

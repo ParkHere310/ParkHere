@@ -14,7 +14,6 @@ import com.example.trevorbernard.parkhere.R;
  */
 
 public class ListedSpotActivity extends Activity {
-    private Button BuyButton;
     private TextView title;
     private TextView date;
     private TextView startTime;
@@ -42,13 +41,6 @@ public class ListedSpotActivity extends Activity {
 
 
     private void initiateVariable() {
-        BuyButton = (Button) findViewById(R.id.BuyButton);
-
-        /*
-        do a bunch of setTexts with the textviews below using the info in the pertinent
-        object
-         */
-
         title = (TextView)findViewById(R.id.title);
         date = (TextView)findViewById(R.id.actual_date);
         startTime = (TextView) findViewById(R.id.startTime);
@@ -57,17 +49,12 @@ public class ListedSpotActivity extends Activity {
         handicapped = (TextView) findViewById(R.id.isHandicapped);
         covered = (TextView) findViewById(R.id.isCovered);
 
+        /*
+        do a bunch of setTexts with the textviews below using the info in the pertinent
+        object
+         */
     }
 
     private void CreateOnclickCallback() {
-
-
-        //When uploadVerificationButton is clicked
-        BuyButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // TO BE FILLED
-            }
-        });
     }
 }

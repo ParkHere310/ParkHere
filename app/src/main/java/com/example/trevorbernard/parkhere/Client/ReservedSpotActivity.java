@@ -13,7 +13,8 @@ import com.example.trevorbernard.parkhere.R;
  */
 
 public class ReservedSpotActivity extends Activity {
-    private Button CancelButton;
+    private Button cancelButton;
+    private Button checkinButton;
     private TextView title;
     private TextView date;
     private TextView startTime;
@@ -29,7 +30,7 @@ public class ReservedSpotActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_viewreservation);
+        setContentView(R.layout.activity_viewcurrentreservation);
 
 
 
@@ -41,7 +42,8 @@ public class ReservedSpotActivity extends Activity {
 
 
     private void initiateVariable() {
-        CancelButton = (Button)findViewById(R.id.cancelButton);
+        cancelButton = (Button)findViewById(R.id.reviewButton);
+        checkinButton = (Button) findViewById(R.id.checkinButton);
 
         /*
         do a bunch of setTexts with the textviews below using the info in the pertinent
@@ -62,10 +64,17 @@ public class ReservedSpotActivity extends Activity {
 
 
         //When uploadVerificationButton is clicked
-        CancelButton.setOnClickListener(new View.OnClickListener() {
+        cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // TO BE FILLED
+            }
+        });
+
+        checkinButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //TO BE FILLED
             }
         });
     }
