@@ -6,13 +6,13 @@ package com.example.trevorbernard.parkhere.Reservation;
 
 public class Reservation {
 
-    String ownerUID;
-    String seekerUID;
-    String parkingSpotUID;
-    boolean isCompleted;
-    Transaction transaction;
-    boolean isRatedAndReviewed;
-    String UID;
+    private String ownerUID;
+    private String seekerUID;
+    private String parkingSpotUID;
+    private boolean isCompleted;
+    private Transaction transaction;
+    private boolean isRatedAndReviewed;
+    private String UID;
 
     public Reservation(String ownerUID,
             String seekerUID,
@@ -28,9 +28,9 @@ public class Reservation {
     }
 
 
-    public void setParkingSpotUID(String uID) {
+    public void setParkingSpotUID(String UID) {
 
-        this.parkingSpotUID = uID;
+        this.parkingSpotUID = UID;
     }
 
     public void setCompleted(boolean completed) {
