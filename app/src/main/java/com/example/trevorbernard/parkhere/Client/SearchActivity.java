@@ -3,13 +3,12 @@ package com.example.trevorbernard.parkhere.Client;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-
+import android.widget.Toast;
 
 import com.example.trevorbernard.parkhere.R;
 
@@ -86,13 +85,21 @@ public class SearchActivity extends Activity { //extends FragmentActivity implem
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent myIntent = new Intent(SearchActivity.this, SearchResultActivity.class);
-                myIntent.putExtra("address",address);
-                myIntent.putExtra("startTime",startTime);
-                myIntent.putExtra("endTime",endTime);
-                myIntent.putExtra("startDate",startDate);
-                myIntent.putExtra("endDate",endDate);
-                SearchActivity.this.startActivity(myIntent);
+
+                if( ETaddress.getText().toString().length() > 0 &&  ETaddress.getText() != null &&  ETaddress.getText().toString() != "" &&  ETaddress.getText().toString() != " "){
+                    Intent myIntent = new Intent(SearchActivity.this, SearchResultActivity.class);
+                    myIntent.putExtra("address", address);
+                    myIntent.putExtra("startTime", startTime);
+                    myIntent.putExtra("endTime", endTime);
+                    myIntent.putExtra("startDate", startDate);
+                    myIntent.putExtra("endDate", endDate);
+                    SearchActivity.this.startActivity(myIntent);
+                }
+                else {
+                    Toast.makeText( SearchActivity.this, "Address Field must have input!",
+                            Toast.LENGTH_LONG).show();
+
+                }
             }
         });
 
