@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     private Button listedSpotPage;
     private Button currentReservationButton;
     private Button searchButton;
+    private Button logoutButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,6 +108,14 @@ public class MainActivity extends AppCompatActivity {
                 MainActivity.this.startActivity(myIntent);
             }
         }));
+
+        logoutButton.setOnClickListener((new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+            }
+        }));
     }
 
     private void InitializeVariables() {
@@ -115,6 +124,7 @@ public class MainActivity extends AppCompatActivity {
         listedSpotPage = (Button) findViewById(R.id.ListedSpotPage);
         currentReservationButton = (Button) findViewById(R.id.CurrentReservationButton);
         searchButton = (Button) findViewById(R.id.SearchButton);
+        logoutButton = (Button) findViewById(R.id.logoutButton);
 
 
     }
