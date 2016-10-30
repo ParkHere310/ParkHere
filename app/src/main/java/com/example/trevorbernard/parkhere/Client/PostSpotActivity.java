@@ -28,8 +28,15 @@ public class PostSpotActivity extends Activity {
         private Button uploadButton;
         private EditText date_field;
         private EditText title_field;
-        private EditText startTime_field;
-        private EditText endTime_field;
+        //private EditText startTime_field;
+        //private EditText endTime_field;
+        private EditText year_field;
+        private EditText month_field;
+        private EditText day_field;
+        private EditText startHour_field;
+        private EditText startMin_field;
+        private EditText endHour_field;
+        private EditText endMin_field;
         private EditText price_field;
         private EditText address_field;
         private EditText description_field;
@@ -40,9 +47,17 @@ public class PostSpotActivity extends Activity {
         private String title;
         private String startTime;
         private String endTime;
-        private String price;
+        private int price;
         private String description;
         private String address;
+
+        private int year;
+        private int month;
+        private int day;
+        private int startHour;
+        private int startMin;
+        private int endHour;
+        private int endMin;
 
         private boolean isSUV;
         private boolean isCovered;
@@ -52,6 +67,8 @@ public class PostSpotActivity extends Activity {
         private FirebaseAuth mAuth;
         private static final String TAG = "PostSpotActivity";
 
+    public PostSpotActivity() {
+    }
 
 
     void postSpotFromGUI(
@@ -88,8 +105,13 @@ public class PostSpotActivity extends Activity {
                 uploadButton = (Button) findViewById(R.id.uploadButton);
                 date_field = (EditText)findViewById(R.id.date_field);
                 title_field = (EditText)findViewById(R.id.title_field);
-                startTime_field = (EditText)findViewById(R.id.startTime_field);
-                endTime_field = (EditText)findViewById(R.id.endTime_field);
+                startHour_field = (EditText)findViewById(R.id.startHour_field);
+                endHour_field = (EditText)findViewById(R.id.endHour_field);
+                    startMin_field = (EditText)findViewById(R.id.startMin_field);
+                    endMin_field = (EditText)findViewById(R.id.endMin_field);
+                    year_field = (EditText)findViewById(R.id.year_field);
+                    month_field = (EditText)findViewById(R.id.month_field);
+                    day_field = (EditText)findViewById(R.id.day_field);
                 price_field = (EditText)findViewById(R.id.price_field);
                     address_field = (EditText)findViewById(R.id.address_field);
                 description_field = (EditText)findViewById(R.id.description_field);
@@ -144,34 +166,111 @@ public class PostSpotActivity extends Activity {
 
                         }
                     });
-                startTime_field.addTextChangedListener(new TextWatcher() {
+                    year_field.addTextChangedListener(new TextWatcher() {
+                        @Override
+                        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                        }
+
+                        @Override
+                        public void onTextChanged(CharSequence s, int start, int before, int count) {
+                            String yearStr = endMin_field.getText().toString();
+                            year = Integer.parseInt(yearStr);
+                        }
+
+                        @Override
+                        public void afterTextChanged(Editable s) {
+                        }
+                    });
+                    month_field.addTextChangedListener(new TextWatcher() {
+                        @Override
+                        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                        }
+
+                        @Override
+                        public void onTextChanged(CharSequence s, int start, int before, int count) {
+                            String monthStr = month_field.getText().toString();
+                            month = Integer.parseInt(monthStr);
+                        }
+
+                        @Override
+                        public void afterTextChanged(Editable s) {
+                        }
+                    });
+                    day_field.addTextChangedListener(new TextWatcher() {
+                        @Override
+                        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                        }
+
+                        @Override
+                        public void onTextChanged(CharSequence s, int start, int before, int count) {
+                            String dayStr = endMin_field.getText().toString();
+                            day = Integer.parseInt(dayStr);
+                        }
+
+                        @Override
+                        public void afterTextChanged(Editable s) {
+                        }
+                    });
+                endHour_field.addTextChangedListener(new TextWatcher() {
                     @Override
                     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
                      }
 
                     @Override
                     public void onTextChanged(CharSequence s, int start, int before, int count) {
-                        startTime = startTime_field.getText().toString();
+                        String endHourStr = endHour_field.getText().toString();
+                        endHour = Integer.parseInt(endHourStr);
                     }
 
                     @Override
                     public void afterTextChanged(Editable s) {
                      }
                 });
-                endTime_field.addTextChangedListener(new TextWatcher() {
+                endMin_field.addTextChangedListener(new TextWatcher() {
                     @Override
                     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
                      }
 
                     @Override
                     public void onTextChanged(CharSequence s, int start, int before, int count) {
-                        endTime = endTime_field.getText().toString();
+                        String endMinStr = endMin_field.getText().toString();
+                        endMin = Integer.parseInt(endMinStr);
                     }
 
                     @Override
                     public void afterTextChanged(Editable s) {
                      }
                 });
+                    startHour_field.addTextChangedListener(new TextWatcher() {
+                        @Override
+                        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                        }
+
+                        @Override
+                        public void onTextChanged(CharSequence s, int start, int before, int count) {
+                            String startHourStr = endHour_field.getText().toString();
+                            startHour = Integer.parseInt(startHourStr);
+                        }
+
+                        @Override
+                        public void afterTextChanged(Editable s) {
+                        }
+                    });
+                    startMin_field.addTextChangedListener(new TextWatcher() {
+                        @Override
+                        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                        }
+
+                        @Override
+                        public void onTextChanged(CharSequence s, int start, int before, int count) {
+                            String startMinStr = endMin_field.getText().toString();
+                            startMin = Integer.parseInt(startMinStr);
+                        }
+
+                        @Override
+                        public void afterTextChanged(Editable s) {
+                        }
+                    });
                 price_field.addTextChangedListener(new TextWatcher() {
                         @Override
                         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -179,7 +278,8 @@ public class PostSpotActivity extends Activity {
 
                                 @Override
                         public void onTextChanged(CharSequence s, int start, int before, int count) {
-                               price = price_field.getText().toString();
+                               String priceStr = price_field.getText().toString();
+                                    price = Integer.getInteger(priceStr);
                             }
 
                                 @Override
@@ -210,17 +310,29 @@ public class PostSpotActivity extends Activity {
                                         //Post Here
 
 
-                                    Date startTime = new Date(2016,10,29,8,30);
-                                    Date endTime = new Date(2016,10,29,15,30);
+
+                                    
+                                    Date startTime = new Date(year,month,day,startHour,startMin);
+                                    Date endTime = new Date(year,month,day,endHour,endMin);
 
                                     //Jun, print the title, description, price,
                                     //all bools, address, and start/end time to log.
                                     //There are 2 date variables above, make them using
                                     // info from date and time picker
+/*
+                                    System.out.println(PostSpotActivity.this.title + " " +
+                                            PostSpotActivity.this.description + " " +
+                                            PostSpotActivity.this.price + " " +
 
+                                            PostSpotActivity.this.isSUV + " " +
+                                            PostSpotActivity.this.isCovered + " " +
+                                            PostSpotActivity.this.isHandicapped + " " +
+                                            PostSpotActivity.this.address);
+                                            */
+                                    //,startTime,endTime)
 
                                     //this will post to database.
-                                    /*
+
                                     postSpotFromGUI(
                                             PostSpotActivity.this.title,
                                             PostSpotActivity.this.description,
@@ -230,7 +342,7 @@ public class PostSpotActivity extends Activity {
                                     PostSpotActivity.this.address,startTime,endTime
                                     );
 
-                                    */
+
 
                                 }
                             });
