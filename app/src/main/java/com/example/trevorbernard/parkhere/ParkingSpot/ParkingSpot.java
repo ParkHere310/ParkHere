@@ -1,6 +1,7 @@
 package com.example.trevorbernard.parkhere.ParkingSpot;
 
 import android.location.Address;
+import android.location.Geocoder;
 
 import com.example.trevorbernard.parkhere.User.Rating;
 import com.google.firebase.auth.FirebaseAuth;
@@ -145,7 +146,7 @@ public class ParkingSpot {
                        boolean isHandicap,
                        String address,
                        Date start,
-                       Date end){
+                       Date end, double latitude, double longitude){
 
         timeWindow = new TimeWindow(start,end);
        // private String imageURL; need to add in later some how
@@ -159,14 +160,8 @@ public class ParkingSpot {
         this.isCovered = isCovered;
         this.isHandicap = isHandicap;
         this.address = address;
-
-        //TODO:
-        //set lat and long from the address that came in
-        //private double longitude;
-        //private double latitude;
-
-        //TODO: someone do the timewindow
-       //private TimeWindow timeWindow;
+        this.latitude = latitude;
+        this.longitude = longitude;
 
         ownerUID = FirebaseAuth.getInstance().getCurrentUser().getUid();
         occupantUID = "-1"; // No occupant
