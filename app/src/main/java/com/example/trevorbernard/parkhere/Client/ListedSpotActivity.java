@@ -23,10 +23,10 @@ public class ListedSpotActivity extends Activity {
     private TextView type;
     private TextView covered;
     private TextView handicapped;
-    private
 
     private Button editButton;
     private Button removeButton;
+    private String spotUID;
 
 
 
@@ -69,6 +69,7 @@ public class ListedSpotActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Intent myIntent = new Intent(ListedSpotActivity.this, EditReservationActivity.class);
+                myIntent.putExtra("spot", spotUID);
                 ListedSpotActivity.this.startActivity(myIntent);
             }
         });
