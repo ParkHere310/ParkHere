@@ -14,11 +14,8 @@ import android.widget.TextView;
 import com.example.trevorbernard.parkhere.ParkingSpot.ParkingSpot;
 import com.example.trevorbernard.parkhere.R;
 import com.example.trevorbernard.parkhere.Reservation.Reservation;
-<<<<<<< HEAD
-=======
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
->>>>>>> 9b8a65555804fbbcadccef8c0254f81a143f7f13
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -45,11 +42,8 @@ public class PastReservedSpotActivity extends Activity {
     private TextView covered;
     private TextView handicapped;
     private TextView description;
-<<<<<<< HEAD
     private TextView price;
-=======
     private ImageView image;
->>>>>>> 9b8a65555804fbbcadccef8c0254f81a143f7f13
     String reservationUID;
 
     Query queryRef;
@@ -77,11 +71,10 @@ public class PastReservedSpotActivity extends Activity {
         covered = (TextView) findViewById(R.id.isCovered);
         address = (TextView) findViewById(R.id.address_label);
         description = (TextView) findViewById(R.id.actual_description);
-<<<<<<< HEAD
+
         price = (TextView) findViewById(R.id.actual_price);
-=======
+
         image = (ImageView) findViewById(R.id.imageView);
->>>>>>> 9b8a65555804fbbcadccef8c0254f81a143f7f13
 
         Intent myIntent = this.getIntent();
         reservationUID = myIntent.getStringExtra("reservationID");
@@ -151,9 +144,9 @@ public class PastReservedSpotActivity extends Activity {
         startTime.setText(start.getHours() + ":" + start.getMinutes());
         endTime.setText(end.getHours() + ":" + end.getMinutes());
         description.setText(mSpot.getDescription());
-<<<<<<< HEAD
+
         price.setText(String.valueOf( (mSpot.getPrice()/100.0) ) );
-=======
+
 
         StorageReference storageRef = FirebaseStorage.getInstance().getReferenceFromUrl(mSpot.getImageURL());
         final long ONE_MEGABYTE = 1024 * 1024;
@@ -177,7 +170,7 @@ public class PastReservedSpotActivity extends Activity {
 
     private void setBmp(Bitmap bmp) {
         image.setImageBitmap(bmp);
->>>>>>> 9b8a65555804fbbcadccef8c0254f81a143f7f13
+
     }
 
 }
