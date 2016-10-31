@@ -2,9 +2,14 @@ package com.example.trevorbernard.parkhere.Client;
 
 import android.app.Activity;
 import android.content.Intent;
+<<<<<<< HEAD
+=======
+import android.graphics.Bitmap;
+>>>>>>> c9e7d2f7458df7c22b19b1d248743cca8ab4c599
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -72,9 +77,13 @@ public class PostSpotActivity extends Activity {
         private FirebaseAuth.AuthStateListener mAuthListener;
         private FirebaseAuth mAuth;
         private static final String TAG = "PostSpotActivity";
+        private Bitmap spotPic = null;
+
+    static final int REQUEST_IMAGE_SPOT = 1;
 
     public PostSpotActivity() {
     }
+
 
 
     void postSpotFromGUI(
@@ -380,7 +389,7 @@ public class PostSpotActivity extends Activity {
         uploadButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Upload Here
+                dispatchTakePictureIntent(REQUEST_IMAGE_SPOT);
             }
         });
 
@@ -423,6 +432,20 @@ public class PostSpotActivity extends Activity {
             }
         });
 
+    }
+
+    private void dispatchTakePictureIntent(int code) {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+            startActivityForResult(takePictureIntent, code);
+        }
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_IMAGE_SPOT && resultCode == RESULT_OK) {
+            Bundle extras = data.getExtras();
+            spotPic = (Bitmap) extras.get("data");
+        }
     }
 }
 
