@@ -1,11 +1,13 @@
 package com.example.trevorbernard.parkhere.Client;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.trevorbernard.parkhere.MainActivity;
 import com.example.trevorbernard.parkhere.R;
 
 
@@ -21,6 +23,10 @@ public class ListedSpotActivity extends Activity {
     private TextView type;
     private TextView covered;
     private TextView handicapped;
+    private
+
+    private Button editButton;
+    private Button removeButton;
 
 
 
@@ -49,6 +55,9 @@ public class ListedSpotActivity extends Activity {
         handicapped = (TextView) findViewById(R.id.isHandicapped);
         covered = (TextView) findViewById(R.id.isCovered);
 
+        editButton = (Button) findViewById(R.id.editButton);
+        removeButton = (Button) findViewById(R.id.removeButton);
+
         /*
         do a bunch of setTexts with the textviews below using the info in the pertinent
         object
@@ -56,5 +65,21 @@ public class ListedSpotActivity extends Activity {
     }
 
     private void CreateOnclickCallback() {
+        editButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(ListedSpotActivity.this, EditReservationActivity.class);
+                ListedSpotActivity.this.startActivity(myIntent);
+            }
+        });
+        removeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(ListedSpotActivity.this, MainActivity.class);
+                ListedSpotActivity.this.startActivity(myIntent);
+            }
+        });
     }
+
+
 }

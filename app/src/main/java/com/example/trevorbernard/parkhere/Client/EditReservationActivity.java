@@ -5,10 +5,8 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.location.Address;
 import android.location.Geocoder;
-import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.support.annotation.NonNull;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -23,83 +21,71 @@ import com.example.trevorbernard.parkhere.Connectors.SpotConnector;
 import com.example.trevorbernard.parkhere.MainActivity;
 import com.example.trevorbernard.parkhere.ParkingSpot.ParkingSpot;
 import com.example.trevorbernard.parkhere.R;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 /**
- * Created by Hexi on 2016/10/20.
+ * Created by junseob on 10/30/16.
  */
 
+public class EditReservationActivity extends Activity {
+    private Button postButton;
+    private Button uploadButton;
 
+    private EditText title_field;
+    //private EditText startTime_field;
+    //private EditText endTime_field;
 
-public class PostSpotActivity extends Activity {
-        private Button postButton;
-        private Button uploadButton;
+    private EditText price_field;
+    private EditText address_field;
+    private EditText description_field;
+    private CheckBox suvCheckBox;
+    private CheckBox coveredCheckBox;
+    private CheckBox handicappedCheckBox;
 
-        private EditText title_field;
-        //private EditText startTime_field;
-        //private EditText endTime_field;
+    private DatePicker startDate_picker;
+    private DatePicker endDate_picker;
+    private TimePicker startTime_picker;
+    private TimePicker endTime_picker;
+    private String date;
+    private String title;
+    private String startTime;
+    private String endTime;
+    private Integer price;
+    private String description;
+    private String address;
 
-        private EditText price_field;
-        private EditText address_field;
-        private EditText description_field;
-        private CheckBox suvCheckBox;
-        private CheckBox coveredCheckBox;
-        private CheckBox handicappedCheckBox;
+    private int startYear;
+    private int startMonth;
+    private int startDay;
+    private int endYear;
+    private int endMonth;
+    private int endDay;
+    private int startHour;
+    private int startMin;
+    private int endHour;
+    private int endMin;
 
-        private DatePicker startDate_picker;
-        private DatePicker endDate_picker;
-        private TimePicker startTime_picker;
-        private TimePicker endTime_picker;
-        private String date;
-        private String title;
-        private String startTime;
-        private String endTime;
-        private Integer price;
-        private String description;
-        private String address;
+    private boolean isSUV;
+    private boolean isCovered;
+    private boolean isHandicapped;
 
-        private int startYear;
-        private int startMonth;
-        private int startDay;
-        private int endYear;
-        private int endMonth;
-        private int endDay;
-        private int startHour;
-        private int startMin;
-        private int endHour;
-        private int endMin;
-
-        private boolean isSUV;
-        private boolean isCovered;
-        private boolean isHandicapped;
-
-        private FirebaseAuth.AuthStateListener mAuthListener;
-        private FirebaseAuth mAuth;
-        private static final String TAG = "PostSpotActivity";
-        private Bitmap spotPic = null;
-        private UploadTask uploadTask;
+    private FirebaseAuth.AuthStateListener mAuthListener;
+    private FirebaseAuth mAuth;
+    private static final String TAG = "EditReservationActivity";
+    private Bitmap spotPic = null;
 
     static final int REQUEST_IMAGE_SPOT = 1;
 
-    public PostSpotActivity() {
+    public EditReservationActivity() {
     }
 
 
 
-    void postSpotFromGUI(
+    void editReservationFromGUI(
             String name,
             String description,
             int price,
@@ -110,7 +96,6 @@ public class PostSpotActivity extends Activity {
             Date startTime,
             Date endTime
     ) {
-
         double latitude = -1;
         double longitude = -1;
         try {
@@ -126,44 +111,14 @@ public class PostSpotActivity extends Activity {
         ParkingSpot spot = new ParkingSpot( name,
                 description, price, isSUV, isCovered, isHandicap, address, startTime, endTime,latitude,longitude);
 
-        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-        String uid = mDatabase.child("ParkingSpots").push().getKey(); //gets new unique id
-
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        spotPic.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-        byte[] data = baos.toByteArray();
-        final ArrayList<String> downloadUrls = new ArrayList<String>();
-        // puts byte array in storage
-        StorageReference storageRef = FirebaseStorage.getInstance().getReferenceFromUrl("gs://parkhere-70b24.appspot.com");
-        StorageReference imagesRef = storageRef.child("SpotPics").child(uid);
-        uploadTask = imagesRef.putBytes(data);
-        uploadTask.addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception exception) {
-                // Handle unsuccessful uploads
-            }
-        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
-                Uri downloadUrl = taskSnapshot.getDownloadUrl();
-                downloadUrls.add(downloadUrl.toString());
-            }
-        });
-
-        if(downloadUrls.isEmpty()){
-            downloadUrls.add("-1");
-        }
-        spot.setImageURL(downloadUrls.get(0));
-
-        SpotConnector.postSpot(spot);
+        SpotConnector.EditReservation(spot);
     }
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_postspot);
+        setContentView(R.layout.activity_editreservation);
 
         initiateVariable();
 
@@ -198,8 +153,8 @@ public class PostSpotActivity extends Activity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-             //   title = title_field.getText().toString();
-            //iman
+                //   title = title_field.getText().toString();
+                //iman
             }
 
 
@@ -217,7 +172,7 @@ public class PostSpotActivity extends Activity {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 //iman
-               // address = address_field.getText().toString();
+                // address = address_field.getText().toString();
             }
 
             @Override
@@ -252,7 +207,7 @@ public class PostSpotActivity extends Activity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 //iman
-               // description = description_field.getText().toString();
+                // description = description_field.getText().toString();
             }
 
             @Override
@@ -293,14 +248,12 @@ public class PostSpotActivity extends Activity {
 
 */
                 String priceStr = price_field.getText().toString();
-                Double priceDouble = Double.parseDouble(priceStr);
-                priceDouble *= 100;
-                price = priceDouble.intValue();
+                price = Integer.parseInt(priceStr);
 
 
 
                 //String startMinStr = endMin_field.getText().toString();
-              //  startMin = Integer.parseInt(startMinStr);
+                //  startMin = Integer.parseInt(startMinStr);
                 description = description_field.getText().toString();
 
 
@@ -318,20 +271,20 @@ public class PostSpotActivity extends Activity {
                         PostSpotActivity.this.isHandicapped + " " +
                         PostSpotActivity.this.address);
                 */
-                postSpotFromGUI(
-                        PostSpotActivity.this.title,
-                        PostSpotActivity.this.description,
-                        PostSpotActivity.this.price,
-                        PostSpotActivity.this.isSUV,
-                        PostSpotActivity.this.isCovered,
-                        PostSpotActivity.this.isHandicapped,
-                        PostSpotActivity.this.address,
+                PostSpotFromGUI(
+                        EditReservationActivity.this.title,
+                        EditReservationActivity.this.description,
+                        EditReservationActivity.this.price,
+                        EditReservationActivity.this.isSUV,
+                        EditReservationActivity.this.isCovered,
+                        EditReservationActivity.this.isHandicapped,
+                        EditReservationActivity.this.address,
                         start,
                         end
                 );
 
-                Intent myIntent = new Intent(PostSpotActivity.this, MainActivity.class);
-                PostSpotActivity.this.startActivity(myIntent);
+                Intent myIntent = new Intent(EditReservationActivity.this, MainActivity.class);
+                EditReservationActivity.this.startActivity(myIntent);
             }
         });
         uploadButton.setOnClickListener(new View.OnClickListener() {
@@ -396,4 +349,3 @@ public class PostSpotActivity extends Activity {
         }
     }
 }
-
