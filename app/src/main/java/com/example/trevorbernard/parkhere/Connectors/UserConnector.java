@@ -194,7 +194,7 @@ public class UserConnector {
     public static boolean checkIn(Reservation res) {
         // TODO: Update boolean, complete transaction to owner, move to PastReservations
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().getRoot();
-        mDatabase.child("Reservatons").child(res.getUID()).removeValue();
+        mDatabase.child("Reservations").child(res.getUID()).removeValue();
 
         res.setCompleted(true);
 

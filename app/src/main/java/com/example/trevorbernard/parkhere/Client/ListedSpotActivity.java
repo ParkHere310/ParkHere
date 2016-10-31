@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.trevorbernard.parkhere.Connectors.SpotConnector;
 import com.example.trevorbernard.parkhere.MainActivity;
 import com.example.trevorbernard.parkhere.R;
 
@@ -76,6 +77,7 @@ public class ListedSpotActivity extends Activity {
         removeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                SpotConnector.removeSpot(spotUID);
                 Intent myIntent = new Intent(ListedSpotActivity.this, MainActivity.class);
                 ListedSpotActivity.this.startActivity(myIntent);
             }
