@@ -5,52 +5,108 @@ package com.example.trevorbernard.parkhere.Client;
  */
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 
+import com.example.trevorbernard.parkhere.ParkingSpot.ParkingSpot;
+import com.example.trevorbernard.parkhere.ParkingSpot.ParkingSpotAdapter;
+import com.example.trevorbernard.parkhere.ParkingSpot.ParkingSpotDistance;
 import com.example.trevorbernard.parkhere.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+
+import static com.example.trevorbernard.parkhere.R.id.listView;
 
 
 public class ViewListingsActivity extends Activity {
+    private Query queryRef;
+    private ArrayList<ParkingSpotDistance> parkingSpotDistances;
+    private ListView list;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_viewlistings);
+        parkingSpotDistances = new ArrayList<ParkingSpotDistance>();
         initiateVariables();
 
-        populateListView();
+        //populateListView();
 
         createClickCallback();
     }
 
     private void createClickCallback() {
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener(){
 
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent myIntent = new Intent(ViewListingsActivity.this, ListedSpotActivity.class);
+                String spotUID = parkingSpotDistances.get(position).parkingSpot.getUID();
+                myIntent.putExtra("spotUID", spotUID);
+                ViewListingsActivity.this.startActivity(myIntent);
+            }
+        });
 
     }
 
     //ONLY FOR TESTING PURPOSES
-    private void populateListView() {
+    /*private void populateListView() {
         String[] mReservations = {"Reservation Address 1","Reservation Address 2",
                 "Reservation Address3 "};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(
                 this, R.layout.layout_reservationitem, mReservations);
-        ListView list = (ListView) findViewById(R.id.listView);
+        ListView list = (ListView) findViewById(listView);
         list.setAdapter(adapter);
-    }
+    }*/
 
     private void initiateVariables() {
-        ListView list = (ListView) findViewById(R.id.listView);
-        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        list = (ListView) findViewById(listView);
+        /*list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View viewClicked, int position, long id) {
                 TextView clickedTextView = (TextView) viewClicked;
                 Toast.makeText(ViewListingsActivity.this,
                         "I just clicked on: " + clickedTextView.toString(),Toast.LENGTH_LONG).show();
+            }
+        });*/
+
+        //final ArrayList<ParkingSpot> spotsList = new ArrayList<ParkingSpot>();
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("ParkingSpots");
+        queryRef = mDatabase.orderByChild("ownerUID").equalTo(FirebaseAuth.getInstance().getCurrentUser().getUid()); // limited to 10
+        queryRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                parkingSpotDistances.clear();
+                double count = 1;
+                for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
+                    ParkingSpot spot = postSnapshot.getValue(ParkingSpot.class);
+                    //spotsList.add(spot);
+                    ParkingSpotDistance psd = new ParkingSpotDistance();
+                    psd.parkingSpot = spot;
+                    psd.distance = count;
+                    count++;
+
+                    ArrayAdapter<ParkingSpotDistance> arrayAdapter = new ParkingSpotAdapter(ViewListingsActivity.this, parkingSpotDistances);
+                    //ArrayAdapter arrayAdapter = new ArrayAdapter<String>(SearchResultActivity.this,android.R.layout.simple_list_item_1,stringSpots);
+                    list.setAdapter(arrayAdapter);
+                    arrayAdapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
             }
         });
     }

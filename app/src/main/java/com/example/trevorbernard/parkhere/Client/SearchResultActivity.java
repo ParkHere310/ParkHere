@@ -265,9 +265,10 @@ public class SearchResultActivity extends Activity {
 
             }
         });
+        // This is really shitty code and I'm sorry i wrote it.
         while(list.isEmpty()) {
             try {
-                Thread.sleep(10);
+                Thread.sleep(5);
             } catch(Exception e) {
 
             }

@@ -9,8 +9,15 @@ import android.widget.TextView;
 
 import com.example.trevorbernard.parkhere.Connectors.SpotConnector;
 import com.example.trevorbernard.parkhere.MainActivity;
+import com.example.trevorbernard.parkhere.ParkingSpot.ParkingSpot;
 import com.example.trevorbernard.parkhere.R;
-
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+import java.util.Date;
 
 /**
  * Created by Hexi on 2016/10/20.
@@ -28,6 +35,7 @@ public class ListedSpotActivity extends Activity {
     private Button editButton;
     private Button removeButton;
     private String spotUID;
+    private Query queryRef;
 
 
 
@@ -63,6 +71,26 @@ public class ListedSpotActivity extends Activity {
         do a bunch of setTexts with the textviews below using the info in the pertinent
         object
          */
+        Intent previousIntent = this.getIntent();
+        spotUID = previousIntent.getExtras().getString("spotUID");
+
+
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().getRoot().child("ParkingSpots");
+        queryRef = mDatabase.orderByChild("UID").equalTo(spotUID);
+        queryRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
+                    ParkingSpot spot = postSnapshot.getValue(ParkingSpot.class);
+                    setText(spot);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
     private void CreateOnclickCallback() {
@@ -82,6 +110,15 @@ public class ListedSpotActivity extends Activity {
                 ListedSpotActivity.this.startActivity(myIntent);
             }
         });
+    }
+
+    private void setText(ParkingSpot mSpot) {
+        title.setText(mSpot.getName());
+        Date start = new Date(mSpot.getTimeWindow().getStartDateTime());
+        Date end = new Date(mSpot.getTimeWindow().getEndDateTime());
+        date.setText(start.getDate());
+        startTime.setText(start.getHours() + ":" + start.getMinutes());
+        endTime.setText(end.getHours() + ":" + end.getMinutes());
     }
 
 

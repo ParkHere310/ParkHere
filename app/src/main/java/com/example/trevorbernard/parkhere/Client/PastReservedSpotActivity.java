@@ -118,7 +118,7 @@ public class PastReservedSpotActivity extends Activity {
         //Get ParkingSpot from specific ParkingSpot ID
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().getRoot().child("ParkingSpots");
         queryRef2 = mDatabase.orderByChild("UID").equalTo(mReservation.getParkingSpotUID());
-        queryRef.addListenerForSingleValueEvent(new ValueEventListener() {
+        queryRef2.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
