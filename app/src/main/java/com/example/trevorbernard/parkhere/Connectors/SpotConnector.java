@@ -100,7 +100,7 @@ public class SpotConnector {
         return true;
     }
 
-    public static boolean editSpot(ParkingSpot spot, User user) {
+    public static boolean editSpot(ParkingSpot spot) {
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
         mDatabase.child("ParkingSpots").child(spot.getUID()).setValue(spot);
         return true;
