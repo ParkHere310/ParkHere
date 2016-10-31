@@ -130,7 +130,7 @@ public class PostSpotActivity extends Activity {
         String uid = mDatabase.child("ParkingSpots").push().getKey(); //gets new unique id
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        spotPic.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        if(spotPic != null) { spotPic.compress(Bitmap.CompressFormat.JPEG, 100, baos); }
         byte[] data = baos.toByteArray();
         final ArrayList<String> downloadUrls = new ArrayList<String>();
         // puts byte array in storage

@@ -32,7 +32,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
-
+import java.util.Date;
 /**
  * Created by Hexi on 2016/10/23.
  */
@@ -44,12 +44,20 @@ public class SearchResultActivity extends Activity {
     double longitude;
     double latitude;
 
+
     String address;
     String startTime;
     String endTime;
     String startDate;
     String endDate;
     String filterType = "-1";
+
+    Long startLongFromIntent;
+    Long endLongFromIntent;
+
+    Date startDateFromIntent;
+    Date endDateFromIntent;
+
 
     Button filterButton;
 
@@ -69,11 +77,24 @@ public class SearchResultActivity extends Activity {
     private void initiateVariables() {
         //Retrieve information passed from previous Intent
         Intent previousIntent = this.getIntent();
+
+
         address = previousIntent.getExtras().getString("address");
+
+        startLongFromIntent = previousIntent.getExtras().getLong("startDateLong");
+        endLongFromIntent = previousIntent.getExtras().getLong("endDateLong");
+
+        Date startDateFromIntent = new Date(startLongFromIntent);
+        Date endDateFromIntent = new Date(endLongFromIntent);
+
+        /*
         startTime = previousIntent.getExtras().getString("startTime");
         endTime = previousIntent.getExtras().getString("endTime");
         startDate = previousIntent.getExtras().getString("startDate");
         endDate = previousIntent.getExtras().getString("endDate");
+        */
+
+
         if(previousIntent.getExtras().containsKey("filter")) {
             filterType = previousIntent.getExtras().getString("filter");
         }
@@ -130,7 +151,6 @@ public class SearchResultActivity extends Activity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-
                 parkingSpotDistances.clear();
 
                 Location source = new Location("");
@@ -142,12 +162,14 @@ public class SearchResultActivity extends Activity {
                     //if the spot is within this range
                     if(spot.getLatitude() >= latitude-0.36 && spot.getLatitude() <= latitude + 0.36) {
 
+
+
                         //if the spot is within time, and unoccupied
-                        /*if(time2Start.compareTo(new Date(spot.getTimeWindow().getStartDateTime())) >= 0
-                                && time2Start.compareTo(new Date(spot.getTimeWindow().getEndDateTime())) < 0
-                                && time2End.compareTo(new Date(spot.getTimeWindow().getEndDateTime())) < 0
-                                && time2End.compareTo(new Date(spot.getTimeWindow().getStartTime())) > 0
-                                && spot.getOccupantUID().equals("-1"))*/ {
+                        if(startDateFromIntent.compareTo(new Date(spot.getTimeWindow().getStartDateTime())) >= 0
+                                && startDateFromIntent.compareTo(new Date(spot.getTimeWindow().getEndDateTime())) < 0
+                                && endDateFromIntent.compareTo(new Date(spot.getTimeWindow().getEndDateTime())) < 0
+                                && endDateFromIntent.compareTo(new Date(spot.getTimeWindow().getStartDateTime())) > 0
+                                && spot.getOccupantUID().equals("-1")) {
 
                             Location spotloc = new Location("");
                             spotloc.setLongitude(spot.getLongitude());
