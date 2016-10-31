@@ -250,7 +250,9 @@ public class PostSpotActivity extends Activity {
 
 */
                 String priceStr = price_field.getText().toString();
-                price = Integer.parseInt(priceStr);
+                Double priceDouble = Double.parseDouble(priceStr);
+                priceDouble *= 100;
+                price = priceDouble.intValue();
 
 
 
