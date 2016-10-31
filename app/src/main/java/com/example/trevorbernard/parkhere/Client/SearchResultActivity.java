@@ -43,6 +43,7 @@ public class SearchResultActivity extends Activity {
     Query queryRef;
     double longitude;
     double latitude;
+    
 
     String address;
     String startTime;
