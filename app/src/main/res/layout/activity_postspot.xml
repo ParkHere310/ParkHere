@@ -1,76 +1,141 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <EditText
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:layout_alignEnd="@+id/title_field" />
+        android:orientation="vertical"
+        android:weightSum="1">
 
 
-    <TextView
-        android:text="Title: "
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="38dp"
-        android:layout_marginTop="26dp"
-        android:id="@+id/post_title" />
+        <TextView
+            android:text="Post"
+            android:layout_width="match_parent"
+            android:layout_height="50sp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="1dp"
+            android:layout_marginTop="1dp"
+            android:id="@+id/post_title"
+            android:gravity="center"
+            android:layout_weight="1.64" />
 
-    <EditText
-        android:layout_width="wrap_content"
+
+        <EditText
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
         android:ems="10"
         android:id="@+id/title_field"
+            android:gravity="center"
         android:layout_centerHorizontal="true"
         android:layout_alignBottom="@+id/post_title"
-        android:layout_alignTop="@+id/post_title" />
+        android:layout_alignTop="@+id/post_title"
+            android:hint="Enter Title Here" />
 
-    <TextView
-        android:text="Upload Picture: "
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:id="@+id/pic_textview"
-        android:layout_below="@+id/post_title"
-        android:layout_alignStart="@+id/post_title" />
 
     <Button
-        android:text="Upload"
-        android:layout_width="wrap_content"
+        android:text="Upload Picture"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/uploadButton"
         android:layout_alignTop="@+id/pic_textview"
         android:layout_alignEnd="@+id/title_field"
         android:layout_marginEnd="20dp"
+        android:gravity="center"
         android:layout_toEndOf="@+id/pic_textview" />
 
     <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
         android:ems="10"
         android:layout_alignTop="@+id/textView8"
         android:id="@+id/price_field"
-
+        android:hint="Enter Price Here"
+        android:gravity="center"
         android:layout_toEndOf="@+id/description_view" />
 
-    <Button
-        android:text="Post"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/postButton"
-        android:layout_alignParentBottom="true"
-        android:layout_alignEnd="@+id/description_field"
-        android:layout_marginBottom="29dp" />
 
-    <CheckBox
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:ems="10"
+            android:id="@+id/address_field"
+            android:hint="Enter address"
+            android:gravity="center"
+            android:layout_below="@+id/uploadButton"
+            android:layout_alignStart="@+id/pic_textview" />
+
+        <TextView
+            android:text="Enter Start Date Below:"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/startDate_label"
+            android:gravity="center"
+            android:layout_below="@+id/startDatePicker"
+            android:layout_toStartOf="@+id/uploadButton" />
+
+        <DatePicker
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/startDatePicker"
+            android:layout_weight="0.09" />
+
+        <TextView
+            android:text="Enter End Date Below:"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/endDate_label"
+            android:gravity="center"
+            android:layout_below="@+id/endDatePicker"/>
+            //android:layout_toStartOf="@+id/uploadButton
+
+        <DatePicker
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/endDatePicker"
+            android:layout_weight="0.09" />
+
+        <TextView
+            android:text="Enter Start Time Below:"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/startTime_label"
+            android:gravity="center"
+            android:layout_below="@+id/coveredCheckBox"
+            android:layout_toStartOf="@+id/uploadButton" />
+
+        <TimePicker
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/startTime_picker"
+            android:layout_weight="1.64" />
+
+        <TextView
+            android:text="Enter End Time Below:"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/endTime_label"
+            android:gravity="center"
+            android:layout_below="@+id/coveredCheckBox"
+            android:layout_toStartOf="@+id/uploadButton" />
+
+        <TimePicker
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/endTime_picker"
+            android:layout_weight="1.64" />
+
+        <CheckBox
         android:text="SUV"
-        android:layout_width="wrap_content"
+        android:layout_width="315dp"
         android:layout_height="wrap_content"
         android:id="@+id/suvCheckBox"
         android:layout_alignBaseline="@+id/handicapCheckBox"
@@ -86,47 +151,19 @@
         android:layout_alignBottom="@+id/coveredCheckBox"
         android:layout_toStartOf="@+id/suvCheckBox" />
 
-    <TextView
-        android:text="Enter price:   $"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView8"
-        android:layout_alignStart="@+id/coveredCheckBox"
-        android:layout_below="@+id/startMin_field" />
+        <CheckBox
+            android:text="Covered"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/coveredCheckBox"
+            android:layout_below="@+id/price_field"
+            android:layout_alignStart="@+id/description_view" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:id="@+id/address_field"
-        android:hint="Enter address"
-        android:layout_below="@+id/uploadButton"
-        android:layout_alignStart="@+id/pic_textview" />
+
 
 
     <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:layout_below="@+id/reservation_label"
-
-        android:id="@+id/year_field"
-        android:hint="Year"
-        android:layout_alignEnd="@+id/coveredCheckBox"
-        android:layout_alignStart="@+id/startMin_field" />
-
-    <TextView
-        android:text="Enter the following information for the reservation:"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/reservation_label"
-        android:layout_below="@+id/address_field"
-        android:layout_alignStart="@+id/year_field" />
-
-    <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="200sp"
         android:layout_height="wrap_content"
         android:inputType="textMultiLine"
         android:ems="10"
@@ -134,92 +171,27 @@
         android:layout_alignStart="@+id/description_view"
         android:layout_above="@+id/postButton"
         android:layout_below="@+id/description_view"
-        android:layout_alignEnd="@+id/suvCheckBox" />
+        android:layout_alignEnd="@+id/suvCheckBox"
+        android:hint="Enter Description Here"
+        android:gravity="center"/>
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:id="@+id/startMin_field"
-        android:hint="Start Min"
-        android:layout_below="@+id/year_field"
-        android:layout_alignStart="@+id/textView8"
-        android:layout_toStartOf="@+id/price_field" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:id="@+id/endMin_field"
-        android:hint="End Min"
-        android:layout_alignBaseline="@+id/startMin_field"
-        android:layout_alignBottom="@+id/startMin_field"
-        android:layout_alignEnd="@+id/price_field"
-        android:layout_toEndOf="@+id/day_field" />
+        <Button
+            android:text="Post"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/postButton"
+            android:layout_alignParentBottom="true"
+            android:layout_alignEnd="@+id/description_field"
+            android:layout_marginBottom="29dp" />
 
-    <CheckBox
-        android:text="Covered"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/coveredCheckBox"
-        android:layout_below="@+id/price_field"
-        android:layout_alignStart="@+id/description_view" />
 
-    <TextView
-        android:text="Enter description:"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/description_view"
-        android:layout_below="@+id/coveredCheckBox"
-        android:layout_toStartOf="@+id/uploadButton" />
+</LinearLayout>
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:id="@+id/day_field"
-        android:hint="Day"
-        android:layout_below="@+id/reservation_label"
-        android:layout_alignStart="@+id/handicapCheckBox"
-        android:layout_toStartOf="@+id/postButton" />
+    </ScrollView>
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:id="@+id/startHour_field"
-        android:hint="Start Hour"
-        android:layout_alignBaseline="@+id/day_field"
-        android:layout_alignBottom="@+id/day_field"
-        android:layout_alignEnd="@+id/endMin_field"
-        android:layout_toEndOf="@+id/day_field" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:layout_below="@+id/reservation_label"
-        android:id="@+id/month_field"
-        android:hint="Month"
-        android:layout_toRightOf="@+id/year_field"
-        android:layout_toLeftOf="@id/day_field"
-         />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:layout_below="@+id/year_field"
-        android:id="@+id/endHour_field"
-        android:layout_toRightOf="@+id/startMin_field"
-        android:layout_toLeftOf="@+id/endMin_field"
-        android:hint="End Hour"
-         />
+
 
 </RelativeLayout>
