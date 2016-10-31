@@ -1,7 +1,10 @@
 package com.example.trevorbernard.parkhere.Client;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -81,6 +84,16 @@ public class ViewCurrentReservationActivity extends Activity {
     }
 
     private void CreateOnclickCallback() {
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent myIntent = new Intent(ViewCurrentReservationActivity.this, ReservedSpotActivity.class);
+                String spotUID = parkingSpotReservations.get(position).reservation.getUID();
+                myIntent.putExtra("reservationID", spotUID);
+                ViewCurrentReservationActivity.this.startActivity(myIntent);
+            }
+        });
     }
 
     private void getSpots(final ParkingSpotReservation psr, final ArrayList<ParkingSpotReservation> parkingSpotReservations) {
