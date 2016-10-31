@@ -70,8 +70,9 @@ public class ViewListingsActivity extends Activity {
         list.setAdapter(adapter);
     }*/
 
+
     private void initiateVariables() {
-        list = (ListView) findViewById(listView);
+        list = (ListView) findViewById(R.id.listView);
         /*list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View viewClicked, int position, long id) {
@@ -83,13 +84,14 @@ public class ViewListingsActivity extends Activity {
 
         //final ArrayList<ParkingSpot> spotsList = new ArrayList<ParkingSpot>();
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("ParkingSpots");
-        queryRef = mDatabase.orderByChild("seekerUID").equalTo(FirebaseAuth.getInstance().getCurrentUser().getUid()); // limited to 10
+        queryRef = mDatabase.orderByChild("ownerUID").equalTo(FirebaseAuth.getInstance().getCurrentUser().getUid()); // limited to 10
         queryRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 parkingSpotDistances.clear();
                 double count = 1;
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
+                    System.out.println("asdfsafd");
                     ParkingSpot spot = postSnapshot.getValue(ParkingSpot.class);
                     //spotsList.add(spot);
                     ParkingSpotDistance psd = new ParkingSpotDistance();
