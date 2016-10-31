@@ -16,16 +16,26 @@
         android:text="TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/PriceTextView"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="83dp"
-        android:id="@+id/DescriptionTextView" />
+        android:layout_alignStart="@+id/DescriptionTextView"
+        android:layout_marginTop="39dp" />
 
     <TextView
         android:text="TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/DescriptionTextView"
-        android:id="@+id/PriceTextView"
-        android:layout_alignEnd="@+id/DescriptionTextView" />
+        android:layout_marginTop="95dp"
+        android:id="@+id/DescriptionTextView"
+        android:layout_below="@+id/PriceTextView"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:text="View Profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/RentButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="15dp"
+        android:id="@+id/ViewProfileButton" />
 </RelativeLayout>
