@@ -112,6 +112,12 @@ public class SpotConnector {
         return true;
     }
 
+    public static boolean removeSpot(String spotUid) {
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+        mDatabase.child("ParkingSpots").child(spotUid).removeValue();
+        return true;
+    }
+
     public static ParkingSpot getParkingSpotFromUID(String uID) {
         System.out.println(uID);
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("ParkingSpots");
