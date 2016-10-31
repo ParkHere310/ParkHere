@@ -2,10 +2,7 @@ package com.example.trevorbernard.parkhere.Client;
 
 import android.app.Activity;
 import android.content.Intent;
-<<<<<<< HEAD
-=======
 import android.graphics.Bitmap;
->>>>>>> c9e7d2f7458df7c22b19b1d248743cca8ab4c599
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
