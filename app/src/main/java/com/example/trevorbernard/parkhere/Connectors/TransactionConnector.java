@@ -42,4 +42,15 @@ public class TransactionConnector {
 
         return true;
     }
+
+    public static boolean cancelReservation(String reservationUid, ParkingSpot spot) {
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().getRoot();
+        mDatabase.child("Reservations").child(reservationUid).removeValue();
+
+        // Remove occupant MOVE TO CANCEL CODE
+        spot.setOccupantUID("-1");
+        mDatabase.getRoot().child("ParkingSpots").child(spot.getUID()).setValue(spot);
+
+        return true;
+    }
 }

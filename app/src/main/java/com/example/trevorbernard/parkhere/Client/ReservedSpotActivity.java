@@ -7,10 +7,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.trevorbernard.parkhere.Connectors.TransactionConnector;
+import com.example.trevorbernard.parkhere.Connectors.UserConnector;
 import com.example.trevorbernard.parkhere.ParkingSpot.ParkingSpot;
 import com.example.trevorbernard.parkhere.R;
 import com.example.trevorbernard.parkhere.Reservation.Reservation;
-import com.google.android.gms.vision.text.Text;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -34,13 +35,15 @@ public class ReservedSpotActivity extends Activity {
     private TextView description;
     private TextView address;
     private TextView price;
-    private TextView type;
+    private TextView type; // TODO: set these
     private TextView covered;
     private TextView handicapped;
 
     Query queryRef;
     Query queryRef2;
     String reservationUID;
+    Reservation mReservation;
+    ParkingSpot mParkingSpot;
 
 
 
@@ -110,19 +113,22 @@ public class ReservedSpotActivity extends Activity {
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TO BE FILLED
+                TransactionConnector.cancelReservation(reservationUID,mParkingSpot);
+                // Put code to return occupantID to "-1" here
+
             }
         });
 
         checkinButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TO BE FILLED
+                UserConnector.checkIn(mReservation);
             }
         });
     }
 
     public void setText(Reservation mReservation) {
+        this.mReservation = mReservation;
         //Get ParkingSpot from specific ParkingSpot ID
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().getRoot().child("ParkingSpots");
         queryRef2 = mDatabase.orderByChild("UID").equalTo(mReservation.getParkingSpotUID());
@@ -143,6 +149,7 @@ public class ReservedSpotActivity extends Activity {
     }
 
     private void setText2(ParkingSpot mSpot) {
+        mParkingSpot = mSpot;
         title.setText(mSpot.getAddress());
         Date start = new Date(mSpot.getTimeWindow().getStartDateTime());
         Date end = new Date(mSpot.getTimeWindow().getEndDateTime());

@@ -98,4 +98,6 @@ public class Reservation {
 
         this.seekerUID = seekerUID;
     }
+
+
 }
