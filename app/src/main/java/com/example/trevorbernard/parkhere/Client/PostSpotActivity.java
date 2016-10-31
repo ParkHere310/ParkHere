@@ -281,17 +281,7 @@ public class PostSpotActivity extends Activity {
                 endHour = endTime_picker.getHour();
                 endMin = endTime_picker.getMinute();
 
-/*
-                String monthStr = month_field.getText().toString();
-                month = Integer.parseInt(monthStr);
-                String dayStr = endMin_field.getText().toString();
-                day = Integer.parseInt(dayStr);
-                String endHourStr = endHour_field.getText().toString();
-                endHour = Integer.parseInt(endHourStr);
-                String startHourStr = endHour_field.getText().toString();
-                startHour = Integer.parseInt(startHourStr);
 
-*/
                 String priceStr = price_field.getText().toString();
                 Double priceDouble = Double.parseDouble(priceStr);
                 priceDouble *= 100;
