@@ -87,7 +87,7 @@
             android:layout_marginTop="22dp"
             android:id="@+id/actual_description"
             android:layout_alignEnd="@+id/endTime"
-            android:layout_above="@+id/BuyButton" />
+            android:layout_above="@+id/editButton" />
 
         <TextView
             android:text="Price here"
@@ -134,6 +134,23 @@
             android:layout_marginEnd="85dp"
             android:layout_marginTop="231dp"
             android:id="@+id/isCovered" />
+
+        <Button
+            android:text="Edit This Spot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="11dp"
+            android:id="@+id/editButton"
+            android:layout_alignParentBottom="true"
+            android:layout_alignEnd="@+id/isHandicapped" />
+
+        <Button
+            android:text="Remove This Spot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/removeButton"
+            android:layout_below="@+id/actual_description"
+            android:layout_toEndOf="@+id/startTime" />
 
     </RelativeLayout>
 </RelativeLayout>

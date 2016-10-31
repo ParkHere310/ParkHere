@@ -42,6 +42,7 @@ public class PastReservedSpotActivity extends Activity {
     private TextView covered;
     private TextView handicapped;
     private TextView description;
+    private TextView price;
     private ImageView image;
     String reservationUID;
 
@@ -70,6 +71,9 @@ public class PastReservedSpotActivity extends Activity {
         covered = (TextView) findViewById(R.id.isCovered);
         address = (TextView) findViewById(R.id.address_label);
         description = (TextView) findViewById(R.id.actual_description);
+
+        price = (TextView) findViewById(R.id.actual_price);
+
         image = (ImageView) findViewById(R.id.imageView);
 
         Intent myIntent = this.getIntent();
@@ -141,6 +145,9 @@ public class PastReservedSpotActivity extends Activity {
         endTime.setText(end.getHours() + ":" + end.getMinutes());
         description.setText(mSpot.getDescription());
 
+        price.setText(String.valueOf( (mSpot.getPrice()/100.0) ) );
+
+
         StorageReference storageRef = FirebaseStorage.getInstance().getReferenceFromUrl(mSpot.getImageURL());
         final long ONE_MEGABYTE = 1024 * 1024;
         storageRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
@@ -163,6 +170,7 @@ public class PastReservedSpotActivity extends Activity {
 
     private void setBmp(Bitmap bmp) {
         image.setImageBitmap(bmp);
+
     }
 
 }

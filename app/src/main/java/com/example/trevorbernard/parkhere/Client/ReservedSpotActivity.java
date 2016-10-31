@@ -156,7 +156,7 @@ public class ReservedSpotActivity extends Activity {
         date.setText(start.getDate());
         startTime.setText(start.getHours() + ":" + start.getMinutes());
         endTime.setText(end.getHours() + ":" + end.getMinutes());
-        price.setText(mSpot.getPrice());
+        price.setText( String.valueOf( (mSpot.getPrice()/100.0) ) );
         description.setText(mSpot.getDescription());
         address.setText(mSpot.getDescription());
     }
