@@ -30,9 +30,10 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import java.util.Date;
+
 /**
  * Created by Hexi on 2016/10/23.
  */
@@ -191,9 +192,30 @@ public class SearchResultActivity extends Activity {
                 // Sort here
                 if(filterType.equals("sortByPrice")) {
 
+                    Collections.sort(parkingSpotDistances, new Comparator<ParkingSpotDistance>() {
+                        @Override
+                        public int compare(ParkingSpotDistance o1, ParkingSpotDistance o2) {
+                            return o1.parkingSpot.getPrice() - (o2.parkingSpot.getPrice());
+                        }
+                    });
+
                 } else if(filterType.equals("sortBySpotRating")) {
 
+                    Collections.sort(parkingSpotDistances, new Comparator<ParkingSpotDistance>() {
+                        @Override
+                        public int compare(ParkingSpotDistance o1, ParkingSpotDistance o2) {
+                            return (int)(o1.parkingSpot.getRating().calculateRating()*100) - (int)(o2.parkingSpot.getRating().calculateRating()*100);
+                        }
+                    });
+
                 } else if(filterType.equals("sortByOwnerRating")) {
+
+                    Collections.sort(parkingSpotDistances, new Comparator<ParkingSpotDistance>() {
+                        @Override
+                        public int compare(ParkingSpotDistance o1, ParkingSpotDistance o2) {
+                            return o1.distance.compareTo(o2.distance);
+                        }
+                    });
                     
                 }
 
@@ -211,6 +233,7 @@ public class SearchResultActivity extends Activity {
 
 
     }
+
 
     public static double toMiles(double meters)
     {
