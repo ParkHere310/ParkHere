@@ -1,6 +1,7 @@
 package com.example.trevorbernard.parkhere.Client;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 
 import com.example.trevorbernard.parkhere.Connectors.SpotConnector;
+import com.example.trevorbernard.parkhere.MainActivity;
 import com.example.trevorbernard.parkhere.ParkingSpot.ParkingSpot;
 import com.example.trevorbernard.parkhere.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -51,7 +53,7 @@ public class PostSpotActivity extends Activity {
         private String title;
         private String startTime;
         private String endTime;
-        private int price;
+        private Integer price;
         private String description;
         private String address;
 
@@ -144,8 +146,11 @@ public class PostSpotActivity extends Activity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                title = title_field.getText().toString();
+             //   title = title_field.getText().toString();
+            //iman
             }
+
+
 
             @Override
             public void afterTextChanged(Editable s) {
@@ -159,7 +164,8 @@ public class PostSpotActivity extends Activity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                address = address_field.getText().toString();
+                //iman
+               // address = address_field.getText().toString();
             }
 
             @Override
@@ -174,8 +180,9 @@ public class PostSpotActivity extends Activity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                String yearStr = endMin_field.getText().toString();
-                year = Integer.parseInt(yearStr);
+                //iman
+               //String yearStr = endMin_field.getText().toString();
+                //year = Integer.parseInt(yearStr);
             }
 
             @Override
@@ -189,8 +196,9 @@ public class PostSpotActivity extends Activity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                String monthStr = month_field.getText().toString();
-                month = Integer.parseInt(monthStr);
+                //iman
+               // String monthStr = month_field.getText().toString();
+                //month = Integer.parseInt(monthStr);
             }
 
             @Override
@@ -204,8 +212,9 @@ public class PostSpotActivity extends Activity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                String dayStr = endMin_field.getText().toString();
-                day = Integer.parseInt(dayStr);
+                //iman
+               // String dayStr = endMin_field.getText().toString();
+                //day = Integer.parseInt(dayStr);
             }
 
             @Override
@@ -219,8 +228,9 @@ public class PostSpotActivity extends Activity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                String endHourStr = endHour_field.getText().toString();
-                endHour = Integer.parseInt(endHourStr);
+                //iman
+              //  String endHourStr = endHour_field.getText().toString();
+              //  endHour = Integer.parseInt(endHourStr);
             }
 
             @Override
@@ -234,8 +244,9 @@ public class PostSpotActivity extends Activity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                String endMinStr = endMin_field.getText().toString();
-                endMin = Integer.parseInt(endMinStr);
+                //iman
+               // String endMinStr = endMin_field.getText().toString();
+                //endMin = Integer.parseInt(endMinStr);
             }
 
             @Override
@@ -249,8 +260,9 @@ public class PostSpotActivity extends Activity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                String startHourStr = endHour_field.getText().toString();
-                startHour = Integer.parseInt(startHourStr);
+                //iman
+                //String startHourStr = endHour_field.getText().toString();
+                //startHour = Integer.parseInt(startHourStr);
             }
 
             @Override
@@ -264,8 +276,9 @@ public class PostSpotActivity extends Activity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                String startMinStr = endMin_field.getText().toString();
-                startMin = Integer.parseInt(startMinStr);
+                //iman
+                //String startMinStr = endMin_field.getText().toString();
+                //startMin = Integer.parseInt(startMinStr);
             }
 
             @Override
@@ -279,8 +292,9 @@ public class PostSpotActivity extends Activity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                String priceStr = price_field.getText().toString();
-                price = Integer.getInteger(priceStr);
+                //iman
+                //String priceStr = price_field.getText().toString();
+                //price = Integer.getInteger(priceStr);
             }
 
             @Override
@@ -296,7 +310,8 @@ public class PostSpotActivity extends Activity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                description = description_field.getText().toString();
+                //iman
+               // description = description_field.getText().toString();
             }
 
             @Override
@@ -307,6 +322,33 @@ public class PostSpotActivity extends Activity {
         postButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                title = title_field.getText().toString();
+                address = address_field.getText().toString();
+                String yearStr = endMin_field.getText().toString();
+                year = Integer.parseInt(yearStr);
+                String monthStr = month_field.getText().toString();
+                month = Integer.parseInt(monthStr);
+                String dayStr = endMin_field.getText().toString();
+                day = Integer.parseInt(dayStr);
+                String endHourStr = endHour_field.getText().toString();
+                endHour = Integer.parseInt(endHourStr);
+                String startHourStr = endHour_field.getText().toString();
+                startHour = Integer.parseInt(startHourStr);
+
+
+                String priceStr = price_field.getText().toString();
+                price = Integer.parseInt(priceStr);
+
+
+
+                String startMinStr = endMin_field.getText().toString();
+                startMin = Integer.parseInt(startMinStr);
+                description = description_field.getText().toString();
+
+
+
+
                 //Post Here
                 Date start = new Date(year,month,day,startHour,startMin);
                 Date end = new Date(year,month,day,endHour,endMin);
@@ -322,11 +364,17 @@ public class PostSpotActivity extends Activity {
                 postSpotFromGUI(
                         PostSpotActivity.this.title,
                         PostSpotActivity.this.description,
-                        PostSpotActivity.this.price, PostSpotActivity.this.isSUV,
+                        PostSpotActivity.this.price,
+                        PostSpotActivity.this.isSUV,
                         PostSpotActivity.this.isCovered,
                         PostSpotActivity.this.isHandicapped,
-                        PostSpotActivity.this.address,start,end
+                        PostSpotActivity.this.address,
+                        start,
+                        end
                 );
+
+                Intent myIntent = new Intent(PostSpotActivity.this, MainActivity.class);
+                PostSpotActivity.this.startActivity(myIntent);
             }
         });
         uploadButton.setOnClickListener(new View.OnClickListener() {
