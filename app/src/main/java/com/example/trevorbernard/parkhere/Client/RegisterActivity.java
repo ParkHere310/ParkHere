@@ -3,6 +3,7 @@ package com.example.trevorbernard.parkhere.Client;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
@@ -18,10 +19,18 @@ import com.example.trevorbernard.parkhere.MainActivity;
 import com.example.trevorbernard.parkhere.R;
 import com.example.trevorbernard.parkhere.User.User;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+
+import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
 
 /**
  * Created by Hexi on 2016/10/20.
@@ -51,6 +60,7 @@ public class RegisterActivity extends Activity{
     static final int REQUEST_IMAGE_VERIFY = 2;
     private Bitmap profilePic = null;
     private Bitmap verifyPic = null;
+    UploadTask uploadTask;
 
     private FirebaseAuth.AuthStateListener mAuthListener;
     private FirebaseAuth mAuth;
@@ -65,11 +75,36 @@ public class RegisterActivity extends Activity{
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
+                final FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
                     // User is signed in
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
-                    User newUser = AuthenticationConnector.register(user, firstName, lastName, phoneNumber, profilePic);
+                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                    profilePic.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                    byte[] data = baos.toByteArray();
+                    final ArrayList<String> downloadUrls = new ArrayList<String>();
+                    // puts byte array in storage
+                    StorageReference storageRef = FirebaseStorage.getInstance().getReferenceFromUrl("gs://parkhere-70b24.appspot.com");
+                    StorageReference imagesRef = storageRef.child("ProfilePics").child(user.getUid());
+                    uploadTask = imagesRef.putBytes(data);
+                    uploadTask.addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception exception) {
+                            // Handle unsuccessful uploads
+                        }
+                    }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
+                            Uri downloadUrl = taskSnapshot.getDownloadUrl();
+                            User newUser = AuthenticationConnector.register(user, firstName, lastName, phoneNumber, downloadUrl.toString());
+                            //downloadUrls.add(downloadUrl.toString());
+                        }
+                    });
+
+                    if(downloadUrls.isEmpty()){
+                        downloadUrls.add("-1");
+                    }
                 } else {
                     // User is signed out
                     Log.d(TAG, "onAuthStateChanged:signed_out");

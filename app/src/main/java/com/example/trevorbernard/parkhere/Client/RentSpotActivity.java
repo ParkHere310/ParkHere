@@ -97,7 +97,6 @@ public class RentSpotActivity extends Activity {
         descriptionTextview = (TextView) findViewById(R.id.DescriptionTextView);
         priceTextview = (TextView) findViewById(R.id.PriceTextView);
 
-
         /*
         TO BE UPDATED
         */
@@ -109,7 +108,9 @@ public class RentSpotActivity extends Activity {
         rentButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 rentSpotFromGUI(spotUID);
+
             }
         });
     }
@@ -124,8 +125,7 @@ public class RentSpotActivity extends Activity {
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
                     parkingSpot = postSnapshot.getValue(ParkingSpot.class);
                     priceTextview.setText("$ " + parkingSpot.getPrice());
-                    descriptionTextview.setText(parkingSpot.getName()+ "\n" + parkingSpot.getAddress()
-                            + "\n" + parkingSpot.getDescription());
+                    descriptionTextview.setText(parkingSpot.getAddress()+ " " + parkingSpot.getDescription());
                 }
             }
 
@@ -136,12 +136,8 @@ public class RentSpotActivity extends Activity {
         });
     }
 
-
-
-
     //iman,
     private void rentSpotFromGUI( String parkingSpotUID) {
-
 
 
         seekerUID = FirebaseAuth.getInstance().getCurrentUser().getUid();
@@ -162,11 +158,10 @@ public class RentSpotActivity extends Activity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 1) {
 
-                com.braintreepayments.api.models.CardNonce paymentMethodNonce = data.getParcelableExtra(
-                        "com.braintreepayments.api.dropin.EXTRA_PAYMENT_METHOD_NONCE"
-                );
-                String nonce = paymentMethodNonce.getNonce();
-                // Send the nonce to your server.
+            com.braintreepayments.api.models.CardNonce paymentMethodNonce = data.getParcelableExtra(
+                    "com.braintreepayments.api.dropin.EXTRA_PAYMENT_METHOD_NONCE"
+            );
+            String nonce = paymentMethodNonce.getNonce();
 
 
             final TransactionRequest request = new TransactionRequest()
@@ -219,9 +214,6 @@ public class RentSpotActivity extends Activity {
             });
 
             thread.start();
-
-
-
 
         }
     }

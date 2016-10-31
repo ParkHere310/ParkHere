@@ -191,6 +191,22 @@ public class UserConnector {
         return true;
     }
 
+    public static boolean checkIn(Reservation res) {
+        // TODO: Update boolean, complete transaction to owner, move to PastReservations
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().getRoot();
+        mDatabase.child("Reservatons").child(res.getUID()).removeValue();
+
+        res.setCompleted(true);
+
+        //TODO: PayPal complete Transaction
+
+        mDatabase = FirebaseDatabase.getInstance().getReference().getRoot().child("PastReservations")
+                .child(res.getUID());
+        mDatabase.setValue(res);
+
+        return true;
+    }
+
     public static User getUserFromUID(String uID) {
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
         final ArrayList<User> list = new ArrayList<User>();
