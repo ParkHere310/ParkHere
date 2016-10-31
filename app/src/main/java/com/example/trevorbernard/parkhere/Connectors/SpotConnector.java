@@ -119,7 +119,7 @@ public class SpotConnector {
     }
 
     public static ParkingSpot getParkingSpotFromUID(String uID) {
-        System.out.println(uID);
+        //System.out.println(uID);
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("ParkingSpots");
         final ArrayList<ParkingSpot> list = new ArrayList<ParkingSpot>();
         Query queryRef = mDatabase.orderByChild("uid").equalTo(uID);
