@@ -83,7 +83,7 @@ public class ViewListingsActivity extends Activity {
 
         //final ArrayList<ParkingSpot> spotsList = new ArrayList<ParkingSpot>();
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("ParkingSpots");
-        queryRef = mDatabase.orderByChild("ownerUID").equalTo(FirebaseAuth.getInstance().getCurrentUser().getUid()); // limited to 10
+        queryRef = mDatabase.orderByChild("seekerUID").equalTo(FirebaseAuth.getInstance().getCurrentUser().getUid()); // limited to 10
         queryRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -95,13 +95,13 @@ public class ViewListingsActivity extends Activity {
                     ParkingSpotDistance psd = new ParkingSpotDistance();
                     psd.parkingSpot = spot;
                     psd.distance = count;
+                    parkingSpotDistances.add(psd);
                     count++;
 
-                    ArrayAdapter<ParkingSpotDistance> arrayAdapter = new ParkingSpotAdapter(ViewListingsActivity.this, parkingSpotDistances);
-                    //ArrayAdapter arrayAdapter = new ArrayAdapter<String>(SearchResultActivity.this,android.R.layout.simple_list_item_1,stringSpots);
-                    list.setAdapter(arrayAdapter);
-                    arrayAdapter.notifyDataSetChanged();
                 }
+                ArrayAdapter<ParkingSpotDistance> arrayAdapter = new ParkingSpotAdapter(ViewListingsActivity.this, parkingSpotDistances);
+                list.setAdapter(arrayAdapter);
+                arrayAdapter.notifyDataSetChanged();
             }
 
             @Override

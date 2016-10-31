@@ -7,6 +7,6 @@ import com.example.trevorbernard.parkhere.Reservation.Reservation;
  */
 
 public class ParkingSpotReservation {
-    ParkingSpot parkingSpot;
-    Reservation reservation;
+    public ParkingSpot parkingSpot;
+    public Reservation reservation;
 }
