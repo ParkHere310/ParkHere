@@ -126,7 +126,7 @@ public class RentSpotActivity extends Activity {
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
                     parkingSpot = postSnapshot.getValue(ParkingSpot.class);
 
-                    priceTextview.setText("$ " + new DecimalFormat("#.00").format(parkingSpot.getPrice()));
+                    priceTextview.setText("$ " + new DecimalFormat("#.00").format(parkingSpot.getPrice()/100));
                     descriptionTextview.setText(parkingSpot.getAddress()+ " " + parkingSpot.getDescription());
                 }
             }
