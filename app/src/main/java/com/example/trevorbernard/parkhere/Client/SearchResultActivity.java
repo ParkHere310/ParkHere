@@ -163,13 +163,13 @@ public class SearchResultActivity extends Activity {
                     if(spot.getLatitude() >= latitude-0.36 && spot.getLatitude() <= latitude + 0.36) {
 
 
-
+                        /*
                         //if the spot is within time, and unoccupied
                         if(startDateFromIntent.compareTo(new Date(spot.getTimeWindow().getStartDateTime())) >= 0
                                 && startDateFromIntent.compareTo(new Date(spot.getTimeWindow().getEndDateTime())) < 0
                                 && endDateFromIntent.compareTo(new Date(spot.getTimeWindow().getEndDateTime())) < 0
                                 && endDateFromIntent.compareTo(new Date(spot.getTimeWindow().getStartDateTime())) > 0
-                                && spot.getOccupantUID().equals("-1")) {
+                                && spot.getOccupantUID().equals("-1")) */{
 
                             Location spotloc = new Location("");
                             spotloc.setLongitude(spot.getLongitude());
