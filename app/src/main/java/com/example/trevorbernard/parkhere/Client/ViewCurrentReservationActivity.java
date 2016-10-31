@@ -2,19 +2,10 @@ package com.example.trevorbernard.parkhere.Client;
 
 import android.app.Activity;
 import android.os.Bundle;
-<<<<<<< HEAD
 import android.widget.ArrayAdapter;
-=======
-import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
->>>>>>> 4abdda041f19ce811b25b77555c0c4b7cd8b4054
 import android.widget.ListView;
 
-<<<<<<< HEAD
 import com.example.trevorbernard.parkhere.ParkingSpot.ParkingSpot;
-=======
->>>>>>> 4abdda041f19ce811b25b77555c0c4b7cd8b4054
 import com.example.trevorbernard.parkhere.ParkingSpot.ParkingSpotReservation;
 import com.example.trevorbernard.parkhere.ParkingSpot.ParkingSpotReservationAdapter;
 import com.example.trevorbernard.parkhere.R;
@@ -28,12 +19,8 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-<<<<<<< HEAD
 
 import static com.example.trevorbernard.parkhere.R.id.listView;
-=======
-import java.util.List;
->>>>>>> 4abdda041f19ce811b25b77555c0c4b7cd8b4054
 
 /**
  * Created by junseob on 10/29/16.
