@@ -17,10 +17,17 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
 
+import com.example.trevorbernard.parkhere.Connectors.SpotConnector;
 import com.example.trevorbernard.parkhere.MainActivity;
 import com.example.trevorbernard.parkhere.ParkingSpot.ParkingSpot;
 import com.example.trevorbernard.parkhere.R;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.io.IOException;
 import java.util.Date;
@@ -79,6 +86,9 @@ public class EditReservationActivity extends Activity {
 
     static final int REQUEST_IMAGE_SPOT = 1;
 
+    String spotUID;
+    ParkingSpot mSpot;
+
     public EditReservationActivity() {
     }
 
@@ -109,6 +119,19 @@ public class EditReservationActivity extends Activity {
         //the parking spot itself will add the seller user to the class
         ParkingSpot spot = new ParkingSpot( name,
                 description, price, isSUV, isCovered, isHandicap, address, startTime, endTime,latitude,longitude);
+        spot.setName(name);
+        spot.setDescription(description);
+        spot.setPrice(price);
+        spot.setSUV(isSUV);
+        spot.setCovered(isCovered);
+        spot.setHandicap(isHandicap);
+        spot.setAddress(address);
+        spot.getTimeWindow().setStartDateTime(startTime.getTime());
+        spot.getTimeWindow().setEndDateTime(endTime.getTime());
+        spot.setLatitude(latitude);
+        spot.setLongitude(longitude);
+
+        SpotConnector.editSpot(spot);
 
      //   SpotConnector.EditReservation(spot);
     }
@@ -140,6 +163,26 @@ public class EditReservationActivity extends Activity {
         coveredCheckBox = (CheckBox) findViewById(R.id.coveredCheckBox);
         suvCheckBox = (CheckBox) findViewById(R.id.suvCheckBox);
         handicappedCheckBox = (CheckBox) findViewById(R.id.handicapCheckBox);
+
+        Intent previousIntent = this.getIntent();
+        spotUID = previousIntent.getExtras().getString("spot");
+
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("ParkingSpots");
+        Query queryRef = mDatabase.orderByChild("uid").equalTo(spotUID);
+        queryRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
+                    ParkingSpot spot = postSnapshot.getValue(ParkingSpot.class);
+                    makeGui(spot);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
     }
 
@@ -272,8 +315,8 @@ public class EditReservationActivity extends Activity {
                 */
 
 
-                /*
-                PostSpotFromGUI(
+
+                editReservationFromGUI(
                         EditReservationActivity.this.title,
                         EditReservationActivity.this.description,
                         EditReservationActivity.this.price,
@@ -284,7 +327,7 @@ public class EditReservationActivity extends Activity {
                         start,
                         end
                 );
-                */
+
 
                 Intent myIntent = new Intent(EditReservationActivity.this, MainActivity.class);
                 EditReservationActivity.this.startActivity(myIntent);
@@ -350,5 +393,13 @@ public class EditReservationActivity extends Activity {
             Bundle extras = data.getExtras();
             spotPic = (Bitmap) extras.get("data");
         }
+    }
+
+    private void makeGui(ParkingSpot spot) {
+        title_field.setText(spot.getName());
+        address_field.setText(spot.getAddress());
+        price_field.setText(Double.toString((double)(spot.getPrice())/100));
+        description_field.setText(spot.getDescription());
+        mSpot = spot;
     }
 }

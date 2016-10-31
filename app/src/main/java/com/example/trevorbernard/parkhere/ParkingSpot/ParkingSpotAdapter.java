@@ -33,16 +33,18 @@ public class ParkingSpotAdapter extends ArrayAdapter<ParkingSpotDistance> {
 
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.search_result_row, parent, false);
-    }
+        }
         if(parkingSpotDistance != null) {
             ParkingSpot parkingSpot = parkingSpotDistance.parkingSpot;
             TextView name = (TextView) convertView.findViewById(R.id.name);
             TextView distance = (TextView) convertView.findViewById(R.id.distance);
             TextView rating = (TextView) convertView.findViewById(R.id.rating);
+            TextView price = (TextView) convertView.findViewById(R.id.price);
 
             name.setTextColor(Color.BLACK);
 
             name.setText(parkingSpot.getName());
+            price.setText(" |  Rate: $ " + new DecimalFormat("#.00").format(parkingSpot.getPrice()/100));
             distance.setText(new DecimalFormat("#.##").format(parkingSpotDistance.distance) + " miles");
             if(parkingSpot.getRating() == null) {
                 rating.setText("Rating: " + 3.0);

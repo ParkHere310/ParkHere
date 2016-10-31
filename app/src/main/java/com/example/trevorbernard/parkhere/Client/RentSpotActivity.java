@@ -3,15 +3,15 @@ package com.example.trevorbernard.parkhere.Client;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Environment;
-import android.view.TextureView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.braintreepayments.api.PaymentButton;
+import com.braintreegateway.BraintreeGateway;
+import com.braintreegateway.Result;
+import com.braintreegateway.TransactionRequest;
+import com.braintreegateway.ValidationError;
 import com.braintreepayments.api.PaymentRequest;
-
 import com.example.trevorbernard.parkhere.Connectors.SpotConnector;
 import com.example.trevorbernard.parkhere.Connectors.TransactionConnector;
 import com.example.trevorbernard.parkhere.MainActivity;
@@ -26,10 +26,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-import com.braintreegateway.*;
-import com.braintreepayments.*;
-import java.math.BigDecimal;
 
+import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
@@ -195,12 +193,26 @@ public class RentSpotActivity extends Activity {
 
                             Transaction trans = null;
 
+                            DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("ParkingSpots");
+                            Query queryRef = mDatabase.orderByChild("UID").equalTo(parkingSpotUID); // limited to 10
+                            queryRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                    for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
+                                        ParkingSpot spot = postSnapshot.getValue(ParkingSpot.class);
+                                        Reservation res = new Reservation(spot.getOwnerUID(), seekerUID,
+                                                parkingSpotUID, null);
 
-                            Reservation res = new Reservation(ownerUID, seekerUID,
-                                    parkingSpotUID, trans);
 
+                                        TransactionConnector.addReservation(res);
+                                    }
+                                }
 
-                            TransactionConnector.addReservation(res);
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
+
+                                }
+                            });
 
                         } else if (result.getTransaction() != null) {
                             com.braintreegateway.Transaction transaction = result.getTransaction();
