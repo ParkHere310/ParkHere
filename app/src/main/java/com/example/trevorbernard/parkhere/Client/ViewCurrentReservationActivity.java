@@ -3,12 +3,16 @@ package com.example.trevorbernard.parkhere.Client;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.trevorbernard.parkhere.ParkingSpot.ParkingSpotReservation;
+import com.example.trevorbernard.parkhere.ParkingSpot.ParkingSpotReservationAdapter;
 import com.example.trevorbernard.parkhere.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -30,7 +34,6 @@ public class ViewCurrentReservationActivity extends Activity {
         initiateVariable();
         CreateOnclickCallback();
     }
-
 
     private void initiateVariable() {
         listView = (ListView) findViewById(R.id.listView);
