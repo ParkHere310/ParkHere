@@ -30,6 +30,7 @@ import com.braintreegateway.*;
 import com.braintreepayments.*;
 import java.math.BigDecimal;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 /**
@@ -124,7 +125,8 @@ public class RentSpotActivity extends Activity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
                     parkingSpot = postSnapshot.getValue(ParkingSpot.class);
-                    priceTextview.setText("$ " + parkingSpot.getPrice());
+
+                    priceTextview.setText("$ " + new DecimalFormat("#.00").format(parkingSpot.getPrice()));
                     descriptionTextview.setText(parkingSpot.getAddress()+ " " + parkingSpot.getDescription());
                 }
             }
@@ -158,14 +160,23 @@ public class RentSpotActivity extends Activity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 1) {
 
-            com.braintreepayments.api.models.CardNonce paymentMethodNonce = data.getParcelableExtra(
-                    "com.braintreepayments.api.dropin.EXTRA_PAYMENT_METHOD_NONCE"
-            );
-            String nonce = paymentMethodNonce.getNonce();
+            Object ob = data.getParcelableExtra("com.braintreepayments.api.dropin.EXTRA_PAYMENT_METHOD_NONCE");
+            String nonce;
 
+            if(ob instanceof com.braintreepayments.api.models.CardNonce ) {
+
+                com.braintreepayments.api.models.CardNonce paymentMethodNonce = (com.braintreepayments.api.models.CardNonce) ob;
+                nonce = paymentMethodNonce.getNonce();
+            } else {
+                com.braintreepayments.api.models.PayPalAccountNonce paymentMethodNonce = (com.braintreepayments.api.models.PayPalAccountNonce) ob;
+                nonce = paymentMethodNonce.getNonce();
+            }
+
+            double price = parkingSpot.getPrice();
+            price = price / 100;
 
             final TransactionRequest request = new TransactionRequest()
-                    .amount(new BigDecimal(parkingSpot.getPrice())).paymentMethodNonce(nonce)
+                    .amount(new BigDecimal(price)).paymentMethodNonce(nonce)
                             .options()
                             .submitForSettlement(true)
                             .done();
