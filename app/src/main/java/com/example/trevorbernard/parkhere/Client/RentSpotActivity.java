@@ -40,6 +40,7 @@ public class RentSpotActivity extends Activity {
     BraintreeGateway gateway;
     String clientToken;
     Button rentButton;
+    Button viewProfileButton;
     TextView descriptionTextview;
     TextView priceTextview;
 
@@ -93,6 +94,7 @@ public class RentSpotActivity extends Activity {
 
         //set up widgets
         rentButton = (Button) findViewById(R.id.RentButton);
+        viewProfileButton = (Button) findViewById(R.id.ViewProfileButton);
         descriptionTextview = (TextView) findViewById(R.id.DescriptionTextView);
         priceTextview = (TextView) findViewById(R.id.PriceTextView);
 
@@ -107,9 +109,15 @@ public class RentSpotActivity extends Activity {
         rentButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 rentSpotFromGUI(spotUID);
-
+            }
+        });
+        viewProfileButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(RentSpotActivity.this,ProfileActivity.class);
+                myIntent.putExtra("ownerUID",ownerUID);
+                RentSpotActivity.this.startActivity(myIntent);
             }
         });
     }
