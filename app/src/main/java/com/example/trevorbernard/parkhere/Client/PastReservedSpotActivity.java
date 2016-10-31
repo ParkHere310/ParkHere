@@ -7,11 +7,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.trevorbernard.parkhere.Connectors.SpotConnector;
 import com.example.trevorbernard.parkhere.ParkingSpot.ParkingSpot;
 import com.example.trevorbernard.parkhere.R;
 import com.example.trevorbernard.parkhere.Reservation.Reservation;
-import com.google.android.gms.vision.text.Text;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -19,7 +17,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -37,6 +34,7 @@ public class PastReservedSpotActivity extends Activity {
     private TextView covered;
     private TextView handicapped;
     private TextView description;
+    private TextView price;
     String reservationUID;
 
     Query queryRef;
@@ -64,6 +62,7 @@ public class PastReservedSpotActivity extends Activity {
         covered = (TextView) findViewById(R.id.isCovered);
         address = (TextView) findViewById(R.id.address_label);
         description = (TextView) findViewById(R.id.actual_description);
+        price = (TextView) findViewById(R.id.actual_price);
 
         Intent myIntent = this.getIntent();
         reservationUID = myIntent.getStringExtra("reservationID");
@@ -133,6 +132,7 @@ public class PastReservedSpotActivity extends Activity {
         startTime.setText(start.getHours() + ":" + start.getMinutes());
         endTime.setText(end.getHours() + ":" + end.getMinutes());
         description.setText(mSpot.getDescription());
+        price.setText(String.valueOf( (mSpot.getPrice()/100.0) ) );
     }
 
 }
