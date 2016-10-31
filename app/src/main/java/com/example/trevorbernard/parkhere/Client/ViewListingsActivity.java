@@ -30,6 +30,7 @@ public class ViewListingsActivity extends Activity {
 
     private void createClickCallback() {
 
+
     }
 
     //ONLY FOR TESTING PURPOSES

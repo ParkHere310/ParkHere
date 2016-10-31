@@ -17,7 +17,6 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
 
-import com.example.trevorbernard.parkhere.Connectors.SpotConnector;
 import com.example.trevorbernard.parkhere.MainActivity;
 import com.example.trevorbernard.parkhere.ParkingSpot.ParkingSpot;
 import com.example.trevorbernard.parkhere.R;
@@ -111,7 +110,7 @@ public class EditReservationActivity extends Activity {
         ParkingSpot spot = new ParkingSpot( name,
                 description, price, isSUV, isCovered, isHandicap, address, startTime, endTime,latitude,longitude);
 
-        SpotConnector.EditReservation(spot);
+     //   SpotConnector.EditReservation(spot);
     }
 
 
@@ -271,6 +270,9 @@ public class EditReservationActivity extends Activity {
                         PostSpotActivity.this.isHandicapped + " " +
                         PostSpotActivity.this.address);
                 */
+
+
+                /*
                 PostSpotFromGUI(
                         EditReservationActivity.this.title,
                         EditReservationActivity.this.description,
@@ -282,6 +284,7 @@ public class EditReservationActivity extends Activity {
                         start,
                         end
                 );
+                */
 
                 Intent myIntent = new Intent(EditReservationActivity.this, MainActivity.class);
                 EditReservationActivity.this.startActivity(myIntent);
