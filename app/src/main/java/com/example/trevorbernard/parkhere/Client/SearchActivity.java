@@ -86,7 +86,7 @@ public class SearchActivity extends Activity { //extends FragmentActivity implem
 
     private void initiateVariable() {
         searchButton = (Button) findViewById(R.id.searchButton);
-        ETaddress = (EditText) findViewById(R.id.addressField);
+        ETaddress = (EditText) findViewById(R.id.address_field);
 
         startDate_picker = (DatePicker) findViewById(R.id.startDatePicker);
         endDate_picker = (DatePicker) findViewById(R.id.endDatePicker);
@@ -122,7 +122,7 @@ public class SearchActivity extends Activity { //extends FragmentActivity implem
 
                 if( ETaddress.getText().toString().length() > 0 &&  ETaddress.getText() != null &&  ETaddress.getText().toString() != "" &&  ETaddress.getText().toString() != " "){
                     Intent myIntent = new Intent(SearchActivity.this, SearchResultActivity.class);
-                    
+
                     myIntent.putExtra("startDateLong", start.getTime());
                     myIntent.putExtra("endDateLong", end.getTime());
                     myIntent.putExtra("address", address);
