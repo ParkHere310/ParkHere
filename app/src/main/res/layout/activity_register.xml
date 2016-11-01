@@ -29,15 +29,6 @@
         android:layout_centerHorizontal="true" />
 
     <Button
-        android:text="Register"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/RegisterButton"
-        android:layout_marginBottom="25dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
-
-    <Button
         android:text="Upload Profile Picture"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -95,4 +86,32 @@
         android:id="@+id/UploadVerificationButton"
         android:layout_above="@+id/RegisterButton"
         android:layout_centerHorizontal="true" />
+
+
+    <CheckBox
+        android:text="Seeker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/seekerCheckBox"
+        android:layout_toLeftOf="@+id/RegisterButton"
+        android:layout_marginBottom="25dp"
+        android:layout_alignParentBottom="true"/>
+
+    <CheckBox
+        android:text="Owner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ownerCheckBox"
+        android:layout_toLeftOf="@+id/seekerCheckBox"
+        android:layout_marginBottom="25dp"
+        android:layout_alignParentBottom="true"/>
+
+    <Button
+        android:text="Register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/RegisterButton"
+        android:layout_alignBaseline="@+id/seekerCheckBox"
+        android:layout_alignBottom="@+id/seekerCheckBox"
+        android:layout_alignEnd="@+id/UploadVerificationButton" />
 </RelativeLayout>
