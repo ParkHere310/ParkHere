@@ -34,8 +34,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import static com.paypal.android.sdk.onetouch.core.metadata.ah.R;
-
 /**
  * Created by Hexi on 2016/10/23.
  */
@@ -126,7 +124,7 @@ public class SearchResultActivity extends Activity {
         try {
             System.out.println(address);
             codedAddress = geocoder.getFromLocationName(address,5);
-            if(codedAddress == null) {
+            if(codedAddress.size() == 0) {
                 System.out.println("didnt code address");
                 latitude = 34;
                 longitude = -118;

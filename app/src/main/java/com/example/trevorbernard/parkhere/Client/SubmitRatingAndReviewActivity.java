@@ -2,6 +2,9 @@ package com.example.trevorbernard.parkhere.Client;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -133,6 +136,10 @@ public class SubmitRatingAndReviewActivity extends Activity{
         EditTextSpotComment = (EditText) findViewById(R.id.CommentSpotText);
         userRatingBar = (RatingBar) findViewById(R.id.UserRatingBar);
         spotRatingBar = (RatingBar) findViewById(R.id.SpotRatingBar);
+        LayerDrawable stars = (LayerDrawable) userRatingBar.getProgressDrawable();
+        stars.getDrawable(2).setColorFilter(Color.YELLOW, PorterDuff.Mode.SRC_ATOP);
+        LayerDrawable starss = (LayerDrawable) spotRatingBar.getProgressDrawable();
+        stars.getDrawable(2).setColorFilter(Color.YELLOW, PorterDuff.Mode.SRC_ATOP);
         userRating = 0;
         spotRating = 0;
     }
