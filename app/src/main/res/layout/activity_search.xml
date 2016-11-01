@@ -95,32 +95,6 @@
                 android:id="@+id/endTime_picker"
                 android:layout_weight="1.64" />
 
-            <CheckBox
-                android:text="SUV"
-                android:layout_width="315dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/suvCheckBox"
-                android:layout_alignBaseline="@+id/handicapCheckBox"
-                android:layout_alignBottom="@+id/handicapCheckBox"
-                android:layout_alignEnd="@+id/price_field" />
-
-            <CheckBox
-                android:text="Handicapped"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/handicapCheckBox"
-                android:layout_alignBaseline="@+id/coveredCheckBox"
-                android:layout_alignBottom="@+id/coveredCheckBox"
-                android:layout_toStartOf="@+id/suvCheckBox" />
-
-            <CheckBox
-                android:text="Covered"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/coveredCheckBox"
-                android:layout_below="@+id/price_field"
-                android:layout_alignStart="@+id/description_view" />
-
             <Button
                 android:text="Search"
                 android:layout_width="match_parent"
