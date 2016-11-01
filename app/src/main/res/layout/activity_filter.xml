@@ -3,32 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <Button
-        android:text="Filter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="39dp"
-        android:id="@+id/FilterButton" />
-
-    <RadioButton
-        android:text="Price"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/DistanceTextView"
-        android:layout_marginTop="11dp"
-        android:id="@+id/sortByPrice"
-        android:layout_alignEnd="@+id/sortByDistance"
-        android:layout_alignStart="@+id/sortByDistance" />
-
-    <RadioButton
-        android:text="Distance"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/sortByPrice"
-        android:id="@+id/sortByDistance"
-        android:layout_alignStart="@+id/DistanceTextView" />
 
     <TextView
         android:text="Sort by:"
@@ -39,12 +13,49 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
-    <RadioButton
-        android:text="Spot Rating"
+    <Button
+        android:text="Filter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/sortByDistance"
-        android:layout_alignStart="@+id/sortByDistance"
-        android:id="@+id/sortBySpotRating" />
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="39dp"
+        android:id="@+id/FilterButton" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/DistanceTextView"
+        android:layout_alignStart="@+id/DistanceTextView"
+        android:layout_marginTop="17dp">
+
+        <RadioButton
+            android:text="Price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/DistanceTextView"
+            android:layout_marginTop="11dp"
+            android:id="@+id/sortByPrice"
+            android:layout_alignEnd="@+id/sortByDistance"
+            android:layout_alignStart="@+id/sortByDistance" />
+
+        <RadioButton
+            android:text="Distance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/sortByPrice"
+            android:id="@+id/sortByDistance"
+            android:layout_alignStart="@+id/DistanceTextView" />
+
+        <RadioButton
+            android:text="Spot Rating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/sortByDistance"
+            android:layout_alignStart="@+id/sortByDistance"
+            android:id="@+id/sortBySpotRating" />
+
+    </RadioGroup>
 
 </RelativeLayout>
