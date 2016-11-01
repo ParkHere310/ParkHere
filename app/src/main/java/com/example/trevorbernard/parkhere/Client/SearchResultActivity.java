@@ -85,8 +85,8 @@ public class SearchResultActivity extends Activity {
         startLongFromIntent = previousIntent.getExtras().getLong("startDateLong");
         endLongFromIntent = previousIntent.getExtras().getLong("endDateLong");
 
-        Date startDateFromIntent = new Date(startLongFromIntent);
-        Date endDateFromIntent = new Date(endLongFromIntent);
+        //Date startDateFromIntent = new Date(startLongFromIntent);
+        //Date endDateFromIntent = new Date(endLongFromIntent);
 
         /*
         startTime = previousIntent.getExtras().getString("startTime");
@@ -164,13 +164,30 @@ public class SearchResultActivity extends Activity {
                     if(spot.getLatitude() >= latitude-0.36 && spot.getLatitude() <= latitude + 0.36) {
 
 
-                        /*
+
                         //if the spot is within time, and unoccupied
-                        if(startDateFromIntent.compareTo(new Date(spot.getTimeWindow().getStartDateTime())) >= 0
-                                && startDateFromIntent.compareTo(new Date(spot.getTimeWindow().getEndDateTime())) < 0
-                                && endDateFromIntent.compareTo(new Date(spot.getTimeWindow().getEndDateTime())) < 0
-                                && endDateFromIntent.compareTo(new Date(spot.getTimeWindow().getStartDateTime())) > 0
-                                && spot.getOccupantUID().equals("-1")) */{
+                        if(startLongFromIntent >= (new Date(spot.getTimeWindow().getStartDateTime())).getTime()
+                                && endLongFromIntent <= (new Date(spot.getTimeWindow().getEndDateTime())).getTime()
+                                && spot.getOccupantUID().equals("-1"))
+
+
+
+                        /*
+                        if(startLongFromIntent >= (new Date(spot.getTimeWindow().getStartDateTime())).getTime()){
+                            System.out.println("first ok");
+                        }
+                        if(endLongFromIntent <= (new Date(spot.getTimeWindow().getEndDateTime())).getTime()) {
+                            System.out.println("second ok");
+                        }
+                        if(spot.getOccupantUID().equals("-1")){
+                            System.out.println("third ok");
+                        }
+
+                        */
+
+                        {
+
+                            System.out.println("There should be atleast 1!");
 
                             Location spotloc = new Location("");
                             spotloc.setLongitude(spot.getLongitude());
