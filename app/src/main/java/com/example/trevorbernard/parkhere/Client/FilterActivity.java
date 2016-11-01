@@ -64,6 +64,7 @@ public class FilterActivity extends Activity {
 
     private void createOnclickCallback() {
 
+
         //When filter button is clicked
         FilterButton.setOnClickListener(new View.OnClickListener() {
             @Override
