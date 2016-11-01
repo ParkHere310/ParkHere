@@ -52,7 +52,7 @@ public class ViewCurrentReservationActivity extends Activity {
         parkingSpotReservations = new ArrayList<ParkingSpotReservation>();
 
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("Reservations");
-        queryRef = mDatabase.orderByChild("ownerUID").equalTo(FirebaseAuth.getInstance().getCurrentUser().getUid()); // limited to 10
+        queryRef = mDatabase.orderByChild("seekerUID").equalTo(FirebaseAuth.getInstance().getCurrentUser().getUid()); // limited to 10
         queryRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {

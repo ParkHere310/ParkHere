@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.example.trevorbernard.parkhere.Connectors.TransactionConnector;
 import com.example.trevorbernard.parkhere.Connectors.UserConnector;
+import com.example.trevorbernard.parkhere.MainActivity;
 import com.example.trevorbernard.parkhere.ParkingSpot.ParkingSpot;
 import com.example.trevorbernard.parkhere.R;
 import com.example.trevorbernard.parkhere.Reservation.Reservation;
@@ -88,7 +89,7 @@ public class ReservedSpotActivity extends Activity {
 
         //Get RESERVATION from specific RESERVATION ID
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-        queryRef = mDatabase.child("Reservations").orderByChild("UID").equalTo(reservationUID);
+        queryRef = mDatabase.child("Reservations").orderByChild("uid").equalTo(reservationUID);
         queryRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -114,6 +115,8 @@ public class ReservedSpotActivity extends Activity {
             @Override
             public void onClick(View v) {
                 TransactionConnector.cancelReservation(reservationUID,mParkingSpot);
+                Intent myIntent = new Intent(ReservedSpotActivity.this, MainActivity.class);
+                ReservedSpotActivity.this.startActivity(myIntent);
                 // Put code to return occupantID to "-1" here
 
             }
@@ -123,6 +126,8 @@ public class ReservedSpotActivity extends Activity {
             @Override
             public void onClick(View v) {
                 UserConnector.checkIn(mReservation);
+                Intent myIntent = new Intent(ReservedSpotActivity.this, MainActivity.class);
+                ReservedSpotActivity.this.startActivity(myIntent);
             }
         });
     }
@@ -132,7 +137,7 @@ public class ReservedSpotActivity extends Activity {
         //Get ParkingSpot from specific ParkingSpot ID
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().getRoot().child("ParkingSpots");
         queryRef2 = mDatabase.orderByChild("UID").equalTo(mReservation.getParkingSpotUID());
-        queryRef.addListenerForSingleValueEvent(new ValueEventListener() {
+        queryRef2.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
