@@ -164,15 +164,15 @@ public class SearchResultActivity extends Activity {
                     if(spot.getLatitude() >= latitude-0.36 && spot.getLatitude() <= latitude + 0.36) {
 
 
-                        /*
+
                         //if the spot is within time, and unoccupied
-                        if(startLongFromIntent <= (new Date(spot.getTimeWindow().getStartDateTime())).getTime()
-                                && endLongFromIntent >= (new Date(spot.getTimeWindow().getEndDateTime())).getTime()
+                        if(startLongFromIntent >= (new Date(spot.getTimeWindow().getStartDateTime())).getTime()
+                                && endLongFromIntent <= (new Date(spot.getTimeWindow().getEndDateTime())).getTime()
                                 && spot.getOccupantUID().equals("-1"))
-                        */
 
 
 
+                        /*
                         if(startLongFromIntent >= (new Date(spot.getTimeWindow().getStartDateTime())).getTime()){
                             System.out.println("first ok");
                         }
@@ -183,7 +183,8 @@ public class SearchResultActivity extends Activity {
                             System.out.println("third ok");
                         }
 
-                        if(true)
+                        */
+
                         {
 
                             System.out.println("There should be atleast 1!");
