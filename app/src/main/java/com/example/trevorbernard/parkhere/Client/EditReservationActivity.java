@@ -16,6 +16,7 @@ import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.example.trevorbernard.parkhere.Connectors.SpotConnector;
 import com.example.trevorbernard.parkhere.MainActivity;
@@ -315,23 +316,28 @@ public class EditReservationActivity extends Activity {
                         PostSpotActivity.this.address);
                 */
 
+                if(start.getTime() >= end.getTime()) {
+                    Toast.makeText(EditReservationActivity.this, "The end time must be after the start time!",
+                            Toast.LENGTH_LONG).show();
+                    //call pop up message telling them that the end time must be greater than start time
+                } else {
+
+                    editReservationFromGUI(
+                            EditReservationActivity.this.title,
+                            EditReservationActivity.this.description,
+                            EditReservationActivity.this.price,
+                            EditReservationActivity.this.isSUV,
+                            EditReservationActivity.this.isCovered,
+                            EditReservationActivity.this.isHandicapped,
+                            EditReservationActivity.this.address,
+                            start,
+                            end
+                    );
 
 
-                editReservationFromGUI(
-                        EditReservationActivity.this.title,
-                        EditReservationActivity.this.description,
-                        EditReservationActivity.this.price,
-                        EditReservationActivity.this.isSUV,
-                        EditReservationActivity.this.isCovered,
-                        EditReservationActivity.this.isHandicapped,
-                        EditReservationActivity.this.address,
-                        start,
-                        end
-                );
-
-
-                Intent myIntent = new Intent(EditReservationActivity.this, MainActivity.class);
-                EditReservationActivity.this.startActivity(myIntent);
+                    Intent myIntent = new Intent(EditReservationActivity.this, MainActivity.class);
+                    EditReservationActivity.this.startActivity(myIntent);
+                }
             }
         });
         uploadButton.setOnClickListener(new View.OnClickListener() {
