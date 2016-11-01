@@ -85,8 +85,8 @@ public class SearchResultActivity extends Activity {
         startLongFromIntent = previousIntent.getExtras().getLong("startDateLong");
         endLongFromIntent = previousIntent.getExtras().getLong("endDateLong");
 
-        Date startDateFromIntent = new Date(startLongFromIntent);
-        Date endDateFromIntent = new Date(endLongFromIntent);
+        //Date startDateFromIntent = new Date(startLongFromIntent);
+        //Date endDateFromIntent = new Date(endLongFromIntent);
 
         /*
         startTime = previousIntent.getExtras().getString("startTime");
@@ -166,10 +166,12 @@ public class SearchResultActivity extends Activity {
 
 
                         //if the spot is within time, and unoccupied
-                        if(startDateFromIntent.getTime() <= (new Date(spot.getTimeWindow().getStartDateTime())).getTime()
-                                && endDateFromIntent.getTime() >= (new Date(spot.getTimeWindow().getEndDateTime())).getTime()
+                        if(startLongFromIntent <= (new Date(spot.getTimeWindow().getStartDateTime())).getTime()
+                                && endLongFromIntent >= (new Date(spot.getTimeWindow().getEndDateTime())).getTime()
                                 && spot.getOccupantUID().equals("-1"))
                         {
+
+                            System.out.println("There should be atleast 1!");
 
                             Location spotloc = new Location("");
                             spotloc.setLongitude(spot.getLongitude());
