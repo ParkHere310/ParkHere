@@ -49,12 +49,7 @@
         android:id="@+id/UserRatingBar"
         android:numStars="5"
         android:layout_below="@+id/CommentUserText"
-        android:layout_centerHorizontal="true"
-        android:theme= "@style/RatingBar" />
+        android:layout_centerHorizontal="true"/>
 
-    <style name="RatingBar" parent="Theme.AppCompat">
-        <item name="colorControlNormal">@color/duskYellow</item>
-        <item name="colorControlActivated">@color/lightGrey</item>
-    </style>
 
 </RelativeLayout>

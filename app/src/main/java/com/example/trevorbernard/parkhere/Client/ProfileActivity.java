@@ -1,6 +1,9 @@
 package com.example.trevorbernard.parkhere.Client;
 
 import android.app.Activity;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
@@ -50,6 +53,9 @@ public class ProfileActivity extends Activity {
         ownerProfileImageView = (ImageView) findViewById(R.id.OwnerProfileImage);
         ownerRatingBar = (RatingBar) findViewById(R.id.OwnerRating);
         ownerReviewList = (ListView) findViewById(R.id.OwnerReviewList);
+        //set up rating bar color
+        LayerDrawable stars = (LayerDrawable) ownerRatingBar.getProgressDrawable();
+        stars.getDrawable(2).setColorFilter(Color.YELLOW, PorterDuff.Mode.SRC_ATOP);
 
         ownerRatingBar.setEnabled(false);
 
