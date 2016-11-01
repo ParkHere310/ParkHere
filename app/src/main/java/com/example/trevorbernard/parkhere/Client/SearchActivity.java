@@ -86,7 +86,7 @@ public class SearchActivity extends Activity { //extends FragmentActivity implem
 
     private void initiateVariable() {
         searchButton = (Button) findViewById(R.id.searchButton);
-        ETaddress = (EditText) findViewById(R.id.addressField);
+        ETaddress = (EditText) findViewById(R.id.address_field);
 
         startDate_picker = (DatePicker) findViewById(R.id.startDatePicker);
         endDate_picker = (DatePicker) findViewById(R.id.endDatePicker);
