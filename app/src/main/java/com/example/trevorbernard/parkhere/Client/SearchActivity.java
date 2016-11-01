@@ -119,7 +119,7 @@ public class SearchActivity extends Activity { //extends FragmentActivity implem
                 Date end = new Date(endYear,endMonth,endDay,endHour,endMin);
 
                 //Can put more cases below
-                if((startHour == endHour && startMin > endMin) || (startHour > endHour) || startDay > endDay ) {
+                if(start.getTime() >= end.getTime()) {
                     Toast.makeText(SearchActivity.this, "The end time must be after the start time!",
                             Toast.LENGTH_LONG).show();
                     //call pop up message telling them that the end time must be greater than start time

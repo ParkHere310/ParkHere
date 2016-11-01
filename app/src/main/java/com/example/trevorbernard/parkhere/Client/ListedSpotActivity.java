@@ -117,7 +117,7 @@ public class ListedSpotActivity extends Activity {
         title.setText(mSpot.getName());
         Date start = new Date(mSpot.getTimeWindow().getStartDateTime());
         Date end = new Date(mSpot.getTimeWindow().getEndDateTime());
-        date.setText(start.getDate());
+        date.setText(start.getMonth()+ "/" + start.getDate() + "/" + start.getYear());
         startTime.setText(start.getHours() + ":" + start.getMinutes());
         endTime.setText(end.getHours() + ":" + end.getMinutes());
     }
