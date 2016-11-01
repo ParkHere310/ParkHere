@@ -310,7 +310,7 @@ public class PostSpotActivity extends Activity {
                         PostSpotActivity.this.address);
                 */
 
-                if((startHour == endHour && startMin > endMin) || (startHour > endHour) || startDay > endDay ) {
+                if(start.getTime() >= end.getTime() ) {
                     Toast.makeText(PostSpotActivity.this, "The end time must be after the start time!",
                             Toast.LENGTH_LONG).show();
                     //call pop up message telling them that the end time must be greater than start time
