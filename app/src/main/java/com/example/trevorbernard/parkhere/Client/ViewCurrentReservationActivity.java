@@ -61,10 +61,7 @@ public class ViewCurrentReservationActivity extends Activity {
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
                     Reservation res = postSnapshot.getValue(Reservation.class);
                     //spotsList.add(spot);
-                    ParkingSpotReservation psr = new ParkingSpotReservation();
-                    psr.reservation = res;
-                    parkingSpotReservations.add(psr);
-                    getSpots(psr, parkingSpotReservations);
+                    getSpots(res, parkingSpotReservations);
 
 
                     /*ArrayAdapter<ParkingSpotDistance> arrayAdapter = new ParkingSpotAdapter(ViewCurrentReservationActivity.this, parkingSpotDistances);
@@ -95,15 +92,17 @@ public class ViewCurrentReservationActivity extends Activity {
         });
     }
 
-    private void getSpots(final ParkingSpotReservation psr, final ArrayList<ParkingSpotReservation> parkingSpotReservations) {
-        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("ParkingSpots");
-        queryRef2 = mDatabase.orderByChild("seekerUID").equalTo(FirebaseAuth.getInstance().getCurrentUser().getUid()); // limited to 10
+    private void getSpots(final Reservation res, final ArrayList<ParkingSpotReservation> parkingSpotReservations) {
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+        queryRef2 = mDatabase.child("ParkingSpots").orderByChild("uid").equalTo(res.getParkingSpotUID()); // limited to 10
         queryRef2.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 double count = 1;
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     ParkingSpot spot = postSnapshot.getValue(ParkingSpot.class);
+                    ParkingSpotReservation psr = new ParkingSpotReservation();
+                    psr.reservation = res;
                     psr.parkingSpot = spot;
                     parkingSpotReservations.add(psr);
 

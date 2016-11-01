@@ -41,11 +41,12 @@ public class ParkingSpotReservationAdapter extends ArrayAdapter<ParkingSpotReser
             TextView date = (TextView) convertView.findViewById(R.id.date);
 
             name.setTextColor(Color.BLACK);
+            if(parkingSpot != null) {
+                name.setText(parkingSpot.getName());
+                price.setText(" |  Rate: $ " + new DecimalFormat("#.00").format(parkingSpot.getPrice()/100));
+                date.setText( new Date(parkingSpot.getTimeWindow().getStartDateTime()).getMonth() + "/" + new Date(parkingSpot.getTimeWindow().getStartDateTime()).getDay() );
 
-            name.setText(parkingSpot.getName());
-            price.setText(" |  Rate: $ " + new DecimalFormat("#.00").format(parkingSpot.getPrice()/100));
-            date.setText( new Date(parkingSpot.getTimeWindow().getStartDateTime()).getMonth() + "/" + new Date(parkingSpot.getTimeWindow().getStartDateTime()).getDay() );
-
+            }
         }
 
         return convertView;

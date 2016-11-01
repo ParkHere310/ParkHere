@@ -75,8 +75,8 @@ public class ListedSpotActivity extends Activity {
         spotUID = previousIntent.getExtras().getString("spotUID");
 
 
-        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().getRoot().child("ParkingSpots");
-        queryRef = mDatabase.orderByChild("UID").equalTo(spotUID);
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+        queryRef = mDatabase.child("ParkingSpots").orderByChild("uid").equalTo(spotUID);
         queryRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -113,6 +113,7 @@ public class ListedSpotActivity extends Activity {
     }
 
     private void setText(ParkingSpot mSpot) {
+        //System.out.println("Making GUI");
         title.setText(mSpot.getName());
         Date start = new Date(mSpot.getTimeWindow().getStartDateTime());
         Date end = new Date(mSpot.getTimeWindow().getEndDateTime());
