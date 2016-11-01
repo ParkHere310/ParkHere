@@ -113,6 +113,7 @@ public class ListedSpotActivity extends Activity {
     }
 
     private void setText(ParkingSpot mSpot) {
+        //System.out.println("Making GUI");
         title.setText(mSpot.getName());
         Date start = new Date(mSpot.getTimeWindow().getStartDateTime());
         Date end = new Date(mSpot.getTimeWindow().getEndDateTime());

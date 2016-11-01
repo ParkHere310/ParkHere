@@ -29,6 +29,7 @@
         <activity android:name=".Client.ViewListingsActivity"></activity>
         <activity android:name=".Client.PastReservedSpotActivity"></activity>
         <activity android:name=".Client.ViewCurrentReservationActivity"></activity>
+        <activity android:name=".Client.ReservedSpotActivity"></activity>
         <activity android:name=".Client.EditReservationActivity"></activity>
 
         <uses-permission android:name="android.permission.INTERNET"/>

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.trevorbernard.parkhere.Client.LoginActivity;
 import com.example.trevorbernard.parkhere.Client.ViewCurrentReservationActivity;
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private Button currentReservationButton;
     private Button searchButton;
     private Button logoutButton;
+    private Button policyButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,6 +120,16 @@ public class MainActivity extends AppCompatActivity {
                 MainActivity.this.startActivity(myIntent);
             }
         }));
+
+        policyButton.setOnClickListener((new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "ParkHere's philosophy regarding cancelations is that \rthe owner must specify them in the description." +
+                        " \rIf there is no cancellation policy mentioned in the description, \ryou may cancel at any time with no fee incurred." +
+                        "\r Otherwise there will be a charge to your paypal account.",
+                        Toast.LENGTH_LONG).show();
+            }
+        }));
     }
 
     private void InitializeVariables() {
@@ -127,6 +139,7 @@ public class MainActivity extends AppCompatActivity {
         currentReservationButton = (Button) findViewById(R.id.CurrentReservationButton);
         searchButton = (Button) findViewById(R.id.SearchButton);
         logoutButton = (Button) findViewById(R.id.logoutButton);
+        policyButton = (Button) findViewById(R.id.policyButton);
 
 
     }
@@ -135,7 +148,12 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onStart() {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         super.onStart();
+        if ( user == null) { //not logged in
+            Intent myIntent = new Intent(MainActivity.this, LoginActivity.class);
+            startActivity(myIntent);
+        }
         //mAuth.addAuthStateListener(mAuthListener);
     }
 

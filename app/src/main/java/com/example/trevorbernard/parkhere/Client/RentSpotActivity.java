@@ -175,6 +175,8 @@ public class RentSpotActivity extends Activity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 1) {
 
+            if(!data.hasExtra("com.braintreepayments.api.dropin.EXTRA_PAYMENT_METHOD_NONCE"))
+            { return;}
             Object ob = data.getParcelableExtra("com.braintreepayments.api.dropin.EXTRA_PAYMENT_METHOD_NONCE");
             String nonce;
 
