@@ -49,6 +49,7 @@
         android:id="@+id/UserRatingBar"
         android:numStars="5"
         android:layout_below="@+id/CommentUserText"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"/>
+
 
 </RelativeLayout>

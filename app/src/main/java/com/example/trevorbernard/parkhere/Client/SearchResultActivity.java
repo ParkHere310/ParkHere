@@ -34,6 +34,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import static com.paypal.android.sdk.onetouch.core.metadata.ah.R;
+
 /**
  * Created by Hexi on 2016/10/23.
  */
@@ -207,7 +209,7 @@ public class SearchResultActivity extends Activity {
 
                 // Sort here
                 if(filterType.equals("sortByPrice")) {
-
+                    System.out.println(filterType );
                     Collections.sort(parkingSpotDistances, new Comparator<ParkingSpotDistance>() {
                         @Override
                         public int compare(ParkingSpotDistance o1, ParkingSpotDistance o2) {
@@ -216,7 +218,7 @@ public class SearchResultActivity extends Activity {
                     });
 
                 } else if(filterType.equals("sortBySpotRating")) {
-
+                    System.out.println(filterType );
                     Collections.sort(parkingSpotDistances, new Comparator<ParkingSpotDistance>() {
                         @Override
                         public int compare(ParkingSpotDistance o1, ParkingSpotDistance o2) {
@@ -225,7 +227,7 @@ public class SearchResultActivity extends Activity {
                     });
 
                 } else if(filterType.equals("sortByOwnerRating")) {
-
+                    System.out.println(filterType );
                     Collections.sort(parkingSpotDistances, new Comparator<ParkingSpotDistance>() {
                         @Override
                         public int compare(ParkingSpotDistance o1, ParkingSpotDistance o2) {

@@ -73,10 +73,11 @@ public class ListedSpotActivity extends Activity {
          */
         Intent previousIntent = this.getIntent();
         spotUID = previousIntent.getExtras().getString("spotUID");
+        System.out.println(spotUID);
 
 
-        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-        queryRef = mDatabase.child("ParkingSpots").orderByChild("uid").equalTo(spotUID);
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("ParkingSpots");
+        queryRef = mDatabase.orderByChild("uid").equalTo(spotUID);
         queryRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
