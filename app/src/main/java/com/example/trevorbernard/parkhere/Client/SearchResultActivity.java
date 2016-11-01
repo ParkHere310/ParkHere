@@ -187,8 +187,6 @@ public class SearchResultActivity extends Activity {
 
                         {
 
-                            System.out.println("There should be atleast 1!");
-
                             Location spotloc = new Location("");
                             spotloc.setLongitude(spot.getLongitude());
                             spotloc.setLatitude(spot.getLatitude());
