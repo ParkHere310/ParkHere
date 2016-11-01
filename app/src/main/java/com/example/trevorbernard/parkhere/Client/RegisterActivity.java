@@ -305,7 +305,7 @@ public class RegisterActivity extends Activity{
         for(int c = 0; c < pass.length(); c++) {
             Character ch = pass.charAt(c);
 
-            if( !Character.isDigit(ch) || !Character.isAlphabetic(ch) ) {
+            if( !Character.isDigit(ch) && !Character.isAlphabetic(ch) ) {
                 result = false;
                 return result;
             }
