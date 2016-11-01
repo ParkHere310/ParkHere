@@ -50,8 +50,8 @@ public class ViewPastReservationActivity extends Activity {
         list = (ListView) findViewById(R.id.listView);
         parkingSpotReservations = new ArrayList<ParkingSpotReservation>();
 
-        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("PastReservations");
-        queryRef = mDatabase.orderByChild("ownerUID").equalTo(FirebaseAuth.getInstance().getCurrentUser().getUid()); // limited to 10
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+        queryRef = mDatabase.child("PastReservations").orderByChild("seekerUID").equalTo(FirebaseAuth.getInstance().getCurrentUser().getUid()); // limited to 10
         queryRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -60,10 +60,7 @@ public class ViewPastReservationActivity extends Activity {
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
                     Reservation res = postSnapshot.getValue(Reservation.class);
                     //spotsList.add(spot);
-                    ParkingSpotReservation psr = new ParkingSpotReservation();
-                    psr.reservation = res;
-                    parkingSpotReservations.add(psr);
-                    getSpots(psr, parkingSpotReservations);
+                    getSpots(res, parkingSpotReservations);
 
 
                     /*ArrayAdapter<ParkingSpotDistance> arrayAdapter = new ParkingSpotAdapter(ViewCurrentReservationActivity.this, parkingSpotDistances);
@@ -112,15 +109,17 @@ public class ViewPastReservationActivity extends Activity {
                 .getCurrentUser().getUid());
     }
 
-    private void getSpots(final ParkingSpotReservation psr, final ArrayList<ParkingSpotReservation> parkingSpotReservations) {
+    private void getSpots(final Reservation res, final ArrayList<ParkingSpotReservation> parkingSpotReservations) {
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("ParkingSpots");
-        queryRef2 = mDatabase.orderByChild("seekerUID").equalTo(FirebaseAuth.getInstance().getCurrentUser().getUid()); // limited to 10
+        queryRef2 = mDatabase.orderByChild("uid").equalTo(res.getParkingSpotUID()); // limited to 10
         queryRef2.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 double count = 1;
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     ParkingSpot spot = postSnapshot.getValue(ParkingSpot.class);
+                    ParkingSpotReservation psr = new ParkingSpotReservation();
+                    psr.reservation = res;
                     psr.parkingSpot = spot;
                     parkingSpotReservations.add(psr);
 

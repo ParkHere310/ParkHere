@@ -187,18 +187,17 @@ public class SearchResultActivity extends Activity {
 
                         {
 
-                            System.out.println("There should be atleast 1!");
-
                             Location spotloc = new Location("");
                             spotloc.setLongitude(spot.getLongitude());
                             spotloc.setLatitude(spot.getLatitude());
                             Double distance = (double) spotloc.distanceTo(source); // in meters
                             distance = toMiles(distance);
-
-                            ParkingSpotDistance psd = new ParkingSpotDistance();
-                            psd.parkingSpot = spot;
-                            psd.distance = distance;
-                            parkingSpotDistances.add(psd);
+                            if(distance <= 3) {
+                                ParkingSpotDistance psd = new ParkingSpotDistance();
+                                psd.parkingSpot = spot;
+                                psd.distance = distance;
+                                parkingSpotDistances.add(psd);
+                            }
 
                             //parkingSpots.add(spot);
                             //stringSpots.add(new DecimalFormat("#.##").format(distance) + " miles " + spot.getName() + ": " + spot.getAddress());
