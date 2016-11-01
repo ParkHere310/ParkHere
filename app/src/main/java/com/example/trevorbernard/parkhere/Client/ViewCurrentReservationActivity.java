@@ -23,6 +23,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
+
 /**
  * Created by junseob on 10/29/16.
  */
@@ -47,7 +48,7 @@ public class ViewCurrentReservationActivity extends Activity {
     }
 
     private void initiateVariable() {
-        list = (ListView) findViewById(R.id.list);
+        list = (ListView) findViewById(R.id.listView);
         parkingSpotReservations = new ArrayList<ParkingSpotReservation>();
 
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("Reservations");

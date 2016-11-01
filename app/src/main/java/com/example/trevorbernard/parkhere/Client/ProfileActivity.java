@@ -9,7 +9,6 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.example.trevorbernard.parkhere.R;
-import com.example.trevorbernard.parkhere.Reservation.Reservation;
 import com.example.trevorbernard.parkhere.User.User;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -45,12 +44,16 @@ public class ProfileActivity extends Activity {
     }
     private void initiateVariables() {
         ownerUID = ProfileActivity.this.getIntent().getStringExtra("ownerUID");
-        retrieveOwner(ownerUID);
+
 
         ownerNameTextView = (TextView) findViewById(R.id.OwnerNameTextView);
         ownerProfileImageView = (ImageView) findViewById(R.id.OwnerProfileImage);
         ownerRatingBar = (RatingBar) findViewById(R.id.OwnerRating);
         ownerReviewList = (ListView) findViewById(R.id.OwnerReviewList);
+
+        ownerRatingBar.setEnabled(false);
+
+        retrieveOwner(ownerUID);
     }
 
     private void retrieveOwner(String ownerUID) {
@@ -77,6 +80,10 @@ public class ProfileActivity extends Activity {
         //ownerProfileImageView.setProfilePicture();
         ownerRatingBar.setRating((float)owner.getRating().calculateRating());
         List<String> ownerReviews =  owner.getReviews();
+        if(ownerReviews == null) {
+            ownerReviews = new ArrayList<String>();
+            ownerReviews.add("No Reviews");
+        }
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(
                 this, android.R.layout.simple_list_item_1, ownerReviews);
         ownerReviewList.setAdapter(adapter);
