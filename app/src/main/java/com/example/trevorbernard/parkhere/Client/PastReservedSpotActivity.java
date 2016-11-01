@@ -77,7 +77,7 @@ public class PastReservedSpotActivity extends Activity {
         image = (ImageView) findViewById(R.id.imageView);
 
         Intent myIntent = this.getIntent();
-        reservationUID = myIntent.getStringExtra("reservationID");
+        reservationUID = myIntent.getExtras().getString("reservationID");
 
         //Get RESERVATION from specific RESERVATION ID
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("PastReservations");

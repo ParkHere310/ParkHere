@@ -22,6 +22,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.Date;
 
+import static com.paypal.android.sdk.onetouch.core.metadata.ah.R;
+
 /**
  * Created by junseob on 10/29/16.
  */
@@ -85,7 +87,7 @@ public class ReservedSpotActivity extends Activity {
         address = (TextView) findViewById(R.id.address_label);
 
         Intent myIntent = this.getIntent();
-        reservationUID = myIntent.getStringExtra("reservationID");
+        reservationUID = myIntent.getExtras().getString("reservationID");
 
         //Get RESERVATION from specific RESERVATION ID
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
