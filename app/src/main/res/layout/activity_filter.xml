@@ -22,14 +22,6 @@
         android:layout_alignEnd="@+id/sortByDistance"
         android:layout_alignStart="@+id/sortByDistance" />
 
-    <RadioButton
-        android:text="Distance"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/sortByPrice"
-        android:id="@+id/sortByDistance"
-        android:layout_alignStart="@+id/DistanceTextView" />
-
     <TextView
         android:text="Sort by:"
         android:layout_width="wrap_content"
@@ -46,5 +38,13 @@
         android:layout_below="@+id/sortByDistance"
         android:layout_alignStart="@+id/sortByDistance"
         android:id="@+id/sortBySpotRating" />
+
+    <RadioButton
+        android:text="Distance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/sortByDistance"
+        android:layout_below="@+id/sortByPrice"
+        android:layout_alignStart="@+id/DistanceTextView" />
 
 </RelativeLayout>
