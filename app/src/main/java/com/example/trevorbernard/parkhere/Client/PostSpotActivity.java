@@ -18,6 +18,7 @@ import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.example.trevorbernard.parkhere.Connectors.SpotConnector;
 import com.example.trevorbernard.parkhere.MainActivity;
@@ -308,20 +309,28 @@ public class PostSpotActivity extends Activity {
                         PostSpotActivity.this.isHandicapped + " " +
                         PostSpotActivity.this.address);
                 */
-                postSpotFromGUI(
-                        PostSpotActivity.this.title,
-                        PostSpotActivity.this.description,
-                        PostSpotActivity.this.price,
-                        PostSpotActivity.this.isSUV,
-                        PostSpotActivity.this.isCovered,
-                        PostSpotActivity.this.isHandicapped,
-                        PostSpotActivity.this.address,
-                        start,
-                        end
-                );
 
-                Intent myIntent = new Intent(PostSpotActivity.this, MainActivity.class);
-                PostSpotActivity.this.startActivity(myIntent);
+                if((startHour == endHour && startMin > endMin) || (startHour > endHour) || startDay > endDay ) {
+                    Toast.makeText(PostSpotActivity.this, "The end time must be after the start time!",
+                            Toast.LENGTH_LONG).show();
+                    //call pop up message telling them that the end time must be greater than start time
+                } else {
+                    postSpotFromGUI(
+                            PostSpotActivity.this.title,
+                            PostSpotActivity.this.description,
+                            PostSpotActivity.this.price,
+                            PostSpotActivity.this.isSUV,
+                            PostSpotActivity.this.isCovered,
+                            PostSpotActivity.this.isHandicapped,
+                            PostSpotActivity.this.address,
+                            start,
+                            end
+                    );
+
+
+                    Intent myIntent = new Intent(PostSpotActivity.this, MainActivity.class);
+                    PostSpotActivity.this.startActivity(myIntent);
+                }
             }
         });
         uploadButton.setOnClickListener(new View.OnClickListener() {

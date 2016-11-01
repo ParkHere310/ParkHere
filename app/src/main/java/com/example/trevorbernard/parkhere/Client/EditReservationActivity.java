@@ -118,7 +118,10 @@ public class EditReservationActivity extends Activity {
         //make new spot
         //the parking spot itself will add the seller user to the class
         ParkingSpot spot = mSpot;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 1576e454818d6e94532479d6cac6891a9b0a41fa
         spot.setName(name);
         spot.setDescription(description);
         spot.setPrice(price);
