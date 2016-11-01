@@ -118,21 +118,27 @@ public class SearchActivity extends Activity { //extends FragmentActivity implem
                 Date start = new Date(startYear,startMonth,startDay,startHour,startMin);
                 Date end = new Date(endYear,endMonth,endDay,endHour,endMin);
 
-
-
-                if( ETaddress.getText().toString().length() > 0 &&  ETaddress.getText() != null &&  ETaddress.getText().toString() != "" &&  ETaddress.getText().toString() != " "){
-                    Intent myIntent = new Intent(SearchActivity.this, SearchResultActivity.class);
-
-                    myIntent.putExtra("startDateLong", start.getTime());
-                    myIntent.putExtra("endDateLong", end.getTime());
-                    myIntent.putExtra("address", address);
-
-                    SearchActivity.this.startActivity(myIntent);
-                }
-                else {
-                    Toast.makeText( SearchActivity.this, "Address Field must have input!",
+                //Can put more cases below
+                if((startHour == endHour && startMin > endMin) || (startHour > endHour) || startDay > endDay ) {
+                    Toast.makeText(SearchActivity.this, "The end time must be after the start time!",
                             Toast.LENGTH_LONG).show();
+                    //call pop up message telling them that the end time must be greater than start time
+                } else {
 
+
+                    if (ETaddress.getText().toString().length() > 0 && ETaddress.getText() != null && ETaddress.getText().toString() != "" && ETaddress.getText().toString() != " ") {
+                        Intent myIntent = new Intent(SearchActivity.this, SearchResultActivity.class);
+
+                        myIntent.putExtra("startDateLong", start.getTime());
+                        myIntent.putExtra("endDateLong", end.getTime());
+                        myIntent.putExtra("address", address);
+
+                        SearchActivity.this.startActivity(myIntent);
+                    } else {
+                        Toast.makeText(SearchActivity.this, "Address Field must have input!",
+                                Toast.LENGTH_LONG).show();
+
+                    }
                 }
             }
         });
