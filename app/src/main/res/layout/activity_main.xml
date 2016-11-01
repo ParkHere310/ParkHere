@@ -11,15 +11,6 @@
     tools:context="com.example.trevorbernard.parkhere.MainActivity">
 
     <Button
-        android:text="Post Page"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="31dp"
-        android:id="@+id/PostPageButton" />
-
-    <Button
         android:text="View Past Reservation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -38,20 +29,20 @@
         android:layout_marginTop="17dp" />
 
     <Button
-        android:text="Search"
+        android:text="Post Page"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/ListedSpotPage"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="32dp"
-        android:id="@+id/SearchButton" />
+        android:layout_marginTop="15dp"
+        android:id="@+id/PostPageButton"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:text="Current Reservation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/CurrentReservationButton"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="13dp"
         android:layout_below="@+id/PostPageButton"
         android:layout_centerHorizontal="true" />
 
@@ -59,9 +50,27 @@
         android:text="Log Out"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="21dp"
         android:id="@+id/logoutButton"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/SearchButton"
+        android:layout_marginBottom="17dp" />
+
+    <Button
+        android:text="Search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="21dp"
+        android:id="@+id/SearchButton"
+        android:layout_below="@+id/ListedSpotPage"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:text="View Cancellation Policy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/policyButton"
+        android:layout_marginTop="22dp"
         android:layout_below="@+id/SearchButton"
-        android:layout_alignStart="@+id/SearchButton" />
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
