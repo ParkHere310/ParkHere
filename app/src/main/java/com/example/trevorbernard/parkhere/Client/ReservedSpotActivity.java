@@ -52,7 +52,7 @@ public class ReservedSpotActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_viewcurrentreservation);
+        setContentView(R.layout.activity_reservedspot);
 
 
 
@@ -87,8 +87,8 @@ public class ReservedSpotActivity extends Activity {
         reservationUID = myIntent.getStringExtra("reservationID");
 
         //Get RESERVATION from specific RESERVATION ID
-        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("PastReservations");
-        queryRef = mDatabase.orderByChild("UID").equalTo(reservationUID);
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+        queryRef = mDatabase.child("Reservations").orderByChild("UID").equalTo(reservationUID);
         queryRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -150,7 +150,7 @@ public class ReservedSpotActivity extends Activity {
 
     private void setText2(ParkingSpot mSpot) {
         mParkingSpot = mSpot;
-        title.setText(mSpot.getAddress());
+        title.setText(mSpot.getName());
         Date start = new Date(mSpot.getTimeWindow().getStartDateTime());
         Date end = new Date(mSpot.getTimeWindow().getEndDateTime());
         date.setText(start.getDate());
@@ -158,6 +158,6 @@ public class ReservedSpotActivity extends Activity {
         endTime.setText(end.getHours() + ":" + end.getMinutes());
         price.setText( String.valueOf( (mSpot.getPrice()/100.0) ) );
         description.setText(mSpot.getDescription());
-        address.setText(mSpot.getDescription());
+        address.setText(mSpot.getAddress());
     }
 }

@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.trevorbernard.parkhere.Connectors.AuthenticationConnector;
 import com.example.trevorbernard.parkhere.MainActivity;
@@ -80,7 +81,7 @@ public class RegisterActivity extends Activity{
                     // User is signed in
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
                     ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                    profilePic.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                    if(profilePic != null) { profilePic.compress(Bitmap.CompressFormat.JPEG, 100, baos); }
                     byte[] data = baos.toByteArray();
                     final ArrayList<String> downloadUrls = new ArrayList<String>();
                     // puts byte array in storage
@@ -262,7 +263,20 @@ public class RegisterActivity extends Activity{
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                createAccount(username, password);
+                if(!password.equals(confirmPassword)) {
+                    Toast.makeText(RegisterActivity.this,
+                            "Passwords dont match" + confirmPassword + " " + password,
+                            Toast.LENGTH_LONG).show();
+                }
+                else if(invalid(password)) {
+                    Toast.makeText(RegisterActivity.this,
+                            "Password must be longer than 10 characters and contain 1 special character",
+                            Toast.LENGTH_LONG).show();
+                }
+                else {
+                    createAccount(username, password);
+                }
+
             }
         });
 
@@ -282,6 +296,23 @@ public class RegisterActivity extends Activity{
             }
         });
     }
+
+    boolean invalid(String pass) {
+        if(pass.length() < 10) {
+            return true;
+        }
+        boolean result = true;
+        for(int c = 0; c < pass.length(); c++) {
+            Character ch = pass.charAt(c);
+
+            if( !Character.isDigit(ch) && !Character.isAlphabetic(ch) ) {
+                result = false;
+                return result;
+            }
+        }
+        return result;
+    }
+
 
     private void createAccount(String email, String password) {
         Log.d(TAG, "createAccount:" + email);

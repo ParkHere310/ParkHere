@@ -148,7 +148,12 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onStart() {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         super.onStart();
+        if ( user == null) { //not logged in
+            Intent myIntent = new Intent(MainActivity.this, LoginActivity.class);
+            startActivity(myIntent);
+        }
         //mAuth.addAuthStateListener(mAuthListener);
     }
 
