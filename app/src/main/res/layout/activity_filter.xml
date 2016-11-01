@@ -30,6 +30,7 @@
         android:layout_alignStart="@+id/DistanceTextView"
         android:layout_marginTop="17dp">
 
+
         <RadioButton
             android:text="Price"
             android:layout_width="wrap_content"
@@ -57,5 +58,7 @@
             android:id="@+id/sortBySpotRating" />
 
     </RadioGroup>
+
+
 
 </RelativeLayout>
