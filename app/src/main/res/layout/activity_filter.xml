@@ -19,15 +19,15 @@
         android:layout_below="@+id/DistanceTextView"
         android:layout_marginTop="11dp"
         android:id="@+id/sortByPrice"
-        android:layout_alignEnd="@+id/sortByOwnerRating"
-        android:layout_alignStart="@+id/sortByOwnerRating" />
+        android:layout_alignEnd="@+id/sortByDistance"
+        android:layout_alignStart="@+id/sortByDistance" />
 
     <RadioButton
-        android:text="Owner Rating"
+        android:text="Distance"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/sortByPrice"
-        android:id="@+id/sortByOwnerRating"
+        android:id="@+id/sortByDistance"
         android:layout_alignStart="@+id/DistanceTextView" />
 
     <TextView
@@ -43,8 +43,8 @@
         android:text="Spot Rating"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/sortByOwnerRating"
-        android:layout_alignStart="@+id/sortByOwnerRating"
+        android:layout_below="@+id/sortByDistance"
+        android:layout_alignStart="@+id/sortByDistance"
         android:id="@+id/sortBySpotRating" />
 
 </RelativeLayout>

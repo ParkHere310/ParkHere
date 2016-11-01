@@ -46,7 +46,7 @@ public class FilterActivity extends Activity {
     private void initiateVariables() {
         FilterButton = (Button) findViewById(R.id.FilterButton);
         spotRatingButton = (RadioButton) findViewById(R.id.sortBySpotRating);
-        ownerRatingButton = (RadioButton) findViewById(R.id.sortByOwnerRating);
+        ownerRatingButton = (RadioButton) findViewById(R.id.sortByDistance);
         priceButton = (RadioButton) findViewById(R.id.sortByPrice);
 
         /*myIntent.putExtra("address", address);
