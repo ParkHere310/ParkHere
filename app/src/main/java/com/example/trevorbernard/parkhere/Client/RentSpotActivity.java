@@ -12,7 +12,6 @@ import com.braintreegateway.Result;
 import com.braintreegateway.TransactionRequest;
 import com.braintreegateway.ValidationError;
 import com.braintreepayments.api.PaymentRequest;
-import com.example.trevorbernard.parkhere.Connectors.SpotConnector;
 import com.example.trevorbernard.parkhere.Connectors.TransactionConnector;
 import com.example.trevorbernard.parkhere.MainActivity;
 import com.example.trevorbernard.parkhere.ParkingSpot.ParkingSpot;
@@ -149,14 +148,24 @@ public class RentSpotActivity extends Activity {
 
 
         seekerUID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        ownerUID = SpotConnector.getParkingSpotFromUID(parkingSpotUID).getOwnerUID();
         this.parkingSpotUID = parkingSpotUID;
 
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+        Query queryRef = mDatabase.child("ParkingSpots").orderByChild("uid").equalTo(spotUID); // limited to 10
+        queryRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
+                    ParkingSpot spot = postSnapshot.getValue(ParkingSpot.class);
+                    finalizeSpot(spot);
+                }
+            }
 
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
 
-
-        PaymentRequest paymentRequest = new PaymentRequest().clientToken(clientToken);
-        startActivityForResult(paymentRequest.getIntent(this), 1);
+            }
+        });
 
 
 
@@ -201,18 +210,13 @@ public class RentSpotActivity extends Activity {
 
                             Transaction trans = null;
 
-                            DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("ParkingSpots");
+                            /*DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("ParkingSpots");
                             Query queryRef = mDatabase.orderByChild("UID").equalTo(parkingSpotUID); // limited to 10
                             queryRef.addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(DataSnapshot dataSnapshot) {
                                     for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
                                         ParkingSpot spot = postSnapshot.getValue(ParkingSpot.class);
-                                        Reservation res = new Reservation(spot.getOwnerUID(), seekerUID,
-                                                parkingSpotUID, null);
-
-
-                                        TransactionConnector.addReservation(res);
                                     }
                                 }
 
@@ -220,7 +224,12 @@ public class RentSpotActivity extends Activity {
                                 public void onCancelled(DatabaseError databaseError) {
 
                                 }
-                            });
+                            });*/
+                            Reservation res = new Reservation(ownerUID, seekerUID,
+                                    parkingSpotUID, null);
+
+
+                            TransactionConnector.addReservation(res);
 
                         } else if (result.getTransaction() != null) {
                             com.braintreegateway.Transaction transaction = result.getTransaction();
@@ -247,6 +256,12 @@ public class RentSpotActivity extends Activity {
             thread.start();
 
         }
+    }
+
+    private void finalizeSpot(ParkingSpot spot){
+        this.ownerUID = spot.getOwnerUID();
+        PaymentRequest paymentRequest = new PaymentRequest().clientToken(clientToken);
+        startActivityForResult(paymentRequest.getIntent(this), 1);
     }
 
 }

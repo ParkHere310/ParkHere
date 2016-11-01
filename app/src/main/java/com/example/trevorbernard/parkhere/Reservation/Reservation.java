@@ -27,6 +27,8 @@ public class Reservation {
 
     }
 
+    public Reservation() {};
+
 
     public void setParkingSpotUID(String UID) {
 
