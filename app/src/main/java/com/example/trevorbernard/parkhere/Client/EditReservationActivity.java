@@ -117,8 +117,8 @@ public class EditReservationActivity extends Activity {
         }
         //make new spot
         //the parking spot itself will add the seller user to the class
-        ParkingSpot spot = new ParkingSpot( name,
-                description, price, isSUV, isCovered, isHandicap, address, startTime, endTime,latitude,longitude);
+        ParkingSpot spot = mSpot;
+
         spot.setName(name);
         spot.setDescription(description);
         spot.setPrice(price);
@@ -290,7 +290,8 @@ public class EditReservationActivity extends Activity {
 
 */
                 String priceStr = price_field.getText().toString();
-                price = Integer.parseInt(priceStr);
+                double tmp = Double.parseDouble(priceStr);
+                price = (int) tmp * 100;
 
 
 
