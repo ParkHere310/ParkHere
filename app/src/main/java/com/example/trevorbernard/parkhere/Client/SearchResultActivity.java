@@ -34,8 +34,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import static com.paypal.android.sdk.onetouch.core.metadata.ah.R;
-
 /**
  * Created by Hexi on 2016/10/23.
  */
