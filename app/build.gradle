@@ -45,6 +45,7 @@ dependencies {
 
     androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2'
     androidTestCompile 'com.android.support.test:runner:0.5'
+    androidTestCompile 'com.android.support.test.espresso:espresso-contrib:2.0'
 
     // Required -- JUnit 4 framework
     androidTestCompile 'junit:junit:4.12'
