@@ -176,10 +176,10 @@ public class PostSpotActivity extends Activity {
         uploadButton = (Button) findViewById(R.id.uploadButton);
         title_field = (EditText) findViewById(R.id.title_field);
 
-        startDate_picker = (DatePicker) findViewById(R.id.startDatePicker.getId());
-        endDate_picker = (DatePicker) findViewById(R.id.endDatePicker.getId());
-        startTime_picker = (TimePicker) findViewById(R.id.startTime_picker.getId());
-        endTime_picker = (TimePicker) findViewById(R.id.endTime_picker.getId());
+        startDate_picker = (DatePicker) findViewById(R.id.startDatePicker);
+        endDate_picker = (DatePicker) findViewById(R.id.endDatePicker);
+        startTime_picker = (TimePicker) findViewById(R.id.startTime_picker);
+        endTime_picker = (TimePicker) findViewById(R.id.endTime_picker);
 
         price_field = (EditText) findViewById(R.id.price_field);
         address_field = (EditText) findViewById(R.id.address_field);
