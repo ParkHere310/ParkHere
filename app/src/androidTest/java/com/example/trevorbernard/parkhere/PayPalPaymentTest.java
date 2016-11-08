@@ -81,7 +81,7 @@ public class PayPalPaymentTest {
             e.printStackTrace();
         }
         // check for paypal button
-        onView(withText(containsString("PayPal")));
+        onView(withText(containsString("PayPal"))).check(matches(isDisplayed()));
 
 
     }

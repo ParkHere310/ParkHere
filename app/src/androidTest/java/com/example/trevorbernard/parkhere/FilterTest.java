@@ -51,6 +51,8 @@ public class FilterTest {
 
         onView(withId(R.id.filter_button)).perform(click());
         onView(withId(R.id.sortBySpotRating)).check(matches(isDisplayed()));
+        onView(withId(R.id.sortByDistance)).check(matches(isDisplayed()));
+        onView(withId(R.id.sortByPrice)).check(matches(isDisplayed()));
 
     }
 
