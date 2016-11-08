@@ -1,19 +1,11 @@
 package com.example.trevorbernard.parkhere;
 
-import android.support.annotation.NonNull;
+import android.content.Intent;
 import android.support.test.rule.ActivityTestRule;
 
 import com.example.trevorbernard.parkhere.Client.RegisterActivity;
-import com.example.trevorbernard.parkhere.Client.SearchResultActivity;
-import com.example.trevorbernard.parkhere.Connectors.AuthenticationConnector;
 import com.example.trevorbernard.parkhere.User.User;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.Query;
 
-import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -38,6 +30,8 @@ public class EmailSignupTwiceTest {
 
     @Test
     public void TestEmailSignup() {
+        Intent i = new Intent();
+        mRegisterActivityRule.launchActivity(i);
         onView(withId(R.id.EditTextEmail))
                 .perform(typeText("test43@gmail.com"),closeSoftKeyboard());
         onView(withId(R.id.RegisterButton)).perform(click());

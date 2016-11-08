@@ -1,8 +1,8 @@
 package com.example.trevorbernard.parkhere;
 
+import android.content.Intent;
 import android.support.test.rule.ActivityTestRule;
 
-import com.example.trevorbernard.parkhere.Client.LoginActivity;
 import com.example.trevorbernard.parkhere.Client.RegisterActivity;
 
 import org.junit.Rule;
@@ -31,6 +31,8 @@ public class PasswordSecurityTest {
     //Password Successfully Edits
     @Test
     public void registerPasswordCheck() {
+        Intent i = new Intent();
+        registerActivityRule.launchActivity(i);
         onView(withId(R.id.EditTextPassword))
                 .perform(typeText("myPassword"),closeSoftKeyboard());
         onView(withId(R.id.RegisterButton)).perform(click());
