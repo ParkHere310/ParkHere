@@ -33,6 +33,7 @@ public class FilterActivity extends Activity {
     String startDate;
     String endDate;
     String filterType = "-1";
+    long startLongFromIntent, endLongFromIntent;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -56,10 +57,16 @@ public class FilterActivity extends Activity {
         myIntent.putExtra("endDate", endDate);*/
         Intent previousIntent = this.getIntent();
         address = previousIntent.getExtras().getString("address");
+
+        startLongFromIntent = previousIntent.getExtras().getLong("startDateLong");
+        endLongFromIntent = previousIntent.getExtras().getLong("endDateLong");
+        /*
+        address = previousIntent.getExtras().getString("address");
         startTime = previousIntent.getExtras().getString("startTime");
         endTime = previousIntent.getExtras().getString("endTime");
         startDate = previousIntent.getExtras().getString("startDate");
         endDate = previousIntent.getExtras().getString("endDate");
+        */
     }
 
     private void createOnclickCallback() {
@@ -72,10 +79,14 @@ public class FilterActivity extends Activity {
                 Intent myIntent = new Intent(FilterActivity.this, SearchResultActivity.class);
 
                 myIntent.putExtra("address", address);
-                myIntent.putExtra("startTime", startTime);
+                /*myIntent.putExtra("startTime", startTime);
                 myIntent.putExtra("endTime", endTime);
-                myIntent.putExtra("startDate", startDate);
-                myIntent.putExtra("endDate", endDate);
+                myIntent.putExtra("startDateLong", startDate);
+                myIntent.putExtra("endDateLong", endDate);*/
+                myIntent.putExtra("startDateLong", startLongFromIntent);
+                myIntent.putExtra("endDateLong", endLongFromIntent);
+
+
 
                 if(priceButton.isChecked()) myIntent.putExtra("filter", "sortByPrice");
                 else if(ownerRatingButton.isChecked()) myIntent.putExtra("filter", "sortByOwnerRating");

@@ -105,11 +105,20 @@ public class SearchResultActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Intent myIntent = new Intent(SearchResultActivity.this, FilterActivity.class);
+
+               /*
                 myIntent.putExtra("address", address);
                 myIntent.putExtra("startTime", startTime);
                 myIntent.putExtra("endTime", endTime);
                 myIntent.putExtra("startDate", startDate);
                 myIntent.putExtra("endDate", endDate);
+
+                */
+
+                myIntent.putExtra("startDateLong", startLongFromIntent);
+                myIntent.putExtra("endDateLong", endLongFromIntent);
+                myIntent.putExtra("address", address);
+
                 SearchResultActivity.this.startActivity(myIntent);
             }
         });
@@ -206,7 +215,16 @@ public class SearchResultActivity extends Activity {
                 }
 
                 // Sort here
+
+                System.out.println("BEFORE: " +  parkingSpotDistances.size());
+
                 if(filterType.equals("sortByPrice")) {
+
+                    System.out.println("@@@@@@@@@@@");
+                    System.out.println(filterType);
+
+                    System.out.println("@@@@@@@@@@@");
+                    // System.out.println("")
                     System.out.println(filterType );
                     Collections.sort(parkingSpotDistances, new Comparator<ParkingSpotDistance>() {
                         @Override
@@ -216,6 +234,11 @@ public class SearchResultActivity extends Activity {
                     });
 
                 } else if(filterType.equals("sortBySpotRating")) {
+
+                    System.out.println("@@@@@@@@@@@");
+                    System.out.println(filterType);
+
+                    System.out.println("@@@@@@@@@@@");
                     System.out.println(filterType );
                     Collections.sort(parkingSpotDistances, new Comparator<ParkingSpotDistance>() {
                         @Override
@@ -225,6 +248,11 @@ public class SearchResultActivity extends Activity {
                     });
 
                 } else if(filterType.equals("sortByOwnerRating")) {
+
+                    System.out.println("@@@@@@@@@@@");
+                    System.out.println(filterType);
+
+                    System.out.println("@@@@@@@@@@@");
                     System.out.println(filterType );
                     Collections.sort(parkingSpotDistances, new Comparator<ParkingSpotDistance>() {
                         @Override
@@ -232,8 +260,10 @@ public class SearchResultActivity extends Activity {
                             return o1.distance.compareTo(o2.distance);
                         }
                     });
-                    
+
                 }
+
+                System.out.println("AFTER: " +  parkingSpotDistances.size());
 
                 ArrayAdapter<ParkingSpotDistance> arrayAdapter = new ParkingSpotAdapter(SearchResultActivity.this, parkingSpotDistances);
                 //ArrayAdapter arrayAdapter = new ArrayAdapter<String>(SearchResultActivity.this,android.R.layout.simple_list_item_1,stringSpots);
