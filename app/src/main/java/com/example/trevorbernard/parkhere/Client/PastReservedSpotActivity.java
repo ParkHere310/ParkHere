@@ -3,9 +3,7 @@ package com.example.trevorbernard.parkhere.Client;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -14,16 +12,12 @@ import android.widget.TextView;
 import com.example.trevorbernard.parkhere.ParkingSpot.ParkingSpot;
 import com.example.trevorbernard.parkhere.R;
 import com.example.trevorbernard.parkhere.Reservation.Reservation;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 
 import java.util.Date;
 
@@ -80,8 +74,8 @@ public class PastReservedSpotActivity extends Activity {
         reservationUID = myIntent.getExtras().getString("reservationID");
 
         //Get RESERVATION from specific RESERVATION ID
-        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("PastReservations");
-        queryRef = mDatabase.orderByChild("UID").equalTo(reservationUID);
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+        queryRef = mDatabase.child("PastReservations").orderByChild("uid").equalTo(reservationUID);
         queryRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -116,8 +110,8 @@ public class PastReservedSpotActivity extends Activity {
 
 
         //Get ParkingSpot from specific ParkingSpot ID
-        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().getRoot().child("ParkingSpots");
-        queryRef2 = mDatabase.orderByChild("UID").equalTo(mReservation.getParkingSpotUID());
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+        queryRef2 = mDatabase.child("ParkingSpots").orderByChild("uid").equalTo(mReservation.getParkingSpotUID());
         queryRef2.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -140,15 +134,15 @@ public class PastReservedSpotActivity extends Activity {
         address.setText(mSpot.getAddress());
         Date start = new Date(mSpot.getTimeWindow().getStartDateTime());
         Date end = new Date(mSpot.getTimeWindow().getEndDateTime());
-        date.setText(start.getDate());
-        startTime.setText(start.getHours() + ":" + start.getMinutes());
-        endTime.setText(end.getHours() + ":" + end.getMinutes());
+        date.setText(Integer.toString(start.getDate()));
+        startTime.setText(Integer.toString(start.getHours()) + ":" + Integer.toString(start.getMinutes()));
+        endTime.setText(Integer.toString(end.getHours()) + ":" + Integer.toString(end.getMinutes()));
         description.setText(mSpot.getDescription());
 
         price.setText(String.valueOf( (mSpot.getPrice()/100.0) ) );
 
 
-        StorageReference storageRef = FirebaseStorage.getInstance().getReferenceFromUrl(mSpot.getImageURL());
+        /*StorageReference storageRef = FirebaseStorage.getInstance().getReferenceFromUrl(mSpot.getImageURL());
         final long ONE_MEGABYTE = 1024 * 1024;
         storageRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
             @Override
@@ -164,7 +158,7 @@ public class PastReservedSpotActivity extends Activity {
             public void onFailure(@NonNull Exception exception) {
                 // Handle any errors
             }
-        });
+        });*/
 
     }
 

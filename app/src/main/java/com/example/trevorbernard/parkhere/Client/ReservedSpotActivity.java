@@ -11,6 +11,7 @@ import com.example.trevorbernard.parkhere.Connectors.TransactionConnector;
 import com.example.trevorbernard.parkhere.Connectors.UserConnector;
 import com.example.trevorbernard.parkhere.MainActivity;
 import com.example.trevorbernard.parkhere.ParkingSpot.ParkingSpot;
+import com.example.trevorbernard.parkhere.R;
 import com.example.trevorbernard.parkhere.Reservation.Reservation;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -73,7 +74,7 @@ public class ReservedSpotActivity extends Activity {
          */
 
         title = (TextView)findViewById(com.example.trevorbernard.parkhere.R.id.title);
-        date = (TextView)findViewById(com.example.trevorbernard.parkhere.R.id.actual_date);
+        date = (TextView)findViewById(R.id.actual_date);
         startTime = (TextView) findViewById(com.example.trevorbernard.parkhere.R.id.startTime);
         endTime = (TextView) findViewById(com.example.trevorbernard.parkhere.R.id.endTime);
         type = (TextView) findViewById(com.example.trevorbernard.parkhere.R.id.isType);
@@ -85,6 +86,9 @@ public class ReservedSpotActivity extends Activity {
 
         Intent myIntent = this.getIntent();
         reservationUID = myIntent.getExtras().getString("reservationID");
+        System.out.println("~~~~~~~~~");
+        System.out.println(reservationUID);
+        System.out.println("~~~~~~~~~~");
 
         //Get RESERVATION from specific RESERVATION ID
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
@@ -132,10 +136,11 @@ public class ReservedSpotActivity extends Activity {
     }
 
     public void setText(Reservation mReservation) {
+        System.out.println("found reservation**********");
         this.mReservation = mReservation;
         //Get ParkingSpot from specific ParkingSpot ID
-        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().getRoot().child("ParkingSpots");
-        queryRef2 = mDatabase.orderByChild("UID").equalTo(mReservation.getParkingSpotUID());
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+        queryRef2 = mDatabase.child("ParkingSpots").orderByChild("uid").equalTo(mReservation.getParkingSpotUID());
         queryRef2.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -153,13 +158,14 @@ public class ReservedSpotActivity extends Activity {
     }
 
     private void setText2(ParkingSpot mSpot) {
+        System.out.println("found parking spot**********");
         mParkingSpot = mSpot;
         title.setText(mSpot.getName());
         Date start = new Date(mSpot.getTimeWindow().getStartDateTime());
         Date end = new Date(mSpot.getTimeWindow().getEndDateTime());
-        date.setText(start.getDate());
-        startTime.setText(start.getHours() + ":" + start.getMinutes());
-        endTime.setText(end.getHours() + ":" + end.getMinutes());
+        date.setText(Integer.toString(start.getDate()));
+        startTime.setText(Integer.toString(start.getHours()) + ":" + Integer.toString(start.getMinutes()));
+        endTime.setText(Integer.toString(end.getHours()) + ":" + Integer.toString(end.getMinutes()));
         price.setText( String.valueOf( (mSpot.getPrice()/100.0) ) );
         description.setText(mSpot.getDescription());
         address.setText(mSpot.getAddress());
