@@ -2,9 +2,13 @@ package com.example.trevorbernard.parkhere.Client;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.trevorbernard.parkhere.Connectors.TransactionConnector;
@@ -13,12 +17,16 @@ import com.example.trevorbernard.parkhere.MainActivity;
 import com.example.trevorbernard.parkhere.ParkingSpot.ParkingSpot;
 import com.example.trevorbernard.parkhere.R;
 import com.example.trevorbernard.parkhere.Reservation.Reservation;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.Date;
 
@@ -39,6 +47,7 @@ public class ReservedSpotActivity extends Activity {
     private TextView type; // TODO: set these
     private TextView covered;
     private TextView handicapped;
+    private ImageView image;
 
     Query queryRef;
     Query queryRef2;
@@ -83,6 +92,7 @@ public class ReservedSpotActivity extends Activity {
         covered = (TextView) findViewById(com.example.trevorbernard.parkhere.R.id.isCovered);
         description = (TextView) findViewById(com.example.trevorbernard.parkhere.R.id.actual_description);
         address = (TextView) findViewById(com.example.trevorbernard.parkhere.R.id.address_label);
+        image = (ImageView) findViewById(R.id.imageView);
 
         Intent myIntent = this.getIntent();
         reservationUID = myIntent.getExtras().getString("reservationID");
@@ -169,5 +179,31 @@ public class ReservedSpotActivity extends Activity {
         price.setText( String.valueOf( (mSpot.getPrice()/100.0) ) );
         description.setText(mSpot.getDescription());
         address.setText(mSpot.getAddress());
+
+        if(mSpot.getImageURL().equals("-1")) return;
+        StorageReference storageRef = FirebaseStorage.getInstance().getReference(mSpot.getImageURL());
+        final long ONE_MEGABYTE = 1024 * 1024;
+        storageRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+            @Override
+            public void onSuccess(byte[] bytes) {
+                // Data for "images/island.jpg" is returns, use this as needed
+                BitmapFactory.Options options = new BitmapFactory.Options();
+                options.inMutable = true;
+                Bitmap bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.length, options);
+                setBmp(bmp);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                // Handle any errors
+            }
+        });
+
+
+    }
+
+    private void setBmp(Bitmap bmp) {
+        image.setImageBitmap(bmp);
+
     }
 }
