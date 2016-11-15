@@ -52,6 +52,9 @@ public class SearchResultActivity extends Activity {
     String startDate;
     String endDate;
     String filterType = "-1";
+    boolean isCovered;
+    boolean isHandicapped;
+    boolean isSUV;
 
     Long startLongFromIntent;
     Long endLongFromIntent;
@@ -84,6 +87,9 @@ public class SearchResultActivity extends Activity {
 
         startLongFromIntent = previousIntent.getExtras().getLong("startDateLong");
         endLongFromIntent = previousIntent.getExtras().getLong("endDateLong");
+        isCovered = previousIntent.getExtras().getBoolean("isCovered");
+        isSUV = previousIntent.getExtras().getBoolean("isSUV");
+        isHandicapped = previousIntent.getExtras().getBoolean("isHandicapped");
 
         //Date startDateFromIntent = new Date(startLongFromIntent);
         //Date endDateFromIntent = new Date(endLongFromIntent);
@@ -194,6 +200,9 @@ public class SearchResultActivity extends Activity {
 
                         */
 
+                        //If the type is correct
+                        if (spot.isCovered() == isCovered || spot.isHandicap() == isHandicapped
+                                || spot.isSUV() == isSUV)
                         {
 
                             Location spotloc = new Location("");

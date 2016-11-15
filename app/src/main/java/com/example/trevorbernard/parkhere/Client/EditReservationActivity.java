@@ -168,6 +168,10 @@ public class EditReservationActivity extends Activity {
         Intent previousIntent = this.getIntent();
         spotUID = previousIntent.getExtras().getString("spot");
 
+        isSUV = false;
+        isCovered = false;
+        isHandicapped = false;
+
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("ParkingSpots");
         Query queryRef = mDatabase.orderByChild("uid").equalTo(spotUID);
         queryRef.addListenerForSingleValueEvent(new ValueEventListener() {

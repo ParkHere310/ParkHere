@@ -7,6 +7,8 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
@@ -31,6 +33,14 @@ public class SearchActivity extends Activity { //extends FragmentActivity implem
     private TimePicker startTime_picker;
     private TimePicker endTime_picker;
     String address;
+
+    private CheckBox SUVCheckBox;
+    private CheckBox handicappedCheckBox;
+    private CheckBox coveredCheckBox;
+
+    private boolean isSUV;
+    private boolean isCovered;
+    private boolean isHandicapped;
 
     private int startYear;
     private int startMonth;
@@ -93,6 +103,13 @@ public class SearchActivity extends Activity { //extends FragmentActivity implem
         startTime_picker = (TimePicker) findViewById(R.id.startTime_picker);
         endTime_picker = (TimePicker) findViewById(R.id.endTime_picker);
 
+        SUVCheckBox = (CheckBox) findViewById(R.id.SUVCheckBox);
+        handicappedCheckBox = (CheckBox) findViewById(R.id.handicapCheckBox);
+        coveredCheckBox = (CheckBox) findViewById(R.id.coveredCheckBox);
+
+        isCovered = false;
+        isHandicapped = false;
+        isSUV = false;
     }
 
     private void CreateOnclickCallback() {
@@ -132,6 +149,9 @@ public class SearchActivity extends Activity { //extends FragmentActivity implem
                         myIntent.putExtra("startDateLong", start.getTime());
                         myIntent.putExtra("endDateLong", end.getTime());
                         myIntent.putExtra("address", address);
+                        myIntent.putExtra("isCovered",isCovered);
+                        myIntent.putExtra("isSUV",isSUV);
+                        myIntent.putExtra("isHandicapped",isHandicapped);
 
                         SearchActivity.this.startActivity(myIntent);
                     } else {
@@ -162,7 +182,44 @@ public class SearchActivity extends Activity { //extends FragmentActivity implem
             }
         });
 
+        coveredCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
+        {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (coveredCheckBox.isChecked()) {
+                    isCovered = true;
+                }
+                else {
+                    isCovered = false;
+                }
+            }
+        });
 
+        handicappedCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
+        {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (handicappedCheckBox.isChecked()) {
+                    isHandicapped = true;
+                }
+                else {
+                    isHandicapped = false;
+                }
+            }
+        });
+
+        SUVCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
+        {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (SUVCheckBox.isChecked()) {
+                    isSUV = true;
+                }
+                else {
+                    isSUV = false;
+                }
+            }
+        });
 
     }
 }
