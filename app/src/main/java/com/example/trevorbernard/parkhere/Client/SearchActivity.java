@@ -104,8 +104,8 @@ public class SearchActivity extends Activity { //extends FragmentActivity implem
         endTime_picker = (TimePicker) findViewById(R.id.endTime_picker);
 
         SUVCheckBox = (CheckBox) findViewById(R.id.SUVCheckBox);
-        handicappedCheckBox = (CheckBox) findViewById(R.id.HandicappedCheckBox);
-        coveredCheckBox = (CheckBox) findViewById(R.id.CoveredCheckBox);
+        handicappedCheckBox = (CheckBox) findViewById(R.id.handicapCheckBox);
+        coveredCheckBox = (CheckBox) findViewById(R.id.coveredCheckBox);
 
         isCovered = false;
         isHandicapped = false;
