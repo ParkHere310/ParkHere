@@ -13,6 +13,8 @@ public class Reservation {
     private Transaction transaction;
     private boolean isRatedAndReviewed;
     private String UID;
+    private long date;
+    private int price;
 
     public Reservation(String ownerUID,
             String seekerUID,
@@ -29,6 +31,21 @@ public class Reservation {
 
     public Reservation() {};
 
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    public int getPrice() {
+        return this.price;
+    }
+
+    public void setDate(long date) {
+        this.date = date;
+    }
+
+    public long getDate() {
+        return this.date;
+    }
 
     public void setParkingSpotUID(String UID) {
 

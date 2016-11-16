@@ -229,8 +229,11 @@ public class RentSpotActivity extends Activity {
                             });*/
                             Reservation res = new Reservation(ownerUID, seekerUID,
                                     parkingSpotUID, null);
-
-
+                            res.setPrice(parkingSpot.getPrice());
+                            res.setDate(parkingSpot.getTimeWindow().getStartDateTime());
+                            System.out.println(res);
+                            System.out.println(res.getDate());
+                            System.out.println(res.getPrice());
                             TransactionConnector.addReservation(res);
 
                         } else if (result.getTransaction() != null) {

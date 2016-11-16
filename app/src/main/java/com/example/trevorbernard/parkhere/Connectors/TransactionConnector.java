@@ -24,7 +24,7 @@ public class TransactionConnector {
                 .child(res.getParkingSpotUID()).child("occupantUID").setValue(res.getSeekerUID());
 
 
-        //TODO: make seeker pay here
+
 
         return true;
     }

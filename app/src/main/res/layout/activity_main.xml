@@ -11,24 +11,6 @@
     tools:context="com.example.trevorbernard.parkhere.MainActivity">
 
     <Button
-        android:text="View Past Reservation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="29dp"
-        android:id="@+id/ViewPastReservationButton"
-        android:layout_below="@+id/CurrentReservationButton"
-        android:layout_centerHorizontal="true" />
-
-    <Button
-        android:text="My Listings"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/ListedSpotPage"
-        android:layout_below="@+id/ViewPastReservationButton"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="17dp" />
-
-    <Button
         android:text="Post Page"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -38,7 +20,7 @@
         android:layout_centerHorizontal="true" />
 
     <Button
-        android:text="Current Reservation"
+        android:text="Current Reservations"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/CurrentReservationButton"
@@ -56,21 +38,47 @@
         android:layout_marginBottom="17dp" />
 
     <Button
-        android:text="Search"
+        android:text="View Past Reservations"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="21dp"
-        android:id="@+id/SearchButton"
-        android:layout_below="@+id/ListedSpotPage"
+        android:layout_marginTop="11dp"
+        android:id="@+id/ViewPastReservationButton"
+        android:layout_below="@+id/CurrentReservationButton"
         android:layout_centerHorizontal="true" />
+
+    <Button
+        android:text="My Listings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ListedSpotPage"
+        android:layout_below="@+id/ViewPastReservationButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="14dp" />
+
+    <Button
+        android:text="View Payments"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ViewPaymentsButton"
+        android:layout_below="@+id/ListedSpotPage"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="12dp" />
 
     <Button
         android:text="View Cancellation Policy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/policyButton"
-        android:layout_marginTop="22dp"
         android:layout_below="@+id/SearchButton"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:text="Search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/SearchButton"
+        android:layout_marginTop="12dp"
+        android:layout_below="@+id/ViewPaymentsButton"
         android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

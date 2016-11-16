@@ -197,7 +197,9 @@ public class UserConnector {
         mDatabase.child("Reservations").child(res.getUID()).removeValue();
 
         res.setCompleted(true);
-
+        System.out.println(res);
+        System.out.println(res.getDate());
+        System.out.println(res.getPrice());
         //TODO: PayPal complete Transaction
 
         mDatabase = FirebaseDatabase.getInstance().getReference().getRoot().child("PastReservations")
