@@ -50,8 +50,6 @@ public class PostSpotActivity extends Activity {
         private Button uploadButton;
 
         private EditText title_field;
-        //private EditText startTime_field;
-        //private EditText endTime_field;
 
         private EditText price_field;
         private EditText address_field;
@@ -172,6 +170,14 @@ public class PostSpotActivity extends Activity {
     }
 
     private void initiateVariable() {
+
+        price_field = (EditText) findViewById(R.id.price_field);
+        address_field = (EditText) findViewById(R.id.address_field);
+        description_field = (EditText) findViewById(R.id.description_field);
+        coveredCheckBox = (CheckBox) findViewById(R.id.coveredCheckBox);
+        suvCheckBox = (CheckBox) findViewById(R.id.suvCheckBox);
+        handicappedCheckBox = (CheckBox) findViewById(R.id.handicapCheckBox);
+
         postButton = (Button) findViewById(R.id.postButton);
         uploadButton = (Button) findViewById(R.id.uploadButton);
         title_field = (EditText) findViewById(R.id.title_field);
@@ -180,13 +186,6 @@ public class PostSpotActivity extends Activity {
         endDate_picker = (DatePicker) findViewById(R.id.endDatePicker);
         startTime_picker = (TimePicker) findViewById(R.id.startTime_picker);
         endTime_picker = (TimePicker) findViewById(R.id.endTime_picker);
-
-        price_field = (EditText) findViewById(R.id.price_field);
-        address_field = (EditText) findViewById(R.id.address_field);
-        description_field = (EditText) findViewById(R.id.description_field);
-        coveredCheckBox = (CheckBox) findViewById(R.id.coveredCheckBox);
-        suvCheckBox = (CheckBox) findViewById(R.id.suvCheckBox);
-        handicappedCheckBox = (CheckBox) findViewById(R.id.handicapCheckBox);
 
     }
 
