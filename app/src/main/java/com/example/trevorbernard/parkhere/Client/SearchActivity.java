@@ -60,6 +60,7 @@ public class SearchActivity extends Activity { //extends FragmentActivity implem
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
         */
+        
     }
 
     //Google Map API
