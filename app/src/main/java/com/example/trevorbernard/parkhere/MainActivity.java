@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     private Button logoutButton;
     private Button policyButton;
     private Button paymentsButton;
+    private Button physicalSpotsButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -141,6 +142,15 @@ public class MainActivity extends AppCompatActivity {
             }
 
         }));
+
+        physicalSpotsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Make Activity
+                //Intent myIntent = new Intent(MainActivity.this, ViewPhysicalSpotsActivity.class);
+                //MainActivity.this.startActivity(myIntent);
+            }
+        });
     }
 
     private void InitializeVariables() {
@@ -152,6 +162,7 @@ public class MainActivity extends AppCompatActivity {
         logoutButton = (Button) findViewById(R.id.logoutButton);
         policyButton = (Button) findViewById(R.id.policyButton);
         paymentsButton = (Button) findViewById(R.id.ViewPaymentsButton);
+        physicalSpotsButton = (Button) findViewById(R.id.PhysicalSpotsButton);
 
     }
 

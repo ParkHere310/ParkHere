@@ -134,13 +134,24 @@ public class UserConnector {
         return true;
     }
 
-    public static boolean addRatingToSpot(String reviewedUID, int num){
-        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-        mDatabase.child("ParkingSpots").child(reviewedUID).child("rating");
-        ParkingSpot spot = SpotConnector.getParkingSpotFromUID(reviewedUID);
-        Rating rating = spot.getRating();
-        rating.addRating(num);
-        mDatabase.setValue(rating);
+    public static boolean addRatingToSpot(final String reviewedUID, final int num){
+        final DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+        mDatabase.child("PhysicalSpots").child(reviewedUID).child("rating").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot data : dataSnapshot.getChildren()) {
+                    Rating rating = data.getValue(Rating.class);
+                    rating.addRating(num);
+                    FirebaseDatabase.getInstance().getReference().child("PhysicalSpots").child(reviewedUID)
+                            .child("rating").setValue(rating);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
         return true;
     }
 

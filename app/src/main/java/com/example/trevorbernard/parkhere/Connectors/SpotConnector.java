@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.support.annotation.NonNull;
 
 import com.example.trevorbernard.parkhere.ParkingSpot.ParkingSpot;
+import com.example.trevorbernard.parkhere.ParkingSpot.PhysicalSpot;
 import com.example.trevorbernard.parkhere.User.User;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -100,15 +101,111 @@ public class SpotConnector {
         return true;
     }
 
+    public static boolean postPhysicalSpot(ParkingSpot spot) {
+        /*
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        pic.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] data = baos.toByteArray();
+        final ArrayList<String> downloadUrls = new ArrayList<String>();
+        // puts byte array in storage
+        StorageReference storageRef = FirebaseStorage.getInstance().getReferenceFromUrl("gs://parkhere-70b24.appspot.com");
+        StorageReference imagesRef = storageRef.child("ProfilePics").child(user.getUid());
+        UploadTask uploadTask = imagesRef.putBytes(data);
+        uploadTask.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                // Handle unsuccessful uploads
+            }
+        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
+                Uri downloadUrl = taskSnapshot.getDownloadUrl();
+                downloadUrls.add(downloadUrl.toString());
+            }
+        });
+
+        if(downloadUrls.isEmpty()){
+            downloadUrls.add("-1");
+        }
+         */
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+        String uid = mDatabase.child("PhysicalSpots").push().getKey(); //gets new unique id
+        spot.setUID(uid);
+        mDatabase.child("PhysicalSpots").child(uid).setValue(spot);
+        return true;
+    }
+
+    public static boolean postPhysicalSpot(ParkingSpot spot, Bitmap pic) {
+
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+        String uid = mDatabase.child("PhysicalSpots").push().getKey(); //gets new unique id
+
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        pic.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] data = baos.toByteArray();
+        final ArrayList<String> downloadUrls = new ArrayList<String>();
+        // puts byte array in storage
+        StorageReference storageRef = FirebaseStorage.getInstance().getReferenceFromUrl("gs://parkhere-70b24.appspot.com");
+        StorageReference imagesRef = storageRef.child("SpotPics").child(uid);
+        UploadTask uploadTask = imagesRef.putBytes(data);
+        uploadTask.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                // Handle unsuccessful uploads
+            }
+        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
+                Uri downloadUrl = taskSnapshot.getDownloadUrl();
+                downloadUrls.add(downloadUrl.toString());
+            }
+        });
+
+        if(downloadUrls.isEmpty()){
+            downloadUrls.add("-1");
+        }
+        spot.setImageURL(downloadUrls.get(0));
+
+        spot.setUID(uid);
+        mDatabase.child("PhysicalSpots").child(uid).setValue(spot);
+        return true;
+    }
+
     public static boolean editSpot(ParkingSpot spot) {
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
         mDatabase.child("ParkingSpots").child(spot.getUID()).setValue(spot);
         return true;
     }
 
+    public static boolean editPhysicalSpot(PhysicalSpot spot) {
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+        mDatabase.child("PhysicalSpots").child(spot.getUID()).setValue(spot);
+        return true;
+    }
+
     public static boolean removeSpot(ParkingSpot spot, User user) {
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
         mDatabase.child("ParkingSpots").child(spot.getUID()).setValue(null);
+        return true;
+    }
+
+    public static boolean removePhysicalSpot(PhysicalSpot spot, User user) {
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+        mDatabase.child("PhysicalSpots").child(spot.getUID()).setValue(null);
+        return true;
+    }
+
+    public static boolean removePhysicalSpot(PhysicalSpot spot) {
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+        mDatabase.child("PhysicalSpots").child(spot.getUID()).setValue(null);
+        return true;
+    }
+
+    public static boolean removePhysicalSpot(String spot) {
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+        mDatabase.child("PhysicalSpots").child(spot).setValue(null);
         return true;
     }
 

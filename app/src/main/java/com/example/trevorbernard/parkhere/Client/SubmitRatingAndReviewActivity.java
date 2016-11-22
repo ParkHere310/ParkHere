@@ -54,7 +54,7 @@ public class SubmitRatingAndReviewActivity extends Activity{
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                spotComment = EditTextSpotComment.toString();
+                spotComment = EditTextSpotComment.getText().toString();
             }
 
             @Override
@@ -72,7 +72,7 @@ public class SubmitRatingAndReviewActivity extends Activity{
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                userComment = EditTextUserComment.toString();
+                userComment = EditTextUserComment.getText().toString();
             }
 
             @Override

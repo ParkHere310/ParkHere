@@ -47,15 +47,6 @@
         android:layout_centerHorizontal="true" />
 
     <Button
-        android:text="My Listings"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/ListedSpotPage"
-        android:layout_below="@+id/ViewPastReservationButton"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="14dp" />
-
-    <Button
         android:text="View Payments"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -80,5 +71,23 @@
         android:layout_marginTop="12dp"
         android:layout_below="@+id/ViewPaymentsButton"
         android:layout_centerHorizontal="true" />
+
+    <Button
+        android:text="My Listings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ListedSpotPage"
+        android:layout_marginTop="17dp"
+        android:layout_below="@+id/ViewPastReservationButton"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="38dp" />
+
+    <Button
+        android:text="My Spots"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/PhysicalSpotsButton"
+        android:layout_above="@+id/ViewPaymentsButton"
+        android:layout_toEndOf="@+id/SearchButton" />
 
 </RelativeLayout>
