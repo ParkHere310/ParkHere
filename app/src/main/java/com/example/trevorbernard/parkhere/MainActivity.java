@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.trevorbernard.parkhere.Client.LoginActivity;
+import com.example.trevorbernard.parkhere.Client.PhysicalSpotListActivity;
 import com.example.trevorbernard.parkhere.Client.ViewCurrentReservationActivity;
 import com.example.trevorbernard.parkhere.Client.ViewPastReservationActivity;
 import com.example.trevorbernard.parkhere.Client.PostSpotActivity;
@@ -147,8 +148,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Make Activity
-                //Intent myIntent = new Intent(MainActivity.this, ViewPhysicalSpotsActivity.class);
-                //MainActivity.this.startActivity(myIntent);
+                Intent myIntent = new Intent(MainActivity.this, PhysicalSpotListActivity.class);
+                MainActivity.this.startActivity(myIntent);
             }
         });
     }
