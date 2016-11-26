@@ -5,7 +5,9 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
 
         <TextView
             android:layout_width="wrap_content"
@@ -24,125 +26,26 @@
             android:layout_centerHorizontal="true"
             android:id="@+id/imageView" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:id="@+id/actual_date"
-            android:text="Date here"
-            android:layout_below="@+id/imageView"
-            android:layout_alignEnd="@+id/title" />
-
-        <TextView
-            android:text="to"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="13dp"
-            android:id="@+id/to_view"
-            android:layout_below="@+id/actual_date"
-            android:layout_centerHorizontal="true" />
-
-        <TextView
-            android:text="Start time here"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/to_view"
-            android:layout_toStartOf="@+id/to_view"
-            android:layout_marginEnd="12dp"
-            android:id="@+id/startTime" />
-
-        <TextView
-            android:text="End time here"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/to_view"
-            android:layout_toEndOf="@+id/to_view"
-            android:layout_marginStart="13dp"
-            android:id="@+id/endTime" />
-
-        <TextView
-            android:text="Date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/actual_date"
-            android:layout_alignStart="@+id/startTime"
-            android:id="@+id/date_label" />
-
-        <TextView
-            android:text="$"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/price_label"
-            android:layout_alignBaseline="@+id/actual_price"
-            android:layout_alignBottom="@+id/actual_price"
-            android:layout_toEndOf="@+id/date_label"
-            android:layout_alignStart="@+id/startTime" />
 
         <TextView
             android:text="Description Here"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/address_label"
-            android:layout_alignStart="@+id/address_label"
-            android:layout_marginTop="22dp"
             android:id="@+id/actual_description"
-            android:layout_alignEnd="@+id/endTime"
-            android:layout_above="@+id/editButton" />
+            android:layout_above="@+id/editButton"
+            android:layout_below="@+id/address_label"
+            android:layout_alignEnd="@+id/editButton"
+            android:layout_alignStart="@+id/removeButton" />
 
-        <TextView
-            android:text="Price here"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="17dp"
-            android:id="@+id/actual_price"
-            android:layout_below="@+id/startTime"
-            android:layout_toEndOf="@+id/price_label" />
-
-        <TextView
-            android:text="Description:"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/address_label"
-            android:layout_marginTop="12dp"
-            android:layout_below="@+id/isHandicapped"
-            android:layout_toStartOf="@+id/imageView" />
-
-        <TextView
-            android:text="Type Here"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/isType"
-            android:layout_alignBaseline="@+id/isHandicapped"
-            android:layout_alignBottom="@+id/isHandicapped"
-            android:layout_alignEnd="@+id/endTime" />
-
-        <TextView
-            android:text="Handicap Here"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="11dp"
-            android:id="@+id/isHandicapped"
-            android:layout_below="@+id/actual_price"
-            android:layout_toStartOf="@+id/actual_date" />
-
-        <TextView
-            android:text="Covered Here"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="85dp"
-            android:layout_marginTop="231dp"
-            android:id="@+id/isCovered" />
 
         <Button
             android:text="Edit This Spot"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="11dp"
+            android:layout_marginBottom="13dp"
             android:id="@+id/editButton"
             android:layout_alignParentBottom="true"
-            android:layout_alignEnd="@+id/isHandicapped" />
+            android:layout_toEndOf="@+id/imageView" />
 
         <Button
             android:text="Remove This Spot"
@@ -150,7 +53,52 @@
             android:layout_height="wrap_content"
             android:id="@+id/removeButton"
             android:layout_below="@+id/actual_description"
-            android:layout_toEndOf="@+id/startTime" />
+            android:layout_alignEnd="@+id/title"
+            android:layout_marginEnd="28dp" />
+
+        <TextView
+            android:text="Description:"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/address_label"
+            android:layout_marginTop="11dp"
+            android:layout_below="@+id/isHandicapped"
+            android:layout_alignStart="@+id/actual_description" />
+
+        <TextView
+            android:text="Handicap Here"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/isHandicapped"
+            android:layout_centerVertical="true"
+            android:layout_alignStart="@+id/address_label" />
+
+        <TextView
+            android:text="Address Here"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/address_view"
+            android:layout_below="@+id/imageView"
+            android:layout_alignStart="@+id/isCovered"
+            android:layout_alignEnd="@+id/actual_description" />
+
+        <TextView
+            android:text="Type Here"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/isType"
+            android:layout_above="@+id/isHandicapped"
+            android:layout_alignStart="@+id/isHandicapped"
+            android:layout_marginBottom="12dp" />
+
+        <TextView
+            android:text="Covered Here"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/isCovered"
+            android:layout_below="@+id/address_view"
+            android:layout_alignStart="@+id/isType"
+            android:layout_marginTop="24dp" />
 
     </RelativeLayout>
 </RelativeLayout>
