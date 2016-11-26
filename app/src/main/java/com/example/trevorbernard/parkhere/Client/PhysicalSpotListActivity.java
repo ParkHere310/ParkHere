@@ -5,14 +5,14 @@ package com.example.trevorbernard.parkhere.Client;
  */
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
 
-import com.example.trevorbernard.parkhere.ParkingSpot.ParkingSpot;
-import com.example.trevorbernard.parkhere.ParkingSpot.ParkingSpotDistance;
+import com.example.trevorbernard.parkhere.ParkingSpot.PhysicalSpot;
+import com.example.trevorbernard.parkhere.ParkingSpot.PhysicalSpotDistance;
 import com.example.trevorbernard.parkhere.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -27,15 +27,14 @@ import java.util.ArrayList;
 
 public class PhysicalSpotListActivity extends Activity {
     private Query queryRef;
-    private ArrayList<ParkingSpotDistance> parkingSpotDistances;
+    private ArrayList<PhysicalSpotDistance> parkingSpotDistances;
     private ListView list;
-    private Button newButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_physicalspotlist);
-        parkingSpotDistances = new ArrayList<ParkingSpotDistance>();
+        parkingSpotDistances = new ArrayList<PhysicalSpotDistance>();
         initiateVariables();
 
         //populateListView();
@@ -48,20 +47,10 @@ public class PhysicalSpotListActivity extends Activity {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                /*
-                Intent myIntent = new Intent(ViewListingsActivity.this, ListedSpotActivity.class);
+                Intent myIntent = new Intent(PhysicalSpotListActivity.this, PhysicalListedSpotActivity.class);
                 String spotUID = parkingSpotDistances.get(position).parkingSpot.getUID();
                 myIntent.putExtra("spotUID", spotUID);
-                ViewListingsActivity.this.startActivity(myIntent);
-                */
-            }
-        });
-
-        newButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-               // Intent myIntent = new Intent(PhysicalSpotListActivity.this, PhysicalSpot.class);
-               // PhysicalSpotListActivity.this.startActivity(myIntent);
+                PhysicalSpotListActivity.this.startActivity(myIntent);
             }
         });
 
@@ -80,19 +69,18 @@ public class PhysicalSpotListActivity extends Activity {
 
     private void initiateVariables() {
         list = (ListView) findViewById(R.id.listView);
-        newButton = (Button) findViewById(R.id.new_button);
         /*list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View viewClicked, int position, long id) {
                 TextView clickedTextView = (TextView) viewClicked;
-                Toast.makeText(ViewListingsActivity.this,
-                        "I just clicked on: " + clickedTextView.toString(),Toast.LENGTH_LONG).show();
+                //Toast.makeText(PhysicalSpotListActivity.this,
+                 //       "I just clicked on: " + clickedTextView.toString(),Toast.LENGTH_LONG).show();
             }
         });*/
 
         //final ArrayList<ParkingSpot> spotsList = new ArrayList<ParkingSpot>();
-        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("ParkingSpots");
-        queryRef = mDatabase.orderByChild("ownerUID").equalTo(FirebaseAuth.getInstance().getCurrentUser().getUid()); // limited to 10
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+        queryRef = mDatabase.child("PhysicalSpots").orderByChild("ownerUID").equalTo(FirebaseAuth.getInstance().getCurrentUser().getUid()); // limited to 10
         queryRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -100,9 +88,9 @@ public class PhysicalSpotListActivity extends Activity {
                 double count = 1;
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
                     System.out.println("asdfsafd");
-                    ParkingSpot spot = postSnapshot.getValue(ParkingSpot.class);
+                    PhysicalSpot spot = postSnapshot.getValue(PhysicalSpot.class);
                     //spotsList.add(spot);
-                    ParkingSpotDistance psd = new ParkingSpotDistance();
+                    PhysicalSpotDistance psd = new PhysicalSpotDistance();
                     psd.parkingSpot = spot;
                     psd.distance = count;
                     parkingSpotDistances.add(psd);

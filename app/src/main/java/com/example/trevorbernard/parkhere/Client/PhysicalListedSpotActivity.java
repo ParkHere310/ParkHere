@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.example.trevorbernard.parkhere.Connectors.SpotConnector;
 import com.example.trevorbernard.parkhere.MainActivity;
-import com.example.trevorbernard.parkhere.ParkingSpot.ParkingSpot;
+import com.example.trevorbernard.parkhere.ParkingSpot.PhysicalSpot;
 import com.example.trevorbernard.parkhere.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -17,8 +17,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-
-import java.util.Date;
 
 /**
  * Created by junseob on 11/26/16.
@@ -58,9 +56,7 @@ public class PhysicalListedSpotActivity extends Activity {
 
     private void initiateVariable() {
         title = (TextView)findViewById(R.id.title);
-        date = (TextView)findViewById(R.id.actual_date);
-        startTime = (TextView) findViewById(R.id.startTime);
-        endTime = (TextView) findViewById(R.id.endTime);
+
         type = (TextView) findViewById(R.id.isType);
         handicapped = (TextView) findViewById(R.id.isHandicapped);
         covered = (TextView) findViewById(R.id.isCovered);
@@ -77,13 +73,13 @@ public class PhysicalListedSpotActivity extends Activity {
         System.out.println(spotUID);
 
 
-        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("ParkingSpots");
-        queryRef = mDatabase.orderByChild("uid").equalTo(spotUID);
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+        queryRef = mDatabase.child("PhysicalSpots").orderByChild("uid").equalTo(spotUID);
         queryRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
-                    ParkingSpot spot = postSnapshot.getValue(ParkingSpot.class);
+                    PhysicalSpot spot = postSnapshot.getValue(PhysicalSpot.class);
                     setText(spot);
                 }
             }
@@ -114,13 +110,9 @@ public class PhysicalListedSpotActivity extends Activity {
         });
     }
 
-    private void setText(ParkingSpot mSpot) {
+    private void setText(PhysicalSpot mSpot) {
         //System.out.println("Making GUI");
         title.setText(mSpot.getName());
-        Date start = new Date(mSpot.getTimeWindow().getStartDateTime());
-        Date end = new Date(mSpot.getTimeWindow().getEndDateTime());
-        date.setText(start.getMonth()+ "/" + start.getDate() + "/" + start.getYear());
-        startTime.setText(start.getHours() + ":" + start.getMinutes());
-        endTime.setText(end.getHours() + ":" + end.getMinutes());
+
     }
 }
