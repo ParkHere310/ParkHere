@@ -24,8 +24,8 @@ import com.google.firebase.database.ValueEventListener;
 
 public class PhysicalListedSpotActivity extends Activity {
     private TextView title;
-    private TextView date;
-    private TextView startTime;
+    private TextView address;
+    private TextView description;
     private TextView endTime;
     private TextView type;
     private TextView covered;
@@ -56,6 +56,8 @@ public class PhysicalListedSpotActivity extends Activity {
 
     private void initiateVariable() {
         title = (TextView)findViewById(R.id.title);
+        address = (TextView) findViewById(R.id.address_view);
+        description = (TextView)findViewById(R.id.actual_description);
 
         type = (TextView) findViewById(R.id.isType);
         handicapped = (TextView) findViewById(R.id.isHandicapped);
@@ -95,7 +97,7 @@ public class PhysicalListedSpotActivity extends Activity {
         editButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent myIntent = new Intent(PhysicalListedSpotActivity.this, EditReservationActivity.class);
+                Intent myIntent = new Intent(PhysicalListedSpotActivity.this, EditPhysicalSpotActivity.class);
                 myIntent.putExtra("spot", spotUID);
                 PhysicalListedSpotActivity.this.startActivity(myIntent);
             }
@@ -103,7 +105,7 @@ public class PhysicalListedSpotActivity extends Activity {
         removeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SpotConnector.removeSpot(spotUID);
+                SpotConnector.removePhysicalSpot(spotUID);
                 Intent myIntent = new Intent(PhysicalListedSpotActivity.this, MainActivity.class);
                 PhysicalListedSpotActivity.this.startActivity(myIntent);
             }
@@ -113,6 +115,18 @@ public class PhysicalListedSpotActivity extends Activity {
     private void setText(PhysicalSpot mSpot) {
         //System.out.println("Making GUI");
         title.setText(mSpot.getName());
+        address.setText(mSpot.getAddress());
+        description.setText(mSpot.getDescription());
+
+        if(mSpot.isSUV()) type.setText("SUV");
+        else type.setText("Not SUV");
+
+        if(mSpot.isCovered()) covered.setText("Covered");
+        else covered.setText("Not Covered");
+
+        if(mSpot.isHandicap()) handicapped.setText("Handicapped");
+        else handicapped.setText("Not Handicapped");
+
 
     }
 }

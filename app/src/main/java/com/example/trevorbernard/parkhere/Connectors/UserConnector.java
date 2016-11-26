@@ -180,7 +180,7 @@ public class UserConnector {
 
     public static boolean addReviewToSpot(String reviewedUID, String rev){
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-        String uid = mDatabase.child("ParkingSpots").child(reviewedUID).child("reviews").push().getKey();
+        String uid = mDatabase.child("PhysicalSpots").child(reviewedUID).child("reviews").push().getKey();
         mDatabase.getRoot().child("ParkingSpots").child(reviewedUID).child("reviews").child(uid).setValue(rev);
         return true;
     }
