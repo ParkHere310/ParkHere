@@ -5,7 +5,6 @@ package com.example.trevorbernard.parkhere.Client;
  */
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -14,7 +13,6 @@ import android.widget.ListView;
 
 import com.example.trevorbernard.parkhere.ParkingSpot.ParkingSpot;
 import com.example.trevorbernard.parkhere.ParkingSpot.ParkingSpotDistance;
-import com.example.trevorbernard.parkhere.ParkingSpot.PhysicalSpot;
 import com.example.trevorbernard.parkhere.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -62,8 +60,8 @@ public class PhysicalSpotListActivity extends Activity {
         newButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent myIntent = new Intent(PhysicalSpotListActivity.this, PhysicalSpot.class);
-                PhysicalSpotListActivity.this.startActivity(myIntent);
+               // Intent myIntent = new Intent(PhysicalSpotListActivity.this, PhysicalSpot.class);
+               // PhysicalSpotListActivity.this.startActivity(myIntent);
             }
         });
 

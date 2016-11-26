@@ -73,65 +73,7 @@
                 android:layout_below="@+id/uploadButton"
                 android:layout_alignStart="@+id/pic_textview" />
 
-            <TextView
-                android:text="Enter Start Date Below:"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/startDate_label"
-                android:gravity="center"
-                android:layout_below="@+id/startDatePicker"
-                android:layout_toStartOf="@+id/uploadButton" />
 
-            <DatePicker
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/startDatePicker"
-                android:layout_weight="0.09" />
-
-            <TextView
-                android:text="Enter End Date Below:"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/endDate_label"
-                android:gravity="center"
-                android:layout_below="@+id/endDatePicker"/>
-            //android:layout_toStartOf="@+id/uploadButton
-
-            <DatePicker
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/endDatePicker"
-                android:layout_weight="0.09" />
-
-            <TextView
-                android:text="Enter Start Time Below:"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/startTime_label"
-                android:gravity="center"
-                android:layout_below="@+id/coveredCheckBox"
-                android:layout_toStartOf="@+id/uploadButton" />
-
-            <TimePicker
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/startTime_picker"
-                android:layout_weight="1.64" />
-
-            <TextView
-                android:text="Enter End Time Below:"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/endTime_label"
-                android:gravity="center"
-                android:layout_below="@+id/coveredCheckBox"
-                android:layout_toStartOf="@+id/uploadButton" />
-
-            <TimePicker
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/endTime_picker"
-                android:layout_weight="1.64" />
 
             <CheckBox
                 android:text="SUV"
@@ -177,7 +119,7 @@
 
 
             <Button
-                android:text="Post"
+                android:text="Post Physical Spot"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/postButton"
