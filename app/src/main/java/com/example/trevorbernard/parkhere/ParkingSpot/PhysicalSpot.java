@@ -4,7 +4,6 @@ import com.example.trevorbernard.parkhere.User.Rating;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -30,13 +29,11 @@ public class PhysicalSpot {
 
     public PhysicalSpot(String name,
                        String description,
-                       int price,
                        boolean isSUV,
                        boolean isCovered,
                        boolean isHandicap,
                        String address,
-                       Date start,
-                       Date end, double latitude, double longitude){
+                       double latitude, double longitude){
 
         // private String imageURL; need to add in later some how
 

@@ -17,7 +17,7 @@ import android.widget.EditText;
 
 import com.example.trevorbernard.parkhere.Connectors.SpotConnector;
 import com.example.trevorbernard.parkhere.MainActivity;
-import com.example.trevorbernard.parkhere.ParkingSpot.ParkingSpot;
+import com.example.trevorbernard.parkhere.ParkingSpot.PhysicalSpot;
 import com.example.trevorbernard.parkhere.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -64,14 +64,14 @@ public class EditPhysicalSpotActivity extends Activity {
     static final int REQUEST_IMAGE_SPOT = 1;
 
     String spotUID;
-    ParkingSpot mSpot;
+    PhysicalSpot mSpot;
 
     public EditPhysicalSpotActivity() {
     }
 
 
 
-    void editReservationFromGUI(
+    void editPhysicalSpotFromGUI(
             String name,
             String description,
 
@@ -93,7 +93,7 @@ public class EditPhysicalSpotActivity extends Activity {
         }
         //make new spot
         //the parking spot itself will add the seller user to the class
-        ParkingSpot spot = mSpot;
+        PhysicalSpot spot = mSpot;
 
         spot.setName(name);
         spot.setDescription(description);
@@ -104,7 +104,7 @@ public class EditPhysicalSpotActivity extends Activity {
         spot.setLatitude(latitude);
         spot.setLongitude(longitude);
 
-        SpotConnector.editSpot(spot);
+        SpotConnector.editPhysicalSpot(spot);
 
         //   SpotConnector.EditReservation(spot);
     }
@@ -138,13 +138,13 @@ public class EditPhysicalSpotActivity extends Activity {
         isCovered = false;
         isHandicapped = false;
 
-        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("ParkingSpots");
-        Query queryRef = mDatabase.orderByChild("uid").equalTo(spotUID);
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+        Query queryRef = mDatabase.child("PhysicalSpots").orderByChild("uid").equalTo(spotUID);
         queryRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
-                    ParkingSpot spot = postSnapshot.getValue(ParkingSpot.class);
+                    PhysicalSpot spot = postSnapshot.getValue(PhysicalSpot.class);
                     makeGui(spot);
                 }
             }
@@ -215,7 +215,7 @@ public class EditPhysicalSpotActivity extends Activity {
         postButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-/*
+
                 String title = title_field.getText().toString();
                 String address = address_field.getText().toString();
 
@@ -246,18 +246,18 @@ public class EditPhysicalSpotActivity extends Activity {
                 */
 
 
-/*
-                    editReservationFromGUI(
-                            EditPhysicalSpotActivity.this.title,
-                            EditPhysicalSpotActivity.this.description,
+
+                    editPhysicalSpotFromGUI(
+                            title,
+                            description,
                             EditPhysicalSpotActivity.this.isSUV,
                             EditPhysicalSpotActivity.this.isCovered,
                             EditPhysicalSpotActivity.this.isHandicapped,
-                            EditPhysicalSpotActivity.this.address
+                            address
 
                     );
 
-*/
+
                     Intent myIntent = new Intent(EditPhysicalSpotActivity.this, MainActivity.class);
                     EditPhysicalSpotActivity.this.startActivity(myIntent);
 
@@ -325,7 +325,7 @@ public class EditPhysicalSpotActivity extends Activity {
         }
     }
 
-    private void makeGui(ParkingSpot spot) {
+    private void makeGui(PhysicalSpot spot) {
         title_field.setText(spot.getName());
         address_field.setText(spot.getAddress());
         description_field.setText(spot.getDescription());
