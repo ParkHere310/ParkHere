@@ -50,7 +50,7 @@ public class SearchHeatMapActivity extends Activity{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_searchresult);
+        setContentView(R.layout.activity_searchheatmap);
 
         initiateVariables();
         CreateOnlickCallback();
