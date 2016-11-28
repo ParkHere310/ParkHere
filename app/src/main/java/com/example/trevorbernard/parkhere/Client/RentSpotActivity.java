@@ -12,9 +12,11 @@ import com.braintreegateway.Result;
 import com.braintreegateway.TransactionRequest;
 import com.braintreegateway.ValidationError;
 import com.braintreepayments.api.PaymentRequest;
+import com.example.trevorbernard.parkhere.Connectors.SpotConnector;
 import com.example.trevorbernard.parkhere.Connectors.TransactionConnector;
 import com.example.trevorbernard.parkhere.MainActivity;
 import com.example.trevorbernard.parkhere.ParkingSpot.ParkingSpot;
+import com.example.trevorbernard.parkhere.ParkingSpot.TimeWindow;
 import com.example.trevorbernard.parkhere.R;
 import com.example.trevorbernard.parkhere.Reservation.Reservation;
 import com.example.trevorbernard.parkhere.Reservation.Transaction;
@@ -29,6 +31,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Created by Hexi on 2016/10/23.
@@ -47,9 +50,13 @@ public class RentSpotActivity extends Activity {
     String spotUID;
     ParkingSpot parkingSpot;
 
+
     String seekerUID;
     String ownerUID;
     String parkingSpotUID;
+    long startLongFromIntent;
+    long endLongFromIntent;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -89,6 +96,9 @@ public class RentSpotActivity extends Activity {
         //Grab info from previous activity
         distance = RentSpotActivity.this.getIntent().getExtras().getString("distance");
         spotUID = RentSpotActivity.this.getIntent().getExtras().getString("spotUID");
+
+        startLongFromIntent = RentSpotActivity.this.getIntent().getExtras().getLong("startDateLong");
+        endLongFromIntent =   RentSpotActivity.this.getIntent().getExtras().getLong("endDateLong");
 
 
         //set up widgets
@@ -171,6 +181,46 @@ public class RentSpotActivity extends Activity {
 
     }
 
+    private void splitParkingSpot(ParkingSpot originalSpot) {
+        // create new spot before, 10 minute buffer
+        if(startLongFromIntent > originalSpot.getTimeWindow().getStartDateTime() + 600000L) {
+
+
+            ParkingSpot beforeSpot = new ParkingSpot(originalSpot.getName(),originalSpot.getDescription(),
+                    originalSpot.getPrice(),originalSpot.isSUV(),originalSpot.isCovered(),originalSpot.isHandicap(),
+                    originalSpot.getAddress(), new Date(originalSpot.getTimeWindow().getStartDateTime()),
+                    new Date(originalSpot.getTimeWindow().getEndDateTime()),originalSpot.getLatitude(),
+                    originalSpot.getLongitude());
+            beforeSpot.setImageURL(originalSpot.getImageURL());
+            beforeSpot.setPhysicalSpotUID(originalSpot.getPhysicalSpotUID());
+            beforeSpot.setOwnerUID(originalSpot.getOwnerUID());
+            TimeWindow beforeTimeWindow = originalSpot.getTimeWindow();
+            // 10 min buffer
+            beforeTimeWindow.setEndDateTime(startLongFromIntent - 600000L);
+            beforeSpot.setTimeWindow(beforeTimeWindow);
+            SpotConnector.postSpot(beforeSpot);
+        }
+        // create new spot after, 10 minute buffer
+        if(endLongFromIntent < originalSpot.getTimeWindow().getEndDateTime() - 600000L) {
+            ParkingSpot afterSpot = new ParkingSpot(originalSpot.getName(),originalSpot.getDescription(),
+                    originalSpot.getPrice(),originalSpot.isSUV(),originalSpot.isCovered(),originalSpot.isHandicap(),
+                    originalSpot.getAddress(), new Date(originalSpot.getTimeWindow().getStartDateTime()),
+                    new Date(originalSpot.getTimeWindow().getEndDateTime()),originalSpot.getLatitude(),
+                    originalSpot.getLongitude());
+            afterSpot.setImageURL(originalSpot.getImageURL());
+            afterSpot.setPhysicalSpotUID(originalSpot.getPhysicalSpotUID());
+            afterSpot.setOwnerUID(originalSpot.getOwnerUID());
+            TimeWindow beforeTimeWindow = originalSpot.getTimeWindow();
+            // 10 min buffer
+            beforeTimeWindow.setEndDateTime(startLongFromIntent - 600000L);
+            afterSpot.setTimeWindow(beforeTimeWindow);
+            SpotConnector.postSpot(afterSpot);
+
+        }
+        //shrink origional spot
+    }
+
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 1) {
@@ -230,11 +280,12 @@ public class RentSpotActivity extends Activity {
                             Reservation res = new Reservation(ownerUID, seekerUID,
                                     parkingSpotUID, null);
                             res.setPrice(parkingSpot.getPrice());
-                            res.setDate(parkingSpot.getTimeWindow().getStartDateTime());
+                            res.setDate(startLongFromIntent);
                             System.out.println(res);
                             System.out.println(res.getDate());
                             System.out.println(res.getPrice());
                             TransactionConnector.addReservation(res);
+                            splitParkingSpot(parkingSpot);
 
                         } else if (result.getTransaction() != null) {
                             com.braintreegateway.Transaction transaction = result.getTransaction();
