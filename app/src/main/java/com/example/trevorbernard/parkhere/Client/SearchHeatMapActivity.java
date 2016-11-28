@@ -57,13 +57,14 @@ public class SearchHeatMapActivity extends Activity{
     }
 
     private void initiateVariables() {
+        //Instantiate variables and Arraylists
         heatMapListView = (ListView) findViewById(R.id.HeatMapListView);
         physicalSpots = new ArrayList<PhysicalSpot>();
         physicalSpotNames = new ArrayList<String>();
         Intent previousIntent = getIntent();
         address = previousIntent.getExtras().getString("address");
 
-
+        //find the longitude and latitude of the address
         Location source = new Location("");
         Locale current = getResources().getConfiguration().locale;
         Geocoder geocoder = new Geocoder(this,current);
@@ -84,6 +85,7 @@ public class SearchHeatMapActivity extends Activity{
             ioe.printStackTrace();
         }
 
+        //look for physical spots that are close to that location
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
         queryRef = mDatabase.child("PhysicalSpots").orderByChild("longitude").startAt(longitude - 0.36).endAt(longitude + 0.36);
         queryRef.addValueEventListener(new ValueEventListener() {

@@ -121,6 +121,7 @@ public class SearchActivity extends Activity { //extends FragmentActivity implem
             public void onClick(View v) {
                 Intent myIntent = new Intent(SearchActivity.this, SearchHeatMapActivity.class);
                 myIntent.putExtra("address",address);
+                SearchActivity.this.startActivity(myIntent);
             }
         });
 
