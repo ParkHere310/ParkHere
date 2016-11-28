@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import com.example.trevorbernard.parkhere.Client.LoginActivity;
 import com.example.trevorbernard.parkhere.Client.PhysicalSpotListActivity;
+import com.example.trevorbernard.parkhere.Client.PostSpotHelperActivity;
 import com.example.trevorbernard.parkhere.Client.ViewCurrentReservationActivity;
 import com.example.trevorbernard.parkhere.Client.ViewPastReservationActivity;
 import com.example.trevorbernard.parkhere.Client.PostSpotActivity;
@@ -74,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
         postPageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent myIntent = new Intent(MainActivity.this, PostSpotActivity.class);
+                Intent myIntent = new Intent(MainActivity.this, PostSpotHelperActivity.class);
                 MainActivity.this.startActivity(myIntent);
             }
         });

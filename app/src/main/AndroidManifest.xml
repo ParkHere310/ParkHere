@@ -25,6 +25,7 @@
         <activity android:name=".Client.ViewPastReservationActivity"></activity>
         <activity android:name=".Client.SubmitRatingAndReviewActivity"></activity>
         <activity android:name=".Client.PostSpotActivity"></activity>
+        <activity android:name=".Client.PostSpotHelperActivity"></activity>
         <activity android:name=".Client.ListedSpotActivity"></activity>
         <activity android:name=".Client.ViewListingsActivity"></activity>
         <activity android:name=".Client.PastReservedSpotActivity"></activity>
