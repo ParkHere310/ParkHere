@@ -308,6 +308,7 @@ public class PostSpotActivity extends Activity {
                             Toast.LENGTH_LONG).show();
                     //call pop up message telling them that the end time must be greater than start time
                 } else {
+                    createNewPhysicalSpotInDatabase();
                     postSpotFromGUI(
                             PostSpotActivity.this.title,
                             PostSpotActivity.this.description,
@@ -326,6 +327,7 @@ public class PostSpotActivity extends Activity {
                 }
             }
         });
+
     }
 
 
@@ -532,6 +534,54 @@ public class PostSpotActivity extends Activity {
             Bundle extras = data.getExtras();
             spotPic = (Bitmap) extras.get("data");
         }
+    }
+
+    private void createNewPhysicalSpotInDatabase() {
+        double latitude = -1;
+        double longitude = -1;
+        try {
+            Geocoder geocoder = new Geocoder(this);
+            List<Address> codedAddress = geocoder.getFromLocationName(address,5);
+            latitude = codedAddress.get(0).getLatitude();
+            longitude = codedAddress.get(0).getLongitude();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        //make new spot
+        //the parking spot itself will add the seller user to the class
+        PhysicalSpot spot = new PhysicalSpot(title,
+                description, isSUV, isCovered, isHandicapped, address,latitude,longitude);
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+        String uid = mDatabase.child("PhysicalSpots").push().getKey(); //gets new unique id
+
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        if(spotPic != null) { spotPic.compress(Bitmap.CompressFormat.JPEG, 100, baos); }
+        byte[] data = baos.toByteArray();
+        final ArrayList<String> downloadUrls = new ArrayList<String>();
+        // puts byte array in storage
+        StorageReference storageRef = FirebaseStorage.getInstance().getReferenceFromUrl("gs://parkhere-70b24.appspot.com");
+        StorageReference imagesRef = storageRef.child("SpotPics").child(uid);
+        uploadTask = imagesRef.putBytes(data);
+        uploadTask.addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception exception) {
+                    // Handle unsuccessful uploads
+                }
+            }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
+                    Uri downloadUrl = taskSnapshot.getDownloadUrl();
+                    downloadUrls.add(downloadUrl.toString());
+                }
+            });
+        if(downloadUrls.isEmpty()){
+            downloadUrls.add("-1");
+        }
+        spot.setImageURL(downloadUrls.get(0));
+
+        spot.setUID(uid);
+        mDatabase.child("PhysicalSpots").child(uid).setValue(spot);
     }
 }
 
