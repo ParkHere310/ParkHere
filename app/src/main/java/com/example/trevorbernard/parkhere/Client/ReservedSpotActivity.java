@@ -107,6 +107,7 @@ public class ReservedSpotActivity extends Activity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
+
                     Reservation res = postSnapshot.getValue(Reservation.class);
                     setText(res);
                 }
@@ -138,6 +139,8 @@ public class ReservedSpotActivity extends Activity {
         checkinButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // TODO:If Statement here to ensure current time is after the reservation's end time
+                // Will System.currentTimeMillis() work???
                 UserConnector.checkIn(mReservation);
                 Intent myIntent = new Intent(ReservedSpotActivity.this, MainActivity.class);
                 ReservedSpotActivity.this.startActivity(myIntent);

@@ -27,6 +27,8 @@ public class PhysicalSpot {
     private String UID;
     private String ownerUID;
 
+    private int timesListed = 0;
+
     public PhysicalSpot(String name,
                        String description,
                        boolean isSUV,
@@ -156,5 +158,15 @@ public class PhysicalSpot {
         this.ownerUID = ownerUID;
     }
 
+    public int getTimesListed() {
+        return timesListed;
+    }
 
+    public void setTimesListed(int timesListed) {
+        this.timesListed = timesListed;
+    }
+
+    public void incrementTimesListed() {
+        timesListed++;
+    }
 }
