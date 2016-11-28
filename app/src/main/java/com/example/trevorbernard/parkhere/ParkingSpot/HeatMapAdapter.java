@@ -46,7 +46,6 @@ public class HeatMapAdapter extends ArrayAdapter<PhysicalSpot> {
                 convertView.setBackgroundColor(Color.GREEN);
             }
             else if(heatNum < 3 &&  heatNum > 0){
-
                 convertView.setBackgroundColor(Color.YELLOW);
             }
             else {
