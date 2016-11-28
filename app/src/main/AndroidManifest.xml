@@ -21,6 +21,7 @@
         <activity android:name=".Client.FilterActivity"></activity>
         <activity android:name=".Client.LoginActivity"></activity>
         <activity android:name=".Client.RegisterActivity"></activity>
+        <activity android:name=".Client.PhysicalSpotListActivity"></activity>
         <activity android:name=".Client.SearchResultActivity"></activity>
         <activity android:name=".Client.ViewPastReservationActivity"></activity>
         <activity android:name=".Client.SubmitRatingAndReviewActivity"></activity>
