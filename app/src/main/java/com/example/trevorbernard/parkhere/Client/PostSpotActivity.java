@@ -308,7 +308,6 @@ public class PostSpotActivity extends Activity {
                             Toast.LENGTH_LONG).show();
                     //call pop up message telling them that the end time must be greater than start time
                 } else {
-                    createNewPhysicalSpotInDatabase();
                     postSpotFromGUI(
                             PostSpotActivity.this.title,
                             PostSpotActivity.this.description,
@@ -456,6 +455,7 @@ public class PostSpotActivity extends Activity {
                             Toast.LENGTH_LONG).show();
                     //call pop up message telling them that the end time must be greater than start time
                 } else {
+                    createNewPhysicalSpotInDatabase();
                     postSpotFromGUI(
                             PostSpotActivity.this.title,
                             PostSpotActivity.this.description,
