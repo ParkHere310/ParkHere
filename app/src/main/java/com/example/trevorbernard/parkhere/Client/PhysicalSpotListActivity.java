@@ -70,7 +70,7 @@ public class PhysicalSpotListActivity extends Activity {
 
 
     private void initiateVariables() {
-        list = (ListView) findViewById(R.id.listView);
+        list = (ListView) findViewById(R.id.list);
         /*list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View viewClicked, int position, long id) {
