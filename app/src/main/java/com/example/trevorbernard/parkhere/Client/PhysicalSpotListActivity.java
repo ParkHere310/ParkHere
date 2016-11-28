@@ -52,6 +52,7 @@ public class PhysicalSpotListActivity extends Activity {
                 Intent myIntent = new Intent(PhysicalSpotListActivity.this, PhysicalListedSpotActivity.class);
                 String spotUID = physicalSpotDistances.get(position).parkingSpot.getUID();
                 myIntent.putExtra("spotUID", spotUID);
+                myIntent.putExtra("editable", true);
                 PhysicalSpotListActivity.this.startActivity(myIntent);
             }
         });

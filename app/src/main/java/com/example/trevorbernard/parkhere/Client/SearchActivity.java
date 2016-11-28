@@ -54,6 +54,7 @@ public class SearchActivity extends Activity { //extends FragmentActivity implem
     private int endMin;
 
     Button searchButton;
+    Button searchHeatMaoButton;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -97,6 +98,7 @@ public class SearchActivity extends Activity { //extends FragmentActivity implem
 
     private void initiateVariable() {
         searchButton = (Button) findViewById(R.id.searchButton);
+        searchHeatMaoButton = (Button) findViewById(R.id.searchHeatMapButton);
         ETaddress = (EditText) findViewById(R.id.address_field);
 
         startDate_picker = (DatePicker) findViewById(R.id.startDatePicker);
@@ -114,6 +116,14 @@ public class SearchActivity extends Activity { //extends FragmentActivity implem
     }
 
     private void CreateOnclickCallback() {
+        searchHeatMaoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(SearchActivity.this, SearchHeatMapActivity.class);
+                myIntent.putExtra("address",address);
+            }
+        });
+
         //When search button is clicked
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override

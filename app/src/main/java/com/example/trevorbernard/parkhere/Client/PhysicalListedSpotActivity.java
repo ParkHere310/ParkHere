@@ -73,6 +73,10 @@ public class PhysicalListedSpotActivity extends Activity {
         Intent previousIntent = this.getIntent();
         spotUID = previousIntent.getExtras().getString("spotUID");
         System.out.println(spotUID);
+        if (!previousIntent.getExtras().getBoolean("editable")) {
+            editButton.setEnabled(false);
+            removeButton.setEnabled(false);
+        }
 
 
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();

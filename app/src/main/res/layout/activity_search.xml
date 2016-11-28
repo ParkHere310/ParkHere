@@ -125,6 +125,13 @@
                 android:layout_alignEnd="@+id/description_field"
                 android:layout_marginBottom="29dp" />
 
+            <Button
+                android:text="Search Heat Map"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/searchHeatMapButton"
+                android:layout_weight="1.64" />
+
 
         </LinearLayout>
 
