@@ -87,6 +87,9 @@ public class ViewCurrentReservationActivity extends Activity {
                 Intent myIntent = new Intent(ViewCurrentReservationActivity.this, ReservedSpotActivity.class);
                 String spotUID = parkingSpotReservations.get(position).reservation.getUID();
                 myIntent.putExtra("reservationID", spotUID);
+                System.out.println("@@@@@@@@@@");
+                System.out.println(spotUID);
+                System.out.println("@@@@@@@@@@");
                 ViewCurrentReservationActivity.this.startActivity(myIntent);
             }
         });

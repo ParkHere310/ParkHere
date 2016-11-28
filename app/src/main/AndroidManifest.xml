@@ -21,16 +21,19 @@
         <activity android:name=".Client.FilterActivity"></activity>
         <activity android:name=".Client.LoginActivity"></activity>
         <activity android:name=".Client.RegisterActivity"></activity>
+        <activity android:name=".Client.PhysicalSpotListActivity"></activity>
         <activity android:name=".Client.SearchResultActivity"></activity>
         <activity android:name=".Client.ViewPastReservationActivity"></activity>
         <activity android:name=".Client.SubmitRatingAndReviewActivity"></activity>
         <activity android:name=".Client.PostSpotActivity"></activity>
+        <activity android:name=".Client.PostSpotHelperActivity"></activity>
         <activity android:name=".Client.ListedSpotActivity"></activity>
         <activity android:name=".Client.ViewListingsActivity"></activity>
         <activity android:name=".Client.PastReservedSpotActivity"></activity>
         <activity android:name=".Client.ViewCurrentReservationActivity"></activity>
         <activity android:name=".Client.ReservedSpotActivity"></activity>
         <activity android:name=".Client.EditReservationActivity"></activity>
+        <activity android:name=".Client.ViewPaymentsActivity"></activity>
 
         <uses-permission android:name="android.permission.INTERNET"/>
         <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>

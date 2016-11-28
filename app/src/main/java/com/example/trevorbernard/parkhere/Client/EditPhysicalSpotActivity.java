@@ -13,14 +13,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.TimePicker;
-import android.widget.Toast;
 
 import com.example.trevorbernard.parkhere.Connectors.SpotConnector;
 import com.example.trevorbernard.parkhere.MainActivity;
-import com.example.trevorbernard.parkhere.ParkingSpot.ParkingSpot;
+import com.example.trevorbernard.parkhere.ParkingSpot.PhysicalSpot;
 import com.example.trevorbernard.parkhere.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -31,50 +28,29 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.io.IOException;
-import java.util.Date;
 import java.util.List;
 
+
 /**
- * Created by junseob on 10/30/16.
+ * Created by junseob on 11/26/16.
  */
 
-public class EditReservationActivity extends Activity {
+public class EditPhysicalSpotActivity extends Activity {
     private Button postButton;
     private Button uploadButton;
 
     private EditText title_field;
-    //private EditText startTime_field;
-    //private EditText endTime_field;
 
-    private EditText price_field;
+
+
     private EditText address_field;
     private EditText description_field;
     private CheckBox suvCheckBox;
     private CheckBox coveredCheckBox;
     private CheckBox handicappedCheckBox;
 
-    private DatePicker startDate_picker;
-    private DatePicker endDate_picker;
-    private TimePicker startTime_picker;
-    private TimePicker endTime_picker;
-    private String date;
-    private String title;
-    private String startTime;
-    private String endTime;
-    private Integer price;
-    private String description;
-    private String address;
 
-    private int startYear;
-    private int startMonth;
-    private int startDay;
-    private int endYear;
-    private int endMonth;
-    private int endDay;
-    private int startHour;
-    private int startMin;
-    private int endHour;
-    private int endMin;
+
 
     private boolean isSUV;
     private boolean isCovered;
@@ -82,29 +58,28 @@ public class EditReservationActivity extends Activity {
 
     private FirebaseAuth.AuthStateListener mAuthListener;
     private FirebaseAuth mAuth;
-    private static final String TAG = "EditReservationActivity";
+    private static final String TAG = "EditPhysicalSpotActivity";
     private Bitmap spotPic = null;
 
     static final int REQUEST_IMAGE_SPOT = 1;
 
     String spotUID;
-    ParkingSpot mSpot;
+    PhysicalSpot mSpot;
 
-    public EditReservationActivity() {
+    public EditPhysicalSpotActivity() {
     }
 
 
 
-    void editReservationFromGUI(
+    void editPhysicalSpotFromGUI(
             String name,
             String description,
-            int price,
+
             boolean isSUV,
             boolean isCovered,
             boolean isHandicap,
-            String address,
-            Date startTime,
-            Date endTime
+            String address
+
     ) {
         double latitude = -1;
         double longitude = -1;
@@ -118,30 +93,27 @@ public class EditReservationActivity extends Activity {
         }
         //make new spot
         //the parking spot itself will add the seller user to the class
-        ParkingSpot spot = mSpot;
+        PhysicalSpot spot = mSpot;
 
         spot.setName(name);
         spot.setDescription(description);
-        spot.setPrice(price);
         spot.setSUV(isSUV);
         spot.setCovered(isCovered);
         spot.setHandicap(isHandicap);
         spot.setAddress(address);
-        spot.getTimeWindow().setStartDateTime(startTime.getTime());
-        spot.getTimeWindow().setEndDateTime(endTime.getTime());
         spot.setLatitude(latitude);
         spot.setLongitude(longitude);
 
-        SpotConnector.editSpot(spot);
+        SpotConnector.editPhysicalSpot(spot);
 
-     //   SpotConnector.EditReservation(spot);
+        //   SpotConnector.EditReservation(spot);
     }
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_editreservation);
+        setContentView(R.layout.activity_editphysicalspot);
 
         initiateVariable();
 
@@ -153,12 +125,6 @@ public class EditReservationActivity extends Activity {
         uploadButton = (Button) findViewById(R.id.uploadButton);
         title_field = (EditText) findViewById(R.id.title_field);
 
-        startDate_picker = (DatePicker) findViewById(R.id.startDatePicker);
-        endDate_picker = (DatePicker) findViewById(R.id.endDatePicker);
-        startTime_picker = (TimePicker) findViewById(R.id.startTime_picker);
-        endTime_picker = (TimePicker) findViewById(R.id.endTime_picker);
-
-        price_field = (EditText) findViewById(R.id.price_field);
         address_field = (EditText) findViewById(R.id.address_field);
         description_field = (EditText) findViewById(R.id.description_field);
         coveredCheckBox = (CheckBox) findViewById(R.id.coveredCheckBox);
@@ -172,13 +138,13 @@ public class EditReservationActivity extends Activity {
         isCovered = false;
         isHandicapped = false;
 
-        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("ParkingSpots");
-        Query queryRef = mDatabase.orderByChild("uid").equalTo(spotUID);
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+        Query queryRef = mDatabase.child("PhysicalSpots").orderByChild("uid").equalTo(spotUID);
         queryRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
-                    ParkingSpot spot = postSnapshot.getValue(ParkingSpot.class);
+                    PhysicalSpot spot = postSnapshot.getValue(PhysicalSpot.class);
                     makeGui(spot);
                 }
             }
@@ -228,23 +194,7 @@ public class EditReservationActivity extends Activity {
             }
         });
 
-        price_field.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
 
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                //iman
-                //String priceStr = price_field.getText().toString();
-                //price = Integer.getInteger(priceStr);
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
         description_field.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -266,50 +216,25 @@ public class EditReservationActivity extends Activity {
             @Override
             public void onClick(View v) {
 
-                title = title_field.getText().toString();
-                address = address_field.getText().toString();
+                String title = title_field.getText().toString();
+                String address = address_field.getText().toString();
 
-                startYear = startDate_picker.getYear();
-                startMonth = startDate_picker.getMonth();
-                startDay = startDate_picker.getDayOfMonth();
 
-                endYear = endDate_picker.getYear();
-                endMonth = endDate_picker.getMonth();
-                endDay = endDate_picker.getDayOfMonth();
 
-                startHour = startTime_picker.getHour();
-                startMin = startTime_picker.getMinute();
 
-                endHour = endTime_picker.getHour();
-                endMin = endTime_picker.getMinute();
 
-/*
-                String monthStr = month_field.getText().toString();
-                month = Integer.parseInt(monthStr);
-                String dayStr = endMin_field.getText().toString();
-                day = Integer.parseInt(dayStr);
-                String endHourStr = endHour_field.getText().toString();
-                endHour = Integer.parseInt(endHourStr);
-                String startHourStr = endHour_field.getText().toString();
-                startHour = Integer.parseInt(startHourStr);
 
-*/
-                String priceStr = price_field.getText().toString();
-                double tmp = Double.parseDouble(priceStr);
-                price = (int) tmp * 100;
 
 
 
                 //String startMinStr = endMin_field.getText().toString();
                 //  startMin = Integer.parseInt(startMinStr);
-                description = description_field.getText().toString();
+                String description = description_field.getText().toString();
 
 
 
 
-                //Post Here
-                Date start = new Date(startYear,startMonth,startDay,startHour,startMin);
-                Date end = new Date(endYear,endMonth,endDay,endHour,endMin);
+
                 /*
                 System.out.println(PostSpotActivity.this.title + " " +
                         PostSpotActivity.this.description + " " +
@@ -320,28 +245,22 @@ public class EditReservationActivity extends Activity {
                         PostSpotActivity.this.address);
                 */
 
-                if(start.getTime() >= end.getTime()) {
-                    Toast.makeText(EditReservationActivity.this, "The end time must be after the start time!",
-                            Toast.LENGTH_LONG).show();
-                    //call pop up message telling them that the end time must be greater than start time
-                } else {
 
-                    editReservationFromGUI(
-                            EditReservationActivity.this.title,
-                            EditReservationActivity.this.description,
-                            EditReservationActivity.this.price,
-                            EditReservationActivity.this.isSUV,
-                            EditReservationActivity.this.isCovered,
-                            EditReservationActivity.this.isHandicapped,
-                            EditReservationActivity.this.address,
-                            start,
-                            end
+
+                    editPhysicalSpotFromGUI(
+                            title,
+                            description,
+                            EditPhysicalSpotActivity.this.isSUV,
+                            EditPhysicalSpotActivity.this.isCovered,
+                            EditPhysicalSpotActivity.this.isHandicapped,
+                            address
+
                     );
 
 
-                    Intent myIntent = new Intent(EditReservationActivity.this, MainActivity.class);
-                    EditReservationActivity.this.startActivity(myIntent);
-                }
+                    Intent myIntent = new Intent(EditPhysicalSpotActivity.this, MainActivity.class);
+                    EditPhysicalSpotActivity.this.startActivity(myIntent);
+
             }
         });
         uploadButton.setOnClickListener(new View.OnClickListener() {
@@ -406,10 +325,9 @@ public class EditReservationActivity extends Activity {
         }
     }
 
-    private void makeGui(ParkingSpot spot) {
+    private void makeGui(PhysicalSpot spot) {
         title_field.setText(spot.getName());
         address_field.setText(spot.getAddress());
-        price_field.setText(Double.toString((double)(spot.getPrice())/100));
         description_field.setText(spot.getDescription());
         mSpot = spot;
     }

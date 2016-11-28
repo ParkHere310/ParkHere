@@ -80,8 +80,8 @@ public class PastReservedSpotActivity extends Activity {
         reservationUID = myIntent.getExtras().getString("reservationID");
 
         //Get RESERVATION from specific RESERVATION ID
-        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("PastReservations");
-        queryRef = mDatabase.orderByChild("UID").equalTo(reservationUID);
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+        queryRef = mDatabase.child("PastReservations").orderByChild("uid").equalTo(reservationUID);
         queryRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -116,8 +116,8 @@ public class PastReservedSpotActivity extends Activity {
 
 
         //Get ParkingSpot from specific ParkingSpot ID
-        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().getRoot().child("ParkingSpots");
-        queryRef2 = mDatabase.orderByChild("UID").equalTo(mReservation.getParkingSpotUID());
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+        queryRef2 = mDatabase.child("ParkingSpots").orderByChild("uid").equalTo(mReservation.getParkingSpotUID());
         queryRef2.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -140,15 +140,15 @@ public class PastReservedSpotActivity extends Activity {
         address.setText(mSpot.getAddress());
         Date start = new Date(mSpot.getTimeWindow().getStartDateTime());
         Date end = new Date(mSpot.getTimeWindow().getEndDateTime());
-        date.setText(start.getDate());
-        startTime.setText(start.getHours() + ":" + start.getMinutes());
-        endTime.setText(end.getHours() + ":" + end.getMinutes());
+        date.setText(Integer.toString(start.getDate()));
+        startTime.setText(Integer.toString(start.getHours()) + ":" + Integer.toString(start.getMinutes()));
+        endTime.setText(Integer.toString(end.getHours()) + ":" + Integer.toString(end.getMinutes()));
         description.setText(mSpot.getDescription());
 
         price.setText(String.valueOf( (mSpot.getPrice()/100.0) ) );
 
-
-        StorageReference storageRef = FirebaseStorage.getInstance().getReferenceFromUrl(mSpot.getImageURL());
+        if(mSpot.getImageURL().equals("-1")) return;
+        StorageReference storageRef = FirebaseStorage.getInstance().getReference(mSpot.getImageURL());
         final long ONE_MEGABYTE = 1024 * 1024;
         storageRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
             @Override

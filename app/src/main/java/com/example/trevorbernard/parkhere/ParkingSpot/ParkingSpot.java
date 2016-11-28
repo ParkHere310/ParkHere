@@ -1,7 +1,6 @@
 package com.example.trevorbernard.parkhere.ParkingSpot;
 
 import android.location.Address;
-import android.location.Geocoder;
 
 import com.example.trevorbernard.parkhere.User.Rating;
 import com.google.firebase.auth.FirebaseAuth;
@@ -60,7 +59,6 @@ public class ParkingSpot {
         List<String> reviews = new ArrayList<String>();
         reviews.add("asdf");
         reviews.add("fds");
-        ps.setReviews(reviews);
 
 
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
@@ -75,12 +73,12 @@ public class ParkingSpot {
     private String name;
     private String imageURL;
     private String description;
-    private List<String> reviews;
+    //private List<String> reviews;
     private int price;
     private boolean isSUV;
     private boolean isCovered;
     private boolean isHandicap;
-    private Rating rating;
+    //private Rating rating;
 
 
     //private Address address;
@@ -91,6 +89,8 @@ public class ParkingSpot {
     private String UID;
     private String occupantUID;
     private String ownerUID;
+    private String physicalSpotUID;
+    private Rating physicalSpotRating;
 
 
     public double getLatitude() {
@@ -151,7 +151,7 @@ public class ParkingSpot {
         timeWindow = new TimeWindow(start,end);
        // private String imageURL; need to add in later some how
 
-        reviews = new ArrayList<String>();
+        //reviews = new ArrayList<String>();
 
         this.name = name;
         this.description = description;
@@ -162,9 +162,32 @@ public class ParkingSpot {
         this.address = address;
         this.latitude = latitude;
         this.longitude = longitude;
+        this.physicalSpotRating = new Rating();
 
         ownerUID = FirebaseAuth.getInstance().getCurrentUser().getUid();
         occupantUID = "-1"; // No occupant
+    }
+
+    public ParkingSpot(PhysicalSpot physicalSpot, Date start, Date end, int price) {
+        timeWindow = new TimeWindow(start,end);
+        // private String imageURL; need to add in later some how
+
+        //reviews = new ArrayList<String>();
+
+        this.name = physicalSpot.getName();
+        this.description = physicalSpot.getDescription();
+        this.price = price;
+        this.isSUV = physicalSpot.isSUV();
+        this.isCovered = physicalSpot.isCovered();
+        this.isHandicap = physicalSpot.isHandicap();
+        this.address = physicalSpot.getAddress();
+        this.latitude = physicalSpot.getLatitude();
+        this.longitude = physicalSpot.getLongitude();
+        this.physicalSpotRating = physicalSpot.getRating();
+
+        ownerUID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        occupantUID = "-1"; // No occupant
+        physicalSpotUID = physicalSpot.getUID();
     }
 
     public void setTimeWindow(TimeWindow timeWindow) {
@@ -210,15 +233,6 @@ public class ParkingSpot {
         this.description = description;
     }
 
-    public List<String> getReviews() {
-
-        return reviews;
-    }
-
-    public void setReviews(List<String> reviews) {
-
-        this.reviews = reviews;
-    }
 
     public int getPrice() {
 
@@ -274,15 +288,21 @@ public class ParkingSpot {
         return isHandicap;
     }
 
-    public Rating getRating() {
-        return rating;
-    }
 
     public void setHandicap(boolean handicap) {
         isHandicap = handicap;
     }
 
-    public void setRating(Rating rating) {
-        this.rating = rating;
+
+    public String getPhysicalSpotUID() {
+        return physicalSpotUID;
+    }
+
+    public void setPhysicalSpotUID(String physicalSpotUID) {
+        this.physicalSpotUID = physicalSpotUID;
+    }
+
+    public Rating getRating() {
+        return physicalSpotRating;
     }
 }

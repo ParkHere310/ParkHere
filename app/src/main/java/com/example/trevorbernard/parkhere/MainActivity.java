@@ -8,11 +8,14 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.trevorbernard.parkhere.Client.LoginActivity;
+import com.example.trevorbernard.parkhere.Client.PhysicalSpotListActivity;
+import com.example.trevorbernard.parkhere.Client.PostSpotHelperActivity;
 import com.example.trevorbernard.parkhere.Client.ViewCurrentReservationActivity;
 import com.example.trevorbernard.parkhere.Client.ViewPastReservationActivity;
 import com.example.trevorbernard.parkhere.Client.PostSpotActivity;
 import com.example.trevorbernard.parkhere.Client.SearchActivity;
 import com.example.trevorbernard.parkhere.Client.ViewListingsActivity;
+import com.example.trevorbernard.parkhere.Client.ViewPaymentsActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -30,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
     private Button searchButton;
     private Button logoutButton;
     private Button policyButton;
+    private Button paymentsButton;
+    private Button physicalSpotsButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
         postPageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent myIntent = new Intent(MainActivity.this, PostSpotActivity.class);
+                Intent myIntent = new Intent(MainActivity.this, PostSpotHelperActivity.class);
                 MainActivity.this.startActivity(myIntent);
             }
         });
@@ -130,6 +135,24 @@ public class MainActivity extends AppCompatActivity {
                         Toast.LENGTH_LONG).show();
             }
         }));
+
+        paymentsButton.setOnClickListener((new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(MainActivity.this, ViewPaymentsActivity.class);
+                MainActivity.this.startActivity(myIntent);
+            }
+
+        }));
+
+        physicalSpotsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Make Activity
+                Intent myIntent = new Intent(MainActivity.this, PhysicalSpotListActivity.class);
+                MainActivity.this.startActivity(myIntent);
+            }
+        });
     }
 
     private void InitializeVariables() {
@@ -140,7 +163,8 @@ public class MainActivity extends AppCompatActivity {
         searchButton = (Button) findViewById(R.id.SearchButton);
         logoutButton = (Button) findViewById(R.id.logoutButton);
         policyButton = (Button) findViewById(R.id.policyButton);
-
+        paymentsButton = (Button) findViewById(R.id.ViewPaymentsButton);
+        physicalSpotsButton = (Button) findViewById(R.id.PhysicalSpotsButton);
 
     }
 
