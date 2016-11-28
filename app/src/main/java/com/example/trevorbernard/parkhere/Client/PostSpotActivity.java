@@ -23,18 +23,24 @@ import android.widget.Toast;
 import com.example.trevorbernard.parkhere.Connectors.SpotConnector;
 import com.example.trevorbernard.parkhere.MainActivity;
 import com.example.trevorbernard.parkhere.ParkingSpot.ParkingSpot;
+import com.example.trevorbernard.parkhere.ParkingSpot.PhysicalSpot;
 import com.example.trevorbernard.parkhere.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -90,6 +96,8 @@ public class PostSpotActivity extends Activity {
         private static final String TAG = "PostSpotActivity";
         private Bitmap spotPic = null;
         private UploadTask uploadTask;
+        private String physicalSpotUID;
+        private PhysicalSpot mPhysicalSpot;
 
     static final int REQUEST_IMAGE_SPOT = 1;
 
@@ -166,7 +174,32 @@ public class PostSpotActivity extends Activity {
 
         initiateVariable();
 
-        createOnclickCallback();
+        Intent previousIntent = getIntent();
+        physicalSpotUID = previousIntent.getExtras().getString("physicalSpotUID");
+
+        if (physicalSpotUID.equals("newSpot")) {
+            createOnclickCallback();
+        } else {
+            //FIND THAT SPECIFIC PHYSICAL SPOT BY ITS UID
+            DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("PhysicalSpots");
+            final ArrayList<PhysicalSpot> list = new ArrayList<PhysicalSpot>();
+            Query queryRef = mDatabase.orderByChild("uid").equalTo(physicalSpotUID);
+            queryRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
+                        mPhysicalSpot = postSnapshot.getValue(PhysicalSpot.class);
+
+                        setUpPageAndCreateOnclickCallback();
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+        }
     }
 
     private void initiateVariable() {
@@ -188,6 +221,113 @@ public class PostSpotActivity extends Activity {
         endTime_picker = (TimePicker) findViewById(R.id.endTime_picker);
 
     }
+
+    private void setUpPageAndCreateOnclickCallback() {
+        title_field.setText(mPhysicalSpot.getName());
+        title_field.setEnabled(false);
+        address_field.setText(mPhysicalSpot.getAddress());
+        address_field.setEnabled(false);
+        description_field.setText(mPhysicalSpot.getDescription());
+        description_field.setEnabled(false);
+        uploadButton.setEnabled(false);
+        suvCheckBox.setChecked(mPhysicalSpot.isSUV());
+        suvCheckBox.setEnabled(false);
+        handicappedCheckBox.setChecked(mPhysicalSpot.isHandicap());
+        handicappedCheckBox.setEnabled(false);
+        coveredCheckBox.setChecked(mPhysicalSpot.isCovered());
+        coveredCheckBox.setEnabled(false);
+
+        price_field.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                //iman
+                //String priceStr = price_field.getText().toString();
+                //price = Integer.getInteger(priceStr);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        postButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                title = title_field.getText().toString();
+                address = address_field.getText().toString();
+
+                startYear = startDate_picker.getYear();
+                startMonth = startDate_picker.getMonth();
+                startDay = startDate_picker.getDayOfMonth();
+
+                endYear = endDate_picker.getYear();
+                endMonth = endDate_picker.getMonth();
+                endDay = endDate_picker.getDayOfMonth();
+
+                startHour = startTime_picker.getHour();
+                startMin = startTime_picker.getMinute();
+
+                endHour = endTime_picker.getHour();
+                endMin = endTime_picker.getMinute();
+
+
+                String priceStr = price_field.getText().toString();
+                Double priceDouble = Double.parseDouble(priceStr);
+                priceDouble *= 100;
+                price = priceDouble.intValue();
+
+
+
+                //String startMinStr = endMin_field.getText().toString();
+                //  startMin = Integer.parseInt(startMinStr);
+                description = description_field.getText().toString();
+
+
+
+
+                //Post Here
+                Date start = new Date(startYear,startMonth,startDay,startHour,startMin);
+                Date end = new Date(endYear,endMonth,endDay,endHour,endMin);
+                /*
+                System.out.println(PostSpotActivity.this.title + " " +
+                        PostSpotActivity.this.description + " " +
+                        PostSpotActivity.this.price + " " +
+                        PostSpotActivity.this.isSUV + " " +
+                        PostSpotActivity.this.isCovered + " " +
+                        PostSpotActivity.this.isHandicapped + " " +
+                        PostSpotActivity.this.address);
+                */
+
+                if(start.getTime() >= end.getTime() ) {
+                    Toast.makeText(PostSpotActivity.this, "The end time must be after the start time!",
+                            Toast.LENGTH_LONG).show();
+                    //call pop up message telling them that the end time must be greater than start time
+                } else {
+                    postSpotFromGUI(
+                            PostSpotActivity.this.title,
+                            PostSpotActivity.this.description,
+                            PostSpotActivity.this.price,
+                            PostSpotActivity.this.isSUV,
+                            PostSpotActivity.this.isCovered,
+                            PostSpotActivity.this.isHandicapped,
+                            PostSpotActivity.this.address,
+                            start,
+                            end
+                    );
+
+
+                    Intent myIntent = new Intent(PostSpotActivity.this, MainActivity.class);
+                    PostSpotActivity.this.startActivity(myIntent);
+                }
+            }
+        });
+    }
+
 
     private void createOnclickCallback() {
         title_field.addTextChangedListener(new TextWatcher() {

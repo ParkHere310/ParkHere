@@ -2,6 +2,7 @@ package com.example.trevorbernard.parkhere.ParkingSpot;
 
 import android.location.Address;
 
+import com.example.trevorbernard.parkhere.User.Rating;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -89,6 +90,7 @@ public class ParkingSpot {
     private String occupantUID;
     private String ownerUID;
     private String physicalSpotUID;
+    private Rating physicalSpotRating;
 
 
     public double getLatitude() {
@@ -160,6 +162,7 @@ public class ParkingSpot {
         this.address = address;
         this.latitude = latitude;
         this.longitude = longitude;
+        this.physicalSpotRating = new Rating();
 
         ownerUID = FirebaseAuth.getInstance().getCurrentUser().getUid();
         occupantUID = "-1"; // No occupant
@@ -180,6 +183,7 @@ public class ParkingSpot {
         this.address = physicalSpot.getAddress();
         this.latitude = physicalSpot.getLatitude();
         this.longitude = physicalSpot.getLongitude();
+        this.physicalSpotRating = physicalSpot.getRating();
 
         ownerUID = FirebaseAuth.getInstance().getCurrentUser().getUid();
         occupantUID = "-1"; // No occupant
@@ -296,5 +300,9 @@ public class ParkingSpot {
 
     public void setPhysicalSpotUID(String physicalSpotUID) {
         this.physicalSpotUID = physicalSpotUID;
+    }
+
+    public Rating getRating() {
+        return physicalSpotRating;
     }
 }

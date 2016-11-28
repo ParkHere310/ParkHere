@@ -9,9 +9,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.example.trevorbernard.parkhere.ParkingSpot.PhysicalSpot;
+import com.example.trevorbernard.parkhere.ParkingSpot.PhysicalSpotAdapter;
 import com.example.trevorbernard.parkhere.ParkingSpot.PhysicalSpotDistance;
 import com.example.trevorbernard.parkhere.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -27,14 +29,14 @@ import java.util.ArrayList;
 
 public class PhysicalSpotListActivity extends Activity {
     private Query queryRef;
-    private ArrayList<PhysicalSpotDistance> parkingSpotDistances;
+    private ArrayList<PhysicalSpotDistance> physicalSpotDistances;
     private ListView list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_physicalspotlist);
-        parkingSpotDistances = new ArrayList<PhysicalSpotDistance>();
+        physicalSpotDistances = new ArrayList<PhysicalSpotDistance>();
         initiateVariables();
 
         //populateListView();
@@ -48,7 +50,7 @@ public class PhysicalSpotListActivity extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent myIntent = new Intent(PhysicalSpotListActivity.this, PhysicalListedSpotActivity.class);
-                String spotUID = parkingSpotDistances.get(position).parkingSpot.getUID();
+                String spotUID = physicalSpotDistances.get(position).parkingSpot.getUID();
                 myIntent.putExtra("spotUID", spotUID);
                 PhysicalSpotListActivity.this.startActivity(myIntent);
             }
@@ -84,7 +86,7 @@ public class PhysicalSpotListActivity extends Activity {
         queryRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                parkingSpotDistances.clear();
+                physicalSpotDistances.clear();
                 double count = 1;
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
                     System.out.println("asdfsafd");
@@ -93,13 +95,12 @@ public class PhysicalSpotListActivity extends Activity {
                     PhysicalSpotDistance psd = new PhysicalSpotDistance();
                     psd.parkingSpot = spot;
                     psd.distance = count;
-                    parkingSpotDistances.add(psd);
+                    physicalSpotDistances.add(psd);
                     count++;
-
                 }
-                //ArrayAdapter<ParkingSpotDistance> arrayAdapter = new ParkingSpotAdapter(ViewListingsActivity.this, parkingSpotDistances);
-                //list.setAdapter(arrayAdapter);
-                //arrayAdapter.notifyDataSetChanged();
+                ArrayAdapter<PhysicalSpotDistance> arrayAdapter = new PhysicalSpotAdapter(PhysicalSpotListActivity.this, physicalSpotDistances);
+                list.setAdapter(arrayAdapter);
+                arrayAdapter.notifyDataSetChanged();
             }
 
             @Override
