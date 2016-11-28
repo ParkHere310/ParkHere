@@ -198,6 +198,13 @@ public class RentSpotActivity extends Activity {
             // 10 min buffer
             beforeTimeWindow.setEndDateTime(startLongFromIntent - 600000L);
             beforeSpot.setTimeWindow(beforeTimeWindow);
+
+            //new price to be fraction of original price acording to length
+            int newPrice = originalSpot.getPrice();
+            long origionalLength = originalSpot.getTimeWindow().getEndDateTime() - originalSpot.getTimeWindow().getStartDateTime();
+            long newLength = beforeSpot.getTimeWindow().getEndDateTime() - beforeSpot.getTimeWindow().getStartDateTime();
+            newPrice = newPrice* (int)(newLength/origionalLength);
+            beforeSpot.setPrice(newPrice);
             SpotConnector.postSpot(beforeSpot);
         }
         // create new spot after, 10 minute buffer
@@ -214,10 +221,23 @@ public class RentSpotActivity extends Activity {
             // 10 min buffer
             beforeTimeWindow.setEndDateTime(startLongFromIntent - 600000L);
             afterSpot.setTimeWindow(beforeTimeWindow);
+
+            //new price to be fraction of original price acording to length
+            int newPrice = originalSpot.getPrice();
+            long origionalLength = originalSpot.getTimeWindow().getEndDateTime() - originalSpot.getTimeWindow().getStartDateTime();
+            long newLength = afterSpot.getTimeWindow().getEndDateTime() - afterSpot.getTimeWindow().getStartDateTime();
+            newPrice = newPrice* (int)(newLength/origionalLength);
+            afterSpot.setPrice(newPrice);
+
             SpotConnector.postSpot(afterSpot);
 
         }
         //shrink origional spot
+        TimeWindow newTimeWindow = originalSpot.getTimeWindow();
+        newTimeWindow.setStartDateTime(startLongFromIntent);
+        newTimeWindow.setEndDateTime(endLongFromIntent);
+        originalSpot.setTimeWindow(newTimeWindow);
+        SpotConnector.editSpot(originalSpot);
     }
 
 
