@@ -68,8 +68,7 @@ public class ParkingSpot {
         mDatabase.child("ParkingSpots").child(uid).setValue(ps);
     }
 
-
-
+    
     private String name;
     private String imageURL;
     private String description;
@@ -150,7 +149,6 @@ public class ParkingSpot {
 
         timeWindow = new TimeWindow(start,end);
        // private String imageURL; need to add in later some how
-
         //reviews = new ArrayList<String>();
 
         this.name = name;
@@ -305,4 +303,6 @@ public class ParkingSpot {
     public Rating getRating() {
         return physicalSpotRating;
     }
+
+    public void setRating(Rating rating) { this.physicalSpotRating = rating; }
 }

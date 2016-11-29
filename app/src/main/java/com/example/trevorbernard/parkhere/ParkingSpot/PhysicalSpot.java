@@ -29,6 +29,10 @@ public class PhysicalSpot {
 
     private int timesListed;
 
+    public PhysicalSpot(){
+
+    }
+
     public PhysicalSpot(String name,
                        String description,
                        boolean isSUV,

@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.view.ViewGroup;
+import android.graphics.Color;
 
 import com.example.trevorbernard.parkhere.ParkingSpot.ParkingSpot;
 import com.example.trevorbernard.parkhere.ParkingSpot.ParkingSpotAdapter;
@@ -19,6 +21,7 @@ import com.example.trevorbernard.parkhere.ParkingSpot.ParkingSpotReservationAdap
 import com.example.trevorbernard.parkhere.ParkingSpot.PhysicalSpot;
 import com.example.trevorbernard.parkhere.ParkingSpot.PhysicalSpotAdapter;
 import com.example.trevorbernard.parkhere.ParkingSpot.PhysicalSpotDistance;
+import com.example.trevorbernard.parkhere.ParkingSpot.HeatMapAdapter;
 import com.example.trevorbernard.parkhere.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -104,7 +107,10 @@ public class SearchHeatMapActivity extends Activity{
                     }
                 }
 
-                ArrayAdapter arrayAdapter = new ArrayAdapter<String>(SearchHeatMapActivity.this,android.R.layout.simple_list_item_1,physicalSpotNames);
+               // ArrayAdapter arrayAdapter = new ArrayAdapter<String>(SearchHeatMapActivity.this,android.R.layout.simple_list_item_1,physicalSpotNames);
+
+                ArrayAdapter<PhysicalSpot> arrayAdapter = new HeatMapAdapter(SearchHeatMapActivity.this, physicalSpots);
+
                 heatMapListView.setAdapter(arrayAdapter);
                 arrayAdapter.notifyDataSetChanged();
 

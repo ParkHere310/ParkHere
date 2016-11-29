@@ -44,7 +44,7 @@ public class ReservationAdapter extends ArrayAdapter<Reservation> {
 
             name.setTextColor(Color.BLACK);
             if(res != null) {
-                name.setText(new Date(res.getDate()).getMonth() + "/" + new Date(res.getDate()).getDate() + " Rental");
+                name.setText((new Date(res.getDate()).getMonth() + 1) + "/" + new Date(res.getDate()).getDate() + " Rental");
                 price.setText("$ " + new DecimalFormat("#.00").format(res.getPrice()/(double)100));
 
             }

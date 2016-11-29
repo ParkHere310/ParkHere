@@ -306,6 +306,8 @@ public class SearchResultActivity extends Activity {
                 String distance = new DecimalFormat("#.#").format(parkingSpotDistances.get(position).distance);
                 myIntent.putExtra("spotUID", spotUID);
                 myIntent.putExtra("distance", distance);
+                myIntent.putExtra("startDateLong", startLongFromIntent);
+                myIntent.putExtra("endDateLong", endLongFromIntent);
                 SearchResultActivity.this.startActivity(myIntent);
             }
         });
