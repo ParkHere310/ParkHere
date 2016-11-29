@@ -186,7 +186,7 @@ public class RentSpotActivity extends Activity {
         // create new spot before, 10 minute buffer
         if(startLongFromIntent > originalSpot.getTimeWindow().getStartDateTime() + 600000L) {
 
-            ParkingSpot beforeSpot = new ParkingSpot(originalSpot.getName() + " 1",originalSpot.getDescription(),
+            ParkingSpot beforeSpot = new ParkingSpot(originalSpot.getName(),originalSpot.getDescription(),
                     originalSpot.getPrice(),originalSpot.isSUV(),originalSpot.isCovered(),originalSpot.isHandicap(),
                     originalSpot.getAddress(), new Date(originalSpot.getTimeWindow().getStartDateTime()),
                     new Date(originalSpot.getTimeWindow().getEndDateTime()),originalSpot.getLatitude(),
@@ -211,7 +211,7 @@ public class RentSpotActivity extends Activity {
 
         // create new spot after, 10 minute buffer
         if(endLongFromIntent < originalSpot.getTimeWindow().getEndDateTime() - 600000L) {
-            ParkingSpot afterSpot = new ParkingSpot(originalSpot.getName() + " 2",originalSpot.getDescription(),
+            ParkingSpot afterSpot = new ParkingSpot(originalSpot.getName(),originalSpot.getDescription(),
                     originalSpot.getPrice(),originalSpot.isSUV(),originalSpot.isCovered(),originalSpot.isHandicap(),
                     originalSpot.getAddress(), new Date(originalSpot.getTimeWindow().getStartDateTime()),
                     new Date(originalSpot.getTimeWindow().getEndDateTime()),originalSpot.getLatitude(),
