@@ -305,4 +305,6 @@ public class ParkingSpot {
     public Rating getRating() {
         return physicalSpotRating;
     }
+
+    public void setRating(Rating rating) { this.physicalSpotRating = rating; }
 }

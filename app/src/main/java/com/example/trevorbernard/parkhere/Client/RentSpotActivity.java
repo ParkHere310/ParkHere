@@ -182,11 +182,11 @@ public class RentSpotActivity extends Activity {
     }
 
     private void splitParkingSpot(ParkingSpot originalSpot) {
+
         // create new spot before, 10 minute buffer
         if(startLongFromIntent > originalSpot.getTimeWindow().getStartDateTime() + 600000L) {
 
-
-            ParkingSpot beforeSpot = new ParkingSpot(originalSpot.getName(),originalSpot.getDescription(),
+            ParkingSpot beforeSpot = new ParkingSpot(originalSpot.getName() + " 1",originalSpot.getDescription(),
                     originalSpot.getPrice(),originalSpot.isSUV(),originalSpot.isCovered(),originalSpot.isHandicap(),
                     originalSpot.getAddress(), new Date(originalSpot.getTimeWindow().getStartDateTime()),
                     new Date(originalSpot.getTimeWindow().getEndDateTime()),originalSpot.getLatitude(),
@@ -194,22 +194,24 @@ public class RentSpotActivity extends Activity {
             beforeSpot.setImageURL(originalSpot.getImageURL());
             beforeSpot.setPhysicalSpotUID(originalSpot.getPhysicalSpotUID());
             beforeSpot.setOwnerUID(originalSpot.getOwnerUID());
-            TimeWindow beforeTimeWindow = originalSpot.getTimeWindow();
+
+            TimeWindow beforeTimeWindow = new TimeWindow();
+            beforeTimeWindow.setStartDateTime(originalSpot.getTimeWindow().getStartDateTime());
             // 10 min buffer
             beforeTimeWindow.setEndDateTime(startLongFromIntent - 600000L);
             beforeSpot.setTimeWindow(beforeTimeWindow);
 
-            //new price to be fraction of original price acording to length
-            int newPrice = originalSpot.getPrice();
-            long origionalLength = originalSpot.getTimeWindow().getEndDateTime() - originalSpot.getTimeWindow().getStartDateTime();
-            long newLength = beforeSpot.getTimeWindow().getEndDateTime() - beforeSpot.getTimeWindow().getStartDateTime();
-            newPrice = newPrice* (int)(newLength/origionalLength);
+            //new price to be fraction of original price
+            int newPrice = originalSpot.getPrice()/2;
             beforeSpot.setPrice(newPrice);
             SpotConnector.postSpot(beforeSpot);
         }
+
+
+
         // create new spot after, 10 minute buffer
         if(endLongFromIntent < originalSpot.getTimeWindow().getEndDateTime() - 600000L) {
-            ParkingSpot afterSpot = new ParkingSpot(originalSpot.getName(),originalSpot.getDescription(),
+            ParkingSpot afterSpot = new ParkingSpot(originalSpot.getName() + " 2",originalSpot.getDescription(),
                     originalSpot.getPrice(),originalSpot.isSUV(),originalSpot.isCovered(),originalSpot.isHandicap(),
                     originalSpot.getAddress(), new Date(originalSpot.getTimeWindow().getStartDateTime()),
                     new Date(originalSpot.getTimeWindow().getEndDateTime()),originalSpot.getLatitude(),
@@ -217,16 +219,14 @@ public class RentSpotActivity extends Activity {
             afterSpot.setImageURL(originalSpot.getImageURL());
             afterSpot.setPhysicalSpotUID(originalSpot.getPhysicalSpotUID());
             afterSpot.setOwnerUID(originalSpot.getOwnerUID());
-            TimeWindow beforeTimeWindow = originalSpot.getTimeWindow();
+            TimeWindow afterTimeWindow = new TimeWindow();
+            afterTimeWindow.setEndDateTime(originalSpot.getTimeWindow().getEndDateTime());
             // 10 min buffer
-            beforeTimeWindow.setEndDateTime(startLongFromIntent - 600000L);
-            afterSpot.setTimeWindow(beforeTimeWindow);
+            afterTimeWindow.setStartDateTime(endLongFromIntent + 600000L);
+            afterSpot.setTimeWindow(afterTimeWindow);
 
-            //new price to be fraction of original price acording to length
-            int newPrice = originalSpot.getPrice();
-            long origionalLength = originalSpot.getTimeWindow().getEndDateTime() - originalSpot.getTimeWindow().getStartDateTime();
-            long newLength = afterSpot.getTimeWindow().getEndDateTime() - afterSpot.getTimeWindow().getStartDateTime();
-            newPrice = newPrice* (int)(newLength/origionalLength);
+            //new price to be fraction of original price
+            int newPrice = originalSpot.getPrice()/2;
             afterSpot.setPrice(newPrice);
 
             SpotConnector.postSpot(afterSpot);
@@ -297,6 +297,9 @@ public class RentSpotActivity extends Activity {
 
                                 }
                             });*/
+
+                            splitParkingSpot(parkingSpot);
+
                             Reservation res = new Reservation(ownerUID, seekerUID,
                                     parkingSpotUID, null);
                             res.setPrice(parkingSpot.getPrice());
@@ -305,7 +308,7 @@ public class RentSpotActivity extends Activity {
                             System.out.println(res.getDate());
                             System.out.println(res.getPrice());
                             TransactionConnector.addReservation(res);
-                            splitParkingSpot(parkingSpot);
+
 
                         } else if (result.getTransaction() != null) {
                             com.braintreegateway.Transaction transaction = result.getTransaction();
