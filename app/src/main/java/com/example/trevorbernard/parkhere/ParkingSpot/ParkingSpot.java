@@ -150,7 +150,6 @@ public class ParkingSpot {
 
         timeWindow = new TimeWindow(start,end);
        // private String imageURL; need to add in later some how
-
         //reviews = new ArrayList<String>();
 
         this.name = name;
