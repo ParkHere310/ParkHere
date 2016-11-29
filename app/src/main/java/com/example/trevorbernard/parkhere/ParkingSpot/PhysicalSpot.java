@@ -27,7 +27,7 @@ public class PhysicalSpot {
     private String UID;
     private String ownerUID;
 
-    private int timesListed = 0;
+    private int timesListed;
 
     public PhysicalSpot(String name,
                        String description,
@@ -49,6 +49,7 @@ public class PhysicalSpot {
         this.address = address;
         this.latitude = latitude;
         this.longitude = longitude;
+        timesListed = 0;
 
         ownerUID = FirebaseAuth.getInstance().getCurrentUser().getUid();
     }
