@@ -26,8 +26,6 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-import static com.example.trevorbernard.parkhere.R.id.listView;
-
 
 public class ViewListingsActivity extends Activity {
     private Query queryRef;
@@ -93,6 +91,7 @@ public class ViewListingsActivity extends Activity {
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
                     System.out.println("asdfsafd");
                     ParkingSpot spot = postSnapshot.getValue(ParkingSpot.class);
+                    if(spot.getOccupantUID().equals("-1") == false) continue;
                     //spotsList.add(spot);
                     ParkingSpotDistance psd = new ParkingSpotDistance();
                     psd.parkingSpot = spot;
