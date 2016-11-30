@@ -38,9 +38,6 @@
         <activity android:name=".Client.EditPhysicalSpotActivity"></activity>
         <activity android:name=".Client.PhysicalListedSpotActivity"></activity>
 
-        <uses-permission android:name="android.permission.INTERNET"/>
-        <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-
         <activity android:name="com.braintreepayments.api.BraintreeBrowserSwitchActivity"
             android:launchMode="singleTask">
             <intent-filter>
@@ -56,6 +53,7 @@
             android:value="AIzaSyCdGvy3lFDoducSm6HXANnZAZAeyNNBebc" />
 
     </application>
+
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
