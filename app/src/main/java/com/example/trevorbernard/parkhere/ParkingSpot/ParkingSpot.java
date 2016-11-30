@@ -68,7 +68,7 @@ public class ParkingSpot {
         mDatabase.child("ParkingSpots").child(uid).setValue(ps);
     }
 
-    
+
     private String name;
     private String imageURL;
     private String description;
